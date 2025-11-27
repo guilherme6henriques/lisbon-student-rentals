@@ -1,9 +1,11 @@
-// script.js
+// script.js — full logic with map, translations, pricing, image loading
 
-// --------------------- TRANSLATION SETUP ---------------------
+const app = document.getElementById("app");
+const langBtns = document.querySelectorAll(".lang-btn");
+let lang = "en";
+
 const i18n = {
   en: {
-    title: "Lisbon Student Rentals",
     contact: "Contact",
     seeRooms: "See rooms",
     backToMap: "← Back to map",
@@ -14,14 +16,14 @@ const i18n = {
     roomsLabel: "Rooms",
     billsIncludedLabel: "Bills included:",
     billsGasExcludedLabel: "Bills included (excluding gas):",
-    aboutUsTitle: "About Us",
+    aboutUsTitle: "About us",
     aboutUsText: `Welcome to Lisbon Student Rentals! We are dedicated to providing safe, comfortable, and well‑located rooms for students coming to Lisbon. With properties in central neighborhoods like Avenida de Roma and Alcântara, we ensure easy access to public transport and local universities.
-    
+
 Our mission is to make the student renting experience as simple and stress‑free as possible. If you have any questions, feel free to contact us via email or WhatsApp. We look forward to helping you find your home in Lisbon!`,
-    aboutUsLink: "About us",
+    nearAlcantara: "Near Alcântara",
+    nearRoma: "Near Avenida de Roma"
   },
   pt: {
-    title: "Quartos de Estudantes Lisboa",
     contact: "Contacto",
     seeRooms: "Ver quartos",
     backToMap: "← Voltar ao mapa",
@@ -32,28 +34,23 @@ Our mission is to make the student renting experience as simple and stress‑fre
     roomsLabel: "Quartos",
     billsIncludedLabel: "Contas incluídas:",
     billsGasExcludedLabel: "Contas incluídas (gás excluído):",
-    aboutUsTitle: "Sobre Nós",
+    aboutUsTitle: "Sobre nós",
     aboutUsText: `Bem‑vindo aos Quartos de Estudantes Lisboa! Dedicamo‑nos a oferecer quartos seguros, confortáveis e bem localizados para estudantes que vêm para Lisboa. Com propriedades em bairros centrais como Avenida de Roma e Alcântara, garantimos fácil acesso a transportes públicos e às principais universidades.
 
-A nossa missão é tornar a experiência de arrendar para estudantes o mais simples e tranquila possível. Se tiver alguma dúvida, contacte‑nos por email ou WhatsApp. Estamos ansiosos para ajudar‑lo a encontrar o seu lar em Lisboa!`,
-    aboutUsLink: "Sobre nós",
+A nossa missão é tornar a experiência de arrendar para estudantes o mais simples e tranquila possível. Se tiver alguma dúvida, contacte‑nos por email ou WhatsApp. Estamos ansiosos por ajudar‑lo a encontrar o seu lar em Lisboa!`,
+    nearAlcantara: "Perto de Alcântara",
+    nearRoma: "Perto da Avenida de Roma"
   }
 };
 
-let lang = "en";
-
 function applyTranslations() {
-  document.documentElement.lang = lang;
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (i18n[lang][key]) el.textContent = i18n[lang][key];
-  });
+  document.querySelector(".i18n-contact").textContent = i18n[lang].contact;
 }
+applyTranslations();
 
-const langBtns = document.querySelectorAll(".lang-btn");
 langBtns.forEach(btn => {
   btn.addEventListener("click", () => {
-    lang = btn.id === "lang‑pt" ? "pt" : "en";
+    lang = btn.id === "lang-pt" ? "pt" : "en";
     langBtns.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
     applyTranslations();
@@ -61,8 +58,7 @@ langBtns.forEach(btn => {
   });
 });
 
-// --------------------- DATA + MAP & PAGES logic ---------------------
-
+// Helper to generate image paths
 function getImagePaths(prefix, count) {
   const arr = [];
   for (let i = 1; i <= count; i++) {
@@ -71,6 +67,7 @@ function getImagePaths(prefix, count) {
   return arr;
 }
 
+// Data structure
 const data = {
   "avenida_de_roma": {
     name: { en: "Avenida de Roma", pt: "Avenida de Roma" },
@@ -82,6 +79,7 @@ const data = {
           en: "1 Kitchen with full utilities, 2 Bathrooms, 1 Living room",
           pt: "1 Cozinha com todas as utilidades, 2 Casas de banho, 1 Sala"
         },
+        commonPhotos: getImagePaths("AR1AZC", 7),
         rooms: [
           { id: "2Q", code: "AR1A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 700,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
@@ -103,6 +101,7 @@ const data = {
           en: "1 Kitchen with full utilities, 1 Bathroom",
           pt: "1 Cozinha com todas as utilidades, 1 Casa de banho"
         },
+        commonPhotos: getImagePaths("AR2AZC", 3),
         rooms: [
           { id: "3Q", code: "AR2A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 650,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
@@ -120,6 +119,7 @@ const data = {
           en: "1 Kitchen with full utilities, 1 Bathroom",
           pt: "1 Cozinha com todas as utilidades, 1 Casa de banho"
         },
+        commonPhotos: getImagePaths("AR3AZC", 5),
         rooms: [
           { id: "2Q", code: "AR3A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 700,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
@@ -143,6 +143,7 @@ const data = {
           en: "1 Kitchen with full utilities, 2 Bathrooms, 1 Living room and 1 Patio",
           pt: "1 Cozinha com todas as utilidades, 2 Casas de banho, 1 Sala e 1 Pátio"
         },
+        commonPhotos: getImagePaths("AL1AZC", 7),
         rooms: [
           { id: "1Q", code: "AL1A1Q", label: { en: "Room 1", pt: "Quarto 1" }, price: 750,
             bills: { en: "All bills included (excluding gas)", pt: "Contas incluídas (gás excluído)" },
@@ -166,14 +167,34 @@ const data = {
   }
 };
 
-// University list remains unchanged — omitted here for brevity
-// … uniLocations, distKm, leaflet markers code stay the same …
+// Universities data
+const uniLocations = [
+  { id: "ist",       name: { en: "IST",       pt: "IST" },        coords: [38.7353,   -9.1367],        color: "#f1c40f" },
+  { id: "nova_ims",  name: { en: "NOVA IMS",  pt: "NOVA IMS" },   coords: [38.732462, -9.159921],      color: "#e74c3c" },
+  { id: "iseg",      name: { en: "ISEG",      pt: "ISEG" },       coords: [38.7099,   -9.1556],        color: "#2ecc71" },
+  { id: "nova_sbe",  name: { en: "NOVA SBE",  pt: "NOVA SBE" },   coords: [38.678458, -9.325998],      color: "#8e44ad" },
+  { id: "iscte",     name: { en: "ISCTE-IUL", pt: "ISCTE-IUL" },  coords: [38.74889,  -9.15389],       color: "#1abc9c" },
+  { id: "fcul",      name: { en: "FCUL",      pt: "FCUL" },       coords: [38.7563,   -9.1564],        color: "#3498db" },
+  { id: "fmul",      name: { en: "FMUL",      pt: "FMUL" },       coords: [38.7463469531953, -9.161155141126354], color: "#e84393" },
+  { id: "ucp_cat",   name: { en: "UCP",       pt: "UCP" },        coords: [38.74893443978093, -9.164949511475601], color: "#a04000" }
+];
 
-// --------------------- RENDER LOGIC ---------------------
-window.addEventListener("hashchange", handleHash);
-window.addEventListener("load", handleHash);
+// Utility: compute distance to decide which building is closer
+function distKm(a, b) {
+  const R = 6371;
+  const [lat1, lon1] = a.map(d => d * Math.PI / 180);
+  const [lat2, lon2] = b.map(d => d * Math.PI / 180);
+  const dLat = lat2 - lat1;
+  const dLon = lon2 - lon1;
+  const x = dLon * Math.cos((lat1 + lat2)/2);
+  const y = dLat;
+  return Math.sqrt(x*x + y*y) * R;
+}
 
-function handleHash() {
+window.addEventListener("hashchange", render);
+window.addEventListener("load", render);
+
+function render() {
   const h = location.hash.slice(1);
   const parts = h.split("/").filter(Boolean);
   if (parts.length === 0) return renderMap();
@@ -185,22 +206,22 @@ function handleHash() {
 }
 
 function renderMap() {
-  applyTranslations();
-
   app.innerHTML = `
     <div class="map-caption-container">
       <div class="caption-box" id="caption-left">
-        <h3>${lang === "en" ? "Near Alcântara" : "Perto de Alcântara"}</h3>
+        <h3>${i18n[lang].nearAlcantara}</h3>
         <ul id="list-alcantara"></ul>
       </div>
       <div class="map-container"><div id="map"></div></div>
       <div class="caption-box" id="caption-right">
-        <h3>${lang === "en" ? "Near Avenida de Roma" : "Perto da Avenida de Roma"}</h3>
+        <h3>${i17ncalls
+Lang h n nearR oras
+})</h3>
         <ul id="list-roma"></ul>
       </div>
     </div>
     <div style="text-align:center; margin: 20px 0;">
-      <button id="btn-about">${i18n[lang].aboutUsLink}</button>
+      <button id="btn-about">${i18n[lang].aboutUsTitle}</button>
     </div>
   `;
 
@@ -208,7 +229,6 @@ function renderMap() {
     location.hash = "#/about";
   });
 
-  // --- Leaflet map + markers + uni circles + rentals (same as before) ---
   const map = L.map("map").setView([38.7369, -9.1427], 12);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '© OpenStreetMap contributors'
@@ -221,7 +241,6 @@ function renderMap() {
     popupAnchor: [0, -35]
   });
 
-  // universities circles and captions (unchanged)
   uniLocations.forEach(uni => {
     L.circleMarker(uni.coords, {
       radius: 9,
@@ -241,7 +260,6 @@ function renderMap() {
     listEl.appendChild(li);
   });
 
-  // rental properties markers
   Object.entries(data).forEach(([key, loc]) => {
     const marker = L.marker(loc.coords, { icon: rentalIcon }).addTo(map);
     const popup = L.popup({ closeOnClick: false, autoClose: false, closeButton: false })
@@ -282,7 +300,6 @@ function renderFloors(locKey) {
 
   let html = `<h2>${loc.name[lang]}</h2><div class="building">`;
   loc.floors.slice().reverse().forEach(f => {
-    // compute min/max for this floor
     const prices = f.rooms.map(r => r.price);
     const minP = Math.min(...prices);
     const maxP = Math.max(...prices);
@@ -299,7 +316,6 @@ function renderFloors(locKey) {
 
 function renderFloor(locKey, floorNum) {
   applyTranslations();
-
   const floor = data[locKey].floors.find(f => f.number === floorNum);
   if (!floor) return renderMap();
 
@@ -337,7 +353,6 @@ function renderFloor(locKey, floorNum) {
 
 function renderRoom(locKey, floorNum, roomId) {
   applyTranslations();
-
   const floor = data[locKey].floors.find(f => f.number === floorNum);
   if (!floor) return renderMap();
   const room = floor.rooms.find(r => r.id === roomId);
@@ -345,8 +360,7 @@ function renderRoom(locKey, floorNum, roomId) {
 
   let html = `<div class="room-detail">`;
   html += `<h2>${room.label[lang]} — €${room.price}</h2>`;
-
-  html += `<p><strong>${i18n[lang].billsIncludedLabel}</strong> ${room.bills[lang]}</p>`;
+  html += `<p><strong>${ room.bills[lang] ? i18n[lang].billsIncludedLabel : '' }</strong> ${room.bills[lang] || ''}</p>`;
 
   room.photos.forEach(src => {
     html += `<img src="${src}" alt="">`;
@@ -366,7 +380,6 @@ function renderRoom(locKey, floorNum, roomId) {
 
 function renderAbout() {
   applyTranslations();
-
   const html = `
     <div class="about-page" style="background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
       <h2>${i18n[lang].aboutUsTitle}</h2>
@@ -376,5 +389,4 @@ function renderAbout() {
   `;
   app.innerHTML = html;
 }
-
 
