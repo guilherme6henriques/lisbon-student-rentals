@@ -1,4 +1,3 @@
-/* --- Base & Reset --- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,37 +6,58 @@
 html, body {
   height: 100%;
   font-family: 'Inter', sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
+  background-color: #f4f5f7;
+  color: #2e2e2e;
 }
 a {
-  color: #007acc;
+  color: #3498db;
   text-decoration: none;
+  transition: color 0.2s;
 }
 a:hover {
+  color: #1d6fa5;
   text-decoration: underline;
+}
+button {
+  cursor: pointer;
+  font: inherit;
+}
+
+/* --- Animations --- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* --- Header --- */
 .site-header {
-  background-color: #007acc;
+  background: linear-gradient(135deg, #2c3e50, #34495e);
   color: #fff;
-  padding: 12px 20px;
+  padding: 16px 24px;
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 .header-inner {
-  max-width: 960px;
+  max-width: 1024px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .site-title {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 600;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 .lang-switcher {
   display: flex;
@@ -46,81 +66,88 @@ a:hover {
   background: transparent;
   border: 2px solid #fff;
   color: #fff;
-  padding: 6px 10px;
-  margin-left: 8px;
-  cursor: pointer;
+  padding: 6px 12px;
+  margin-left: 10px;
   border-radius: 4px;
-  font-size: 0.9rem;
-  transition: background 0.2s, color 0.2s;
+  font-size: 0.95rem;
+  transition: background 0.3s, color 0.3s, transform 0.1s;
 }
-.lang-btn.active, .lang-btn:hover {
+.lang-btn:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.05);
+}
+.lang-btn.active {
   background: #fff;
-  color: #007acc;
+  color: #2c3e50;
 }
 
 /* --- Main container --- */
 main#app {
-  padding: 20px 15px;
-  max-width: 960px;
+  padding: 24px 16px;
+  max-width: 1024px;
   margin: 0 auto;
+  min-height: 70vh;
 }
 
 /* --- Map --- */
 #map {
   width: 100%;
-  height: 65vh;
+  height: 60vh;
   border-radius: 8px;
   border: 2px solid #ddd;
   overflow: hidden;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 /* --- Floors list --- */
 .building {
   display: flex;
   flex-direction: column-reverse;
-  gap: 14px;
-  margin-bottom: 20px;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 .floor {
   background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #e1e4e8;
+  padding: 18px 24px;
   cursor: pointer;
-  transition: transform 0.1s, box-shadow 0.2s, background 0.2s;
+  transition: transform 0.15s, box-shadow 0.25s;
 }
 .floor:hover {
   transform: translateY(-2px);
-  background: #f4faff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 .floor strong {
-  font-size: 1.1rem;
-  display: block;
-  margin-bottom: 6px;
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+.floor p {
+  margin-top: 6px;
+  color: #555;
 }
 
-/* --- Room cards list --- */
+/* --- Rooms list / cards --- */
 .rooms-list {
   display: grid;
-  gap: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   margin-top: 20px;
 }
 .room-card {
   background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  border-radius: 8px;
+  border: 1px solid #e2e4e7;
   overflow: hidden;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  transition: transform 0.1s, box-shadow 0.2s;
+  transition: transform 0.15s, box-shadow 0.25s;
 }
 .room-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
 .room-card img {
   width: 100%;
@@ -128,65 +155,64 @@ main#app {
   object-fit: cover;
 }
 .room-card .room-info {
-  padding: 14px;
+  padding: 16px;
   flex-grow: 1;
 }
 .room-card h3 {
+  font-size: 1.15rem;
   margin-bottom: 8px;
-  font-size: 1.1rem;
-  color: #222;
+  color: #2c3e50;
 }
 .room-card p {
   font-size: 0.95rem;
   color: #555;
 }
 
-/* --- Room detail & common area sections --- */
-.section-title {
-  margin: 24px 0 12px;
-  font-size: 1.25rem;
-  border-bottom: 2px solid #007acc;
-  display: inline-block;
-}
+/* --- Room detail --- */
 .common-photo, .room-detail img {
   width: 100%;
-  border-radius: 6px;
-  margin-bottom: 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
   object-fit: cover;
 }
 .room-detail {
   background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 24px;
-  margin-bottom: 30px;
+  padding: 26px;
+  border-radius: 8px;
+  border: 1px solid #e2e4e7;
+  margin-bottom: 36px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
 }
 .room-detail h2 {
-  margin-bottom: 16px;
-  font-size: 1.4rem;
-  color: #003b7a;
+  margin-bottom: 20px;
+  font-size: 1.45rem;
+  color: #1f2d3d;
 }
 .room-detail p {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   color: #444;
   line-height: 1.6;
 }
 .back-link {
   display: inline-block;
-  margin-top: 20px;
-  color: #007acc;
+  margin-top: 24px;
+  color: #3498db;
   font-weight: 500;
+  transition: color 0.2s;
+}
+.back-link:hover {
+  color: #1d6fa5;
 }
 
 /* --- Footer --- */
 .site-footer {
   background-color: #fff;
   border-top: 1px solid #ddd;
-  padding: 16px 20px;
-  margin-top: 40px;
+  padding: 18px 24px;
+  margin-top: 48px;
 }
 .footer-inner {
-  max-width: 960px;
+  max-width: 1024px;
   margin: 0 auto;
   text-align: center;
   font-size: 0.9rem;
@@ -194,14 +220,15 @@ main#app {
 }
 
 /* --- Responsive tweaks --- */
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .site-title {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
   .room-card img {
     height: 140px;
   }
   #map {
-    height: 55vh;
+    height: 50vh;
   }
 }
+
