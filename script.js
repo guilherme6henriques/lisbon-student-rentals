@@ -61,6 +61,8 @@ function render() {
   }
 }
 
+// ... (previous parts unchanged) ...
+
 function renderMap() {
   app.innerHTML = `<div id="map"></div>`;
   const map = L.map("map").setView([38.7369, -9.1427], 12);
@@ -68,28 +70,48 @@ function renderMap() {
     attribution: '© OpenStreetMap contributors'
   }).addTo(map);
 
-  // Add property locations (your rentals)
-  Object.entries(data).forEach(([key, loc]) => {
-    const m = L.marker(loc.coords).addTo(map);
-    m.bindPopup(`<strong>${loc.name[lang]}</strong><br><button onclick="location.hash='#/location/${key}'">${lang === "en" ? "See rooms" : "Ver quartos"}</button>`);
-    m.on("mouseover", () => m.openPopup());
-    m.on("mouseout", () => m.closePopup());
+  // Custom icons for rentals vs universities
+  const rentalIcon = L.icon({
+    iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+    iconSize: [25,41],
+    iconAnchor: [12,41],
+    popupAnchor: [0, -35]
+  });
+  const uniIcon = L.icon({
+    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-red.png',
+    iconSize: [25,41],
+    iconAnchor: [12,41],
+    popupAnchor: [0, -35]
   });
 
-  // Add university / landmark pins with always-visible labels
+  // Add rental properties markers
+  Object.entries(data).forEach(([key, loc]) => {
+    const m = L.marker(loc.coords, { icon: rentalIcon }).addTo(map);
+    m.bindPopup(`
+      <strong>${loc.name[lang]}</strong><br>
+      <button class="popup-btn" onclick="location.hash='#/location/${key}'">
+        ${lang === "en" ? "See rooms" : "Ver quartos"}
+      </button>
+    `, { autoClose: false, closeOnClick: false });
+    m.on("mouseover", () => m.openPopup());
+    // keep popup open when cursor leaves marker → to allow click
+    m.on("mouseout", () => {
+      // delay closing slightly so user can move into popup
+      setTimeout(() => {
+        if (!m.isPopupOpen()) return;
+        // but only close if mouse isn't over popup
+        m.closePopup();
+      }, 300);
+    });
+  });
+
+  // Add university/ landmark markers
   uniLocations.forEach(uni => {
-    // Create a transparent or custom red icon — simpler: use default marker but bind permanent tooltip
-    const marker = L.marker(uni.coords, {
-      icon: L.icon({
-        iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [0, -41]
-      })
-    }).addTo(map);
-    marker.bindTooltip(uni.name[lang], {
+    const m = L.marker(uni.coords, { icon: uniIcon }).addTo(map);
+    m.bindTooltip(uni.name[lang], {
       permanent: true,
       direction: 'top',
+      offset: [0, -10],
       className: 'uni-label'
     });
   });
@@ -159,4 +181,5 @@ function renderRoom(locKey, floorNum, roomId) {
   html += `<a href="#/floor/${locKey}/${floorNum}" class="back-link">← ${lang === "en" ? "Back to floor" : "Voltar ao andar"}</a>`;
   app.innerHTML = html;
 }
+
 
