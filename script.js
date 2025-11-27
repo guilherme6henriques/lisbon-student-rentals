@@ -83,7 +83,7 @@ const data = {
   }
 };
 
-/* Universities to show on map */
+// universities with approximate coords + color codes
 const uniLocations = [
   {
     id: "ist",
@@ -100,22 +100,43 @@ const uniLocations = [
   {
     id: "iseg",
     name: { en: "ISEG", pt: "ISEG" },
-    coords: [38.7108, -9.1559], // campus Rua Miguel Lupi, from official source :contentReference[oaicite:3]{index=3}
+    coords: [38.7108, -9.1559],
     color: "green"
+  },
+  {
+    id: "nova_sbe",
+    name: { en: "NOVA SBE", pt: "NOVA SBE" },
+    coords: [38.67839175584445, -9.325852201844153],
+    color: "purple"
   }
+  // you can add more universities here
 ];
+
+// Helper: compute distance (approx) between two coords (lat,lon)
+function dist2(a, b) {
+  const R = 6371; // km
+  const [lat1, lon1] = a;
+  const [lat2, lon2] = b;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const rLat1 = lat1 * Math.PI / 180;
+  const rLat2 = lat2 * Math.PI / 180;
+  const x = dLon * Math.cos((rLat1 + rLat2) / 2);
+  const y = dLat;
+  return Math.sqrt(x*x + y*y) * R;
+}
 
 window.addEventListener("hashchange", render);
 window.addEventListener("load", render);
 
 function render() {
   const hash = location.hash.slice(1);
-  const parts = hash.split("/").filter(Boolean);
+  const p = hash.split("/").filter(Boolean);
 
-  if (parts.length === 0) return renderMap();
-  if (parts[0] === "location") return renderFloors(parts[1]);
-  if (parts[0] === "floor") return renderFloor(parts[1], +parts[2]);
-  if (parts[0] === "room") return renderRoom(parts[1], +parts[2], parts[3]);
+  if (p.length === 0) return renderMap();
+  if (p[0] === "location") return renderFloors(p[1]);
+  if (p[0] === "floor") return renderFloor(p[1], +p[2]);
+  if (p[0] === "room") return renderRoom(p[1], +p[2], p[3]);
   renderMap();
 }
 
@@ -146,6 +167,7 @@ function renderMap() {
     popupAnchor: [0, -35]
   });
 
+  // add university pins & captions
   uniLocations.forEach(uni => {
     const circle = L.circleMarker(uni.coords, {
       radius: 10,
@@ -156,13 +178,17 @@ function renderMap() {
       fillOpacity: 0.9
     }).addTo(map);
 
-    const side = (uni.coords[1] > -9.165) ? "roma" : "alcantara";
+    const dRoma = dist2(uni.coords, data["avenida_de_roma"].coords);
+    const dAlc = dist2(uni.coords, data["alcantara"].coords);
+    const side = dAlc < dRoma ? "alcantara" : "roma";
+
     const listEl = document.getElementById(side === "roma" ? "list-roma" : "list-alcantara");
     const li = document.createElement("li");
     li.innerHTML = `<span class="dot ${uni.color}"></span>${uni.name[lang]}`;
     listEl.appendChild(li);
   });
 
+  // rental markers + sticky popups
   Object.entries(data).forEach(([key, loc]) => {
     const marker = L.marker(loc.coords, { icon: rentalIcon }).addTo(map);
 
