@@ -1,0 +1,150 @@
+/* Reset some defaults */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background: #0066cc;
+  color: white;
+  padding: 10px 20px;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lang-switcher {
+  display: flex;
+}
+
+.lang-btn {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 5px 10px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.lang-btn.active {
+  background: white;
+  color: #0066cc;
+}
+
+main#app {
+  flex: 1;
+  padding: 15px;
+}
+
+footer#contact {
+  background: #f2f2f2;
+  padding: 10px;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Map container */
+#map {
+  width: 100%;
+  height: 60vh;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+.building {
+  display: flex;
+  flex-direction: column-reverse; /* floor 1 at bottom */
+  align-items: center;
+}
+
+.floor {
+  border: 1px solid #888;
+  width: 90%;
+  max-width: 300px;
+  padding: 12px;
+  margin: 8px 0;
+  background: #fafafa;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.floor:hover {
+  background: #eee;
+}
+
+.rooms-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.room-card {
+  border: 1px solid #aaa;
+  padding: 10px;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.room-card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.room-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.room-detail img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.back-link {
+  display: inline-block;
+  margin: 20px 0;
+}
+
+/* Responsive typography */
+@media (max-width: 600px) {
+  .floor {
+    max-width: 100%;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .lang-switcher {
+    margin-top: 10px;
+  }
+}
