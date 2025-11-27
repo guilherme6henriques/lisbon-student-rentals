@@ -19,6 +19,10 @@ a:hover {
   color: #155bb5;
   text-decoration: underline;
 }
+button {
+  cursor: pointer;
+  font: inherit;
+}
 
 /* Header */
 .site-header {
@@ -31,14 +35,21 @@ a:hover {
   top: 0;
   z-index: 1000;
 }
+.header-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
 .site-title {
   font-size: 2.2rem;
   font-weight: 700;
   letter-spacing: 1px;
-  margin-bottom: 8px;
 }
 .lang-switcher {
-  margin-top: 8px;
+  /* keep on right */
 }
 .lang-btn {
   background: transparent;
@@ -115,7 +126,7 @@ main#app {
 .rooms-list {
   display: grid;
   gap: 26px;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto‑fit, minmax(230px, 1fr));
   margin-top: 20px;
 }
 .room-card {
@@ -153,7 +164,6 @@ main#app {
 /* Floor common photos / room detail images */
 .common-photo, .room-detail img {
   width: 100%;
-  max-width: 100%;
   height: auto;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -213,3 +223,4 @@ main#app {
     height: 45vh;
   }
 }
+
