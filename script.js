@@ -1,3 +1,6 @@
+/* ===========================================================
+   script.js — full logic: map, language toggle, image loading
+=========================================================== */
 const app = document.getElementById("app");
 const langBtns = document.querySelectorAll(".lang-btn");
 let lang = "en";
@@ -11,14 +14,16 @@ langBtns.forEach(btn => {
   });
 });
 
-function getImagePaths(prefix, count, ext = "jpeg") {
+// helper: build image paths from naming scheme
+function getImagePaths(prefix, count) {
   const arr = [];
   for (let i = 1; i <= count; i++) {
-    arr.push(`images/${prefix}${i}F.${ext}`);
+    arr.push(`Images/${prefix}${i}F.jpg`);
   }
   return arr;
 }
 
+// Data structure for your two buildings, floors, rooms, and photo counts
 const data = {
   "avenida_de_roma": {
     name: { en: "Avenida de Roma", pt: "Avenida de Roma" },
@@ -30,13 +35,13 @@ const data = {
         commonPhotos: getImagePaths("AR1AZC", 7),
         rooms: [
           { id: "2Q", code: "AR1A2Q", name: { en: "", pt: "" }, price: null,
-            thumb: `images/AR1A2Q1F.jpeg`, photos: getImagePaths("AR1A2Q", 8),
+            thumb: `Images/AR1A2Q1F.jpg`, photos: getImagePaths("AR1A2Q", 8),
             description: { en: "", pt: "" }, availableFrom: "" },
           { id: "4Q", code: "AR1A4Q", name: { en: "", pt: "" }, price: null,
-            thumb: `images/AR1A4Q1F.jpeg`, photos: getImagePaths("AR1A4Q", 3),
+            thumb: `Images/AR1A4Q1F.jpg`, photos: getImagePaths("AR1A4Q", 3),
             description: { en: "", pt: "" }, availableFrom: "" },
           { id: "5Q", code: "AR1A5Q", name: { en: "", pt: "" }, price: null,
-            thumb: `images/AR1A5Q1F.jpeg`, photos: getImagePaths("AR1A5Q", 2),
+            thumb: `Images/AR1A5Q1F.jpg`, photos: getImagePaths("AR1A5Q", 2),
             description: { en: "", pt: "" }, availableFrom: "" }
         ]
       },
@@ -46,10 +51,10 @@ const data = {
         commonPhotos: getImagePaths("AR2AZC", 3),
         rooms: [
           { id: "3Q", code: "AR2A3Q", name: { en: "", pt: "" }, price: null,
-            thumb: `images/AR2A3Q1F.jpeg`, photos: getImagePaths("AR2A3Q", 6),
+            thumb: `Images/AR2A3Q1F.jpg`, photos: getImagePaths("AR2A3Q", 6),
             description: { en: "", pt: "" }, availableFrom: "" },
           { id: "5Q", code: "AR2A5Q", name: { en: "", pt: "" }, price: null,
-            thumb: `images/AR2A5Q1F.jpeg`, photos: getImagePaths("AR2A5Q", 4),
+            thumb: `Images/AR2A5Q1F.jpg`, photos: getImagePaths("AR2A5Q", 4),
             description: { en: "", pt: "" }, availableFrom: "" }
         ]
       },
@@ -59,10 +64,10 @@ const data = {
         commonPhotos: getImagePaths("AR3AZC", 5),
         rooms: [
           { id: "2Q", code: "AR3A2Q", name: { en: "", pt: "" }, price: null,
-            thumb: `images/AR3A2Q1F.jpeg`, photos: getImagePaths("AR3A2Q", 4),
+            thumb: `Images/AR3A2Q1F.jpg`, photos: getImagePaths("AR3A2Q", 4),
             description: { en: "", pt: "" }, availableFrom: "" },
           { id: "3Q", code: "AR3A3Q", name: { en: "", pt: "" }, price: null,
-            thumb: `images/AR3A3Q1F.jpeg`, photos: getImagePaths("AR3A3Q", 6),
+            thumb: `Images/AR3A3Q1F.jpg`, photos: getImagePaths("AR3A3Q", 6),
             description: { en: "", pt: "" }, availableFrom: "" }
         ]
       }
@@ -78,16 +83,16 @@ const data = {
         commonPhotos: getImagePaths("AL1AZC", 7),
         rooms: [
           { id: "1Q", code: "AL1A1Q", name: { en: "", pt: "" }, price: null,
-            thumb: `images/AL1A1Q1F.jpeg`, photos: getImagePaths("AL1A1Q", 6),
+            thumb: `Images/AL1A1Q1F.jpg`, photos: getImagePaths("AL1A1Q", 6),
             description: { en: "", pt: "" }, availableFrom: "" },
           { id: "2Q", code: "AL1A2Q", name: { en: "", pt: "" }, price: null,
-            thumb: `images/AL1A2Q1F.jpeg`, photos: getImagePaths("AL1A2Q", 4),
+            thumb: `Images/AL1A2Q1F.jpg`, photos: getImagePaths("AL1A2Q", 4),
             description: { en: "", pt: "" }, availableFrom: "" },
           { id: "3Q", code: "AL1A3Q", name: { en: "", pt: "" }, price: null,
-            thumb: `images/AL1A3Q1F.jpeg`, photos: getImagePaths("AL1A3Q", 4),
+            thumb: `Images/AL1A3Q1F.jpg`, photos: getImagePaths("AL1A3Q", 4),
             description: { en: "", pt: "" }, availableFrom: "" },
           { id: "4Q", code: "AL1A4Q", name: { en: "", pt: "" }, price: null,
-            thumb: `images/AL1A4Q1F.jpeg`, photos: getImagePaths("AL1A4Q", 5),
+            thumb: `Images/AL1A4Q1F.jpg`, photos: getImagePaths("AL1A4Q", 5),
             description: { en: "", pt: "" }, availableFrom: "" }
         ]
       }
@@ -95,7 +100,7 @@ const data = {
   }
 };
 
-// University list with exact hex‑colours
+// Full university list, with consistent hex-colours
 const uniLocations = [
   { id: "ist",       name: { en: "IST",       pt: "IST" },        coords: [38.7353,   -9.1367],        color: "#f1c40f" },
   { id: "nova_ims",  name: { en: "NOVA IMS",  pt: "NOVA IMS" },   coords: [38.732462, -9.159921],      color: "#e74c3c" },
@@ -148,17 +153,20 @@ function renderMap() {
   `;
 
   const map = L.map("map").setView([38.7369, -9.1427], 12);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
 
   const rentalIcon = L.icon({
-    iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-    iconSize: [25,41],
-    iconAnchor: [12,41],
+    iconUrl: "https://unpkg.com/leaflet/dist/images/marker-icon.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
     popupAnchor: [0, -35]
   });
 
   uniLocations.forEach(uni => {
-    const circle = L.circleMarker(uni.coords, {
+    // Add map circle marker
+    L.circleMarker(uni.coords, {
       radius: 9,
       fillColor: uni.color,
       color: "#000",
@@ -167,7 +175,7 @@ function renderMap() {
       fillOpacity: 0.9
     }).addTo(map);
 
-    // Add to caption list with exact same color
+    // Add to side caption list
     const dA = distKm(uni.coords, data.alcantara.coords);
     const dR = distKm(uni.coords, data.avenida_de_roma.coords);
     const side = dA < dR ? "alcantara" : "roma";
@@ -177,9 +185,9 @@ function renderMap() {
     listEl.appendChild(li);
   });
 
+  // Rental property markers
   Object.entries(data).forEach(([key, loc]) => {
     const marker = L.marker(loc.coords, { icon: rentalIcon }).addTo(map);
-
     const popup = L.popup({ closeOnClick: false, autoClose: false, closeButton: false })
       .setContent(`
         <div class="popup-wrap" id="popup-${key}">
@@ -190,20 +198,19 @@ function renderMap() {
         </div>
       `);
 
-    let overM = false, overP = false;
-
-    marker.on("mouseover", () => { overM = true; marker.openPopup(); });
+    let overMarker = false, overPopup = false;
+    marker.on("mouseover", () => { overMarker = true; marker.openPopup(); });
     marker.on("mouseout", () => {
-      overM = false;
-      setTimeout(() => { if (!overM && !overP) marker.closePopup(); }, 200);
+      overMarker = false;
+      setTimeout(() => { if (!overMarker && !overPopup) marker.closePopup(); }, 200);
     });
     marker.on("popupopen", () => {
       const el = document.getElementById(`popup-${key}`);
       if (!el) return;
-      el.addEventListener("mouseenter", () => overP = true);
+      el.addEventListener("mouseenter", () => overPopup = true);
       el.addEventListener("mouseleave", () => {
-        overP = false;
-        setTimeout(() => { if (!overM && !overP) marker.closePopup(); }, 200);
+        overPopup = false;
+        setTimeout(() => { if (!overMarker && !overPopup) marker.closePopup(); }, 200);
       });
     });
 
