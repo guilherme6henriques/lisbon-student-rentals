@@ -4,17 +4,17 @@ let lang = "en";
 
 langBtns.forEach(btn => {
   btn.addEventListener("click", () => {
-    lang = btn.id === "lang‑pt" ? "pt" : "en";
+    lang = btn.id === "lang-pt" ? "pt" : "en";
     langBtns.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
     render();
   });
 });
 
-function getImagePaths(prefix, count) {
+function getImagePaths(prefix, count, ext = "jpeg") {
   const arr = [];
   for (let i = 1; i <= count; i++) {
-    arr.push(`images/${prefix}${i}F.jpg`);
+    arr.push(`images/${prefix}${i}F.${ext}`);
   }
   return arr;
 }
@@ -29,9 +29,15 @@ const data = {
         priceRange: [700, 850],
         commonPhotos: getImagePaths("AR1AZC", 7),
         rooms: [
-          { id: "1Q", code: "AR1A2Q", name: { en: "", pt: "" }, price: null, thumb: `images/AR1A2Q1F.jpg`, photos: getImagePaths("AR1A2Q", 8), description: { en: "", pt: "" }, availableFrom: "" },
-          { id: "4Q", code: "AR1A4Q", name: { en: "", pt: "" }, price: null, thumb: `images/AR1A4Q1F.jpg`, photos: getImagePaths("AR1A4Q", 3), description: { en: "", pt: "" }, availableFrom: "" },
-          { id: "5Q", code: "AR1A5Q", name: { en: "", pt: "" }, price: null, thumb: `images/AR1A5Q1F.jpg`, photos: getImagePaths("AR1A5Q", 2), description: { en: "", pt: "" }, availableFrom: "" }
+          { id: "2Q", code: "AR1A2Q", name: { en: "", pt: "" }, price: null,
+            thumb: `images/AR1A2Q1F.jpeg`, photos: getImagePaths("AR1A2Q", 8),
+            description: { en: "", pt: "" }, availableFrom: "" },
+          { id: "4Q", code: "AR1A4Q", name: { en: "", pt: "" }, price: null,
+            thumb: `images/AR1A4Q1F.jpeg`, photos: getImagePaths("AR1A4Q", 3),
+            description: { en: "", pt: "" }, availableFrom: "" },
+          { id: "5Q", code: "AR1A5Q", name: { en: "", pt: "" }, price: null,
+            thumb: `images/AR1A5Q1F.jpeg`, photos: getImagePaths("AR1A5Q", 2),
+            description: { en: "", pt: "" }, availableFrom: "" }
         ]
       },
       {
@@ -39,8 +45,12 @@ const data = {
         priceRange: [650, 800],
         commonPhotos: getImagePaths("AR2AZC", 3),
         rooms: [
-          { id: "3Q", code: "AR2A3Q", name: { en: "", pt: "" }, price: null, thumb: `images/AR2A3Q1F.jpg`, photos: getImagePaths("AR2A3Q", 6), description: { en: "", pt: "" }, availableFrom: "" },
-          { id: "5Q", code: "AR2A5Q", name: { en: "", pt: "" }, price: null, thumb: `images/AR2A5Q1F.jpg`, photos: getImagePaths("AR2A5Q", 4), description: { en: "", pt: "" }, availableFrom: "" }
+          { id: "3Q", code: "AR2A3Q", name: { en: "", pt: "" }, price: null,
+            thumb: `images/AR2A3Q1F.jpeg`, photos: getImagePaths("AR2A3Q", 6),
+            description: { en: "", pt: "" }, availableFrom: "" },
+          { id: "5Q", code: "AR2A5Q", name: { en: "", pt: "" }, price: null,
+            thumb: `images/AR2A5Q1F.jpeg`, photos: getImagePaths("AR2A5Q", 4),
+            description: { en: "", pt: "" }, availableFrom: "" }
         ]
       },
       {
@@ -48,8 +58,12 @@ const data = {
         priceRange: [600, 780],
         commonPhotos: getImagePaths("AR3AZC", 5),
         rooms: [
-          { id: "2Q", code: "AR3A2Q", name: { en: "", pt: "" }, price: null, thumb: `images/AR3A2Q1F.jpg`, photos: getImagePaths("AR3A2Q", 4), description: { en: "", pt: "" }, availableFrom: "" },
-          { id: "3Q", code: "AR3A3Q", name: { en: "", pt: "" }, price: null, thumb: `images/AR3A3Q1F.jpg`, photos: getImagePaths("AR3A3Q", 6), description: { en: "", pt: "" }, availableFrom: "" }
+          { id: "2Q", code: "AR3A2Q", name: { en: "", pt: "" }, price: null,
+            thumb: `images/AR3A2Q1F.jpeg`, photos: getImagePaths("AR3A2Q", 4),
+            description: { en: "", pt: "" }, availableFrom: "" },
+          { id: "3Q", code: "AR3A3Q", name: { en: "", pt: "" }, price: null,
+            thumb: `images/AR3A3Q1F.jpeg`, photos: getImagePaths("AR3A3Q", 6),
+            description: { en: "", pt: "" }, availableFrom: "" }
         ]
       }
     ]
@@ -63,27 +77,35 @@ const data = {
         priceRange: [550, 750],
         commonPhotos: getImagePaths("AL1AZC", 7),
         rooms: [
-          { id: "1Q", code: "AL1A1Q", name: { en: "", pt: "" }, price: null, thumb: `images/AL1A1Q1F.jpg`, photos: getImagePaths("AL1A1Q", 6), description: { en: "", pt: "" }, availableFrom: "" },
-          { id: "2Q", code: "AL1A2Q", name: { en: "", pt: "" }, price: null, thumb: `images/AL1A2Q1F.jpg`, photos: getImagePaths("AL1A2Q", 4), description: { en: "", pt: "" }, availableFrom: "" },
-          { id: "3Q", code: "AL1A3Q", name: { en: "", pt: "" }, price: null, thumb: `images/AL1A3Q1F.jpg`, photos: getImagePaths("AL1A3Q", 4), description: { en: "", pt: "" }, availableFrom: "" },
-          { id: "4Q", code: "AL1A4Q", name: { en: "", pt: "" }, price: null, thumb: `images/AL1A4Q1F.jpg`, photos: getImagePaths("AL1A4Q", 5), description: { en: "", pt: "" }, availableFrom: "" }
+          { id: "1Q", code: "AL1A1Q", name: { en: "", pt: "" }, price: null,
+            thumb: `images/AL1A1Q1F.jpeg`, photos: getImagePaths("AL1A1Q", 6),
+            description: { en: "", pt: "" }, availableFrom: "" },
+          { id: "2Q", code: "AL1A2Q", name: { en: "", pt: "" }, price: null,
+            thumb: `images/AL1A2Q1F.jpeg`, photos: getImagePaths("AL1A2Q", 4),
+            description: { en: "", pt: "" }, availableFrom: "" },
+          { id: "3Q", code: "AL1A3Q", name: { en: "", pt: "" }, price: null,
+            thumb: `images/AL1A3Q1F.jpeg`, photos: getImagePaths("AL1A3Q", 4),
+            description: { en: "", pt: "" }, availableFrom: "" },
+          { id: "4Q", code: "AL1A4Q", name: { en: "", pt: "" }, price: null,
+            thumb: `images/AL1A4Q1F.jpeg`, photos: getImagePaths("AL1A4Q", 5),
+            description: { en: "", pt: "" }, availableFrom: "" }
         ]
       }
     ]
   }
 };
 
-// Full list of universities
+// University list with exact hex‑colours
 const uniLocations = [
-  { id: "ist",       name: { en: "IST",       pt: "IST" },        coords: [38.7353,   -9.1367],        color: "yellow" },
-  { id: "nova_ims",  name: { en: "NOVA IMS",  pt: "NOVA IMS" },   coords: [38.732462, -9.159921],      color: "red" },
-  { id: "iseg",      name: { en: "ISEG",      pt: "ISEG" },       coords: [38.7099,   -9.1556],        color: "green" },
-  { id: "nova_sbe",  name: { en: "NOVA SBE",  pt: "NOVA SBE" },   coords: [38.678458, -9.325998],      color: "purple" },
-  { id: "nova_law",  name: { en: "NOVA LAW",  pt: "NOVA LAW" },   coords: [38.732591, -9.160372],      color: "blue" },
-  { id: "fcul",      name: { en: "FCUL",      pt: "FCUL" },       coords: [38.7563,   -9.1564],        color: "orange" },
-  { id: "iscte",     name: { en: "ISCTE-IUL", pt: "ISCTE-IUL" },  coords: [38.74889,  -9.15389],       color: "teal" },
-  { id: "fmul",      name: { en: "FMUL",      pt: "FMUL" },       coords: [38.7463469531953, -9.161155141126354], color: "magenta" },
-  { id: "ucp_cat",   name: { en: "UCP",       pt: "UCP" },        coords: [38.74893443978093, -9.164949511475601], color: "brown" }
+  { id: "ist",       name: { en: "IST",       pt: "IST" },        coords: [38.7353,   -9.1367],        color: "#f1c40f" },
+  { id: "nova_ims",  name: { en: "NOVA IMS",  pt: "NOVA IMS" },   coords: [38.732462, -9.159921],      color: "#e74c3c" },
+  { id: "iseg",      name: { en: "ISEG",      pt: "ISEG" },       coords: [38.7099,   -9.1556],        color: "#2ecc71" },
+  { id: "nova_sbe",  name: { en: "NOVA SBE",  pt: "NOVA SBE" },   coords: [38.678458, -9.325998],      color: "#8e44ad" },
+  { id: "nova_law",  name: { en: "NOVA LAW",  pt: "NOVA LAW" },   coords: [38.732591, -9.160372],      color: "#3498db" },
+  { id: "fcul",      name: { en: "FCUL",      pt: "FCUL" },       coords: [38.7563,   -9.1564],        color: "#f39c12" },
+  { id: "iscte",     name: { en: "ISCTE-IUL", pt: "ISCTE-IUL" },  coords: [38.74889,  -9.15389],       color: "#1abc9c" },
+  { id: "fmul",      name: { en: "FMUL",      pt: "FMUL" },       coords: [38.7463469531953, -9.161155141126354], color: "#e84393" },
+  { id: "ucp_cat",   name: { en: "UCP",       pt: "UCP" },        coords: [38.74893443978093, -9.164949511475601], color: "#a04000" }
 ];
 
 function distKm(a, b) {
@@ -136,7 +158,7 @@ function renderMap() {
   });
 
   uniLocations.forEach(uni => {
-    L.circleMarker(uni.coords, {
+    const circle = L.circleMarker(uni.coords, {
       radius: 9,
       fillColor: uni.color,
       color: "#000",
@@ -145,12 +167,13 @@ function renderMap() {
       fillOpacity: 0.9
     }).addTo(map);
 
+    // Add to caption list with exact same color
     const dA = distKm(uni.coords, data.alcantara.coords);
     const dR = distKm(uni.coords, data.avenida_de_roma.coords);
     const side = dA < dR ? "alcantara" : "roma";
     const listEl = document.getElementById(side === "roma" ? "list-roma" : "list-alcantara");
     const li = document.createElement("li");
-    li.innerHTML = `<span class="dot ${uni.color}"></span>${uni.name[lang]}`;
+    li.innerHTML = `<span class="dot" style="background: ${uni.color};"></span>${uni.name[lang]}`;
     listEl.appendChild(li);
   });
 
