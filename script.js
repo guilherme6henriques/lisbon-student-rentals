@@ -1,4 +1,4 @@
-// script.js — corrected full logic
+// script.js — corrected full logic + image popup & global back-to-map
 
 const app = document.getElementById("app");
 const langBtns = document.querySelectorAll(".lang-btn");
@@ -388,18 +388,42 @@ function renderAbout() {
   app.innerHTML = html;
 }
 
-// === IMAGE POPUP HANDLER ===
+// === IMAGE MODAL & GLOBAL BACK BUTTON LOGIC ===
+const imageModal = document.getElementById("image-modal");
+const modalImg = document.getElementById("modal-img");
+const backToMapBtn = document.getElementById("top-back-to-map");
+
+// Show modal on image click
 document.body.addEventListener("click", function (e) {
   if (e.target.matches(".photo-wrapper img")) {
-    const modal = document.getElementById("image-modal");
-    const modalImg = document.getElementById("modal-img");
     modalImg.src = e.target.src;
-    modal.classList.remove("hidden");
+    imageModal.classList.remove("hidden");
   }
-
   if (e.target.matches(".close-btn")) {
-    document.getElementById("image-modal").classList.add("hidden");
+    imageModal.classList.add("hidden");
   }
 });
 
+// Close modal by clicking outside modal content (on backdrop)
+imageModal.addEventListener("click", function (e) {
+  if (e.target === imageModal) {
+    imageModal.classList.add("hidden");
+  }
+});
+
+// Close modal on ESC key
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    imageModal.classList.add("hidden");
+  }
+});
+
+// Show or hide top "Back to Map" button depending on view
+function toggleBackBtnVisibility() {
+  const current = location.hash;
+  const show = current.startsWith("#/floor") || current.startsWith("#/room") || current.startsWith("#/about");
+  backToMapBtn.classList.toggle("hidden", !show);
+}
+window.addEventListener("hashchange", toggleBackBtnVisibility);
+window.addEventListener("load", toggleBackBtnVisibility);
 
