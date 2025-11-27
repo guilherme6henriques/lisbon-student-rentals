@@ -1,4 +1,5 @@
 // script.js — full logic + top‑nav + translated nav + improved room layout + image modal
+// — UPDATED with new universities + room availability dates
 
 const app = document.getElementById("app");
 const langBtns = document.querySelectorAll(".lang-btn");
@@ -90,15 +91,15 @@ const data = {
           { id: "2Q", code: "AR1A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 700,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR1A2Q1F.jpg`, photos: getImagePaths("AR1A2Q", 8),
-            description: { en: "", pt: "" }, availableFrom: "" },
+            description: { en: "", pt: "" }, availableFrom: "01/01/2026" },
           { id: "4Q", code: "AR1A4Q", label: { en: "Room 4", pt: "Quarto 4" }, price: 600,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR1A4Q1F.jpg`, photos: getImagePaths("AR1A4Q", 3),
-            description: { en: "", pt: "" }, availableFrom: "" },
+            description: { en: "", pt: "" }, availableFrom: "16/02/2026" },
           { id: "5Q", code: "AR1A5Q", label: { en: "Room 5", pt: "Quarto 5" }, price: 570,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR1A5Q1F.jpg`, photos: getImagePaths("AR1A5Q", 2),
-            description: { en: "", pt: "" }, availableFrom: "" }
+            description: { en: "", pt: "" }, availableFrom: "01/02/2026" }
         ]
       },
       {
@@ -112,11 +113,11 @@ const data = {
           { id: "3Q", code: "AR2A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 650,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR2A3Q1F.jpg`, photos: getImagePaths("AR2A3Q", 6),
-            description: { en: "", pt: "" }, availableFrom: "" },
+            description: { en: "", pt: "" }, availableFrom: "01/03/2026" },
           { id: "5Q", code: "AR2A5Q", label: { en: "Room 5", pt: "Quarto 5" }, price: 600,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR2A5Q1F.jpg`, photos: getImagePaths("AR2A5Q", 4),
-            description: { en: "", pt: "" }, availableFrom: "" }
+            description: { en: "", pt: "" }, availableFrom: "01/02/2026" }
         ]
       },
       {
@@ -130,11 +131,11 @@ const data = {
           { id: "2Q", code: "AR3A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 700,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR3A2Q1F.jpg`, photos: getImagePaths("AR3A2Q", 4),
-            description: { en: "", pt: "" }, availableFrom: "" },
+            description: { en: "", pt: "" }, availableFrom: "01/12/2025" },
           { id: "3Q", code: "AR3A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 650,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR3A3Q1F.jpg`, photos: getImagePaths("AR3A3Q", 6),
-            description: { en: "", pt: "" }, availableFrom: "" }
+            description: { en: "", pt: "" }, availableFrom: "01/02/2026" }
         ]
       }
     ]
@@ -154,25 +155,26 @@ const data = {
           { id: "1Q", code: "AL1A1Q", label: { en: "Room 1", pt: "Quarto 1" }, price: 750,
             bills: { en: "All bills included (excluding gas)", pt: "Contas incluídas (gás excluído)" },
             thumb: `Images/AL1A1Q1F.jpg`, photos: getImagePaths("AL1A1Q", 6),
-            description: { en: "", pt: "" }, availableFrom: "" },
+            description: { en: "", pt: "" }, availableFrom: "01/02/2026" },
           { id: "2Q", code: "AL1A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 700,
             bills: { en: "All bills included (excluding gas)", pt: "Contas incluídas (gás excluído)" },
             thumb: `Images/AL1A2Q1F.jpg`, photos: getImagePaths("AL1A2Q", 4),
-            description: { en: "", pt: "" }, availableFrom: "" },
+            description: { en: "", pt: "" }, availableFrom: "01/01/2026" },
           { id: "3Q", code: "AL1A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 600,
             bills: { en: "All bills included (excluding gas)", pt: "Contas incluídas (gás excluído)" },
             thumb: `Images/AL1A3Q1F.jpg`, photos: getImagePaths("AL1A3Q", 4),
-            description: { en: "", pt: "" }, availableFrom: "" },
+            description: { en: "", pt: "" }, availableFrom: "01/03/2026" },
           { id: "4Q", code: "AL1A4Q", label: { en: "Room 4", pt: "Quarto 4" }, price: 750,
             bills: { en: "All bills included (excluding gas)", pt: "Contas incluídas (gás excluído)" },
             thumb: `Images/AL1A4Q1F.jpg`, photos: getImagePaths("AL1A4Q", 5),
-            description: { en: "", pt: "" }, availableFrom: "" }
+            description: { en: "", pt: "" }, availableFrom: "01/12/2025" }
         ]
       }
     ]
   }
 };
 
+// ===== New universities added =====
 const uniLocations = [
   { id: "ist", name: { en: "IST", pt: "IST" }, coords: [38.7353, -9.1367], color: "#f1c40f" },
   { id: "nova_ims", name: { en: "NOVA IMS", pt: "NOVA IMS" }, coords: [38.732462, -9.159921], color: "#e74c3c" },
@@ -181,7 +183,18 @@ const uniLocations = [
   { id: "iscte", name: { en: "ISCTE-IUL", pt: "ISCTE-IUL" }, coords: [38.74889, -9.15389], color: "#1abc9c" },
   { id: "fcul", name: { en: "FCUL", pt: "FCUL" }, coords: [38.7563, -9.1564], color: "#3498db" },
   { id: "fmul", name: { en: "FMUL", pt: "FMUL" }, coords: [38.7463469531953, -9.161155141126354], color: "#e84393" },
-  { id: "ucp_cat", name: { en: "UCP", pt: "UCP" }, coords: [38.74893443978093, -9.164949511475601], color: "#a04000" }
+  { id: "ucp_cat", name: { en: "UCP", pt: "UCP" }, coords: [38.74893443978093, -9.164949511475601], color: "#a04000" },
+
+  // ** New ones **
+  { id: "isa", name: { en: "ISA", pt: "ISA" }, coords: [38.707804917614304, -9.18041829943341], color: "#ff6600" },
+  { id: "universidade_europeia", name: { en: "Universidade Europeia de Lisboa", pt: "Universidade Europeia de Lisboa" },
+    coords: [38.70830724760151, -9.15303831282159], color: "#0077ff" },
+  { id: "fmv", name: { en: "FMV", pt: "FMV" },
+    coords: [38.71446887487367, -9.19299249625838], color: "#22aa55" },
+  { id: "faul", name: { en: "Faculdade de Arquitetura (FAUL)", pt: "Faculdade de Arquitetura (FAUL)" },
+    coords: [38.71339732566229, -9.193335818974514], color: "#993399" },
+  { id: "lusofona", name: { en: "Universidade Lusófona", pt: "Universidade Lusófona" },
+    coords: [38.758500744490426, -9.151230966127313], color: "#dd3333" }
 ];
 
 function distKm(a, b) {
@@ -228,8 +241,10 @@ function render() {
 
 function toggleBackBtn(show) {
   const btn = document.getElementById("btn-back-to-map");
-  if (show) btn.classList.remove("hidden");
-  else btn.classList.add("hidden");
+  if (btn) {
+    if (show) btn.classList.remove("hidden");
+    else btn.classList.add("hidden");
+  }
 }
 
 function renderMap() {
@@ -245,14 +260,7 @@ function renderMap() {
         <ul id="list-roma"></ul>
       </div>
     </div>
-    <div style="text-align:center; margin: 20px 0;">
-      <button id="btn-about">${i18n[lang].aboutUsTitle}</button>
-    </div>
   `;
-
-  document.getElementById("btn-about").addEventListener("click", () => {
-    location.hash = "#/about";
-  });
 
   const map = L.map("map").setView([38.7369, -9.1427], 12);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -378,7 +386,7 @@ function renderFloor(locKey, floorNum) {
 }
 
 function renderRoom(locKey, floorNum, roomId) {
-  applyTranslationsText();  
+  applyTranslationsText();
   const floor = data[locKey].floors.find(f => f.number === floorNum);
   if (!floor) return renderMap();
   const room = floor.rooms.find(r => r.id === roomId);
@@ -390,6 +398,11 @@ function renderRoom(locKey, floorNum, roomId) {
   const billsText = room.bills[lang] || "";
   if (billsText) {
     html += `<p><strong>${i18n[lang].billsIncludedLabel}</strong> ${billsText}</p>`;
+  }
+
+  // Available from date
+  if (room.availableFrom) {
+    html += `<p><strong>${lang === "en" ? "Available from:" : "Disponível a partir de:"}</strong> ${room.availableFrom}</p>`;
   }
 
   const desc = (room.description && room.description[lang]) ? room.description[lang] : "";
@@ -443,3 +456,4 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
