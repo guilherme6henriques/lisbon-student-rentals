@@ -6,35 +6,42 @@
   <title>Lisbon Student Rentals</title>
 
   <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css"
+  />
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <h1 class="site-title">Lisbon Student Rentals</h1>
-      <div class="lang-switcher">
+      <h1 class="site-title" data-i18n="title">Lisbon Student Rentals</h1>
+      <nav class="lang-switcher">
         <button id="lang‑en" class="lang-btn active">EN</button>
         <button id="lang‑pt" class="lang-btn">PT</button>
-      </div>
+      </nav>
     </div>
   </header>
 
   <main id="app">
-    <!-- Map or content injected via JS -->
+    <!-- Map / content rendered by script.js -->
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      Contact: <a href="mailto:matildersbarros@gmail.com">matildersbarros@gmail.com</a> |
+      <span data-i18n="contact">Contact</span>:
+      <a href="mailto:matildersbarros@gmail.com">matildersbarros@gmail.com</a> |
       <a href="https://wa.me/351924488081" target="_blank">WhatsApp</a>
     </div>
   </footer>
 
+  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
-
