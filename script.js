@@ -83,30 +83,29 @@ const data = {
   }
 };
 
-/* Universities with correct coordinates + colors */
 const uniLocations = [
   {
     id: "ist",
     name: { en: "IST", pt: "IST" },
-    coords: [38.73676, -9.13871],  // from reliable source :contentReference[oaicite:1]{index=1}
+    coords: [38.73676, -9.13871],
     color: "yellow"
   },
   {
     id: "novalisboa",
     name: { en: "NOVA", pt: "NOVA" },
-    coords: [38.7335, -9.1562],  // from source :contentReference[oaicite:2]{index=2}
+    coords: [38.7335, -9.1562],
     color: "red"
   },
   {
     id: "fdul",
     name: { en: "Direito ULisboa", pt: "Direito ULisboa" },
-    coords: [38.7273, -9.1504],  // approximate main campus area :contentReference[oaicite:3]{index=3}
+    coords: [38.7273, -9.1504],
     color: "green"
   },
   {
     id: "novaims",
     name: { en: "NOVA IMS", pt: "NOVA IMS" },
-    coords: [38.7325, -9.1600],  // Campus Campolide / IMS location :contentReference[oaicite:4]{index=4}
+    coords: [38.7325, -9.1600],
     color: "purple"
   }
 ];
@@ -152,7 +151,6 @@ function renderMap() {
     popupAnchor: [0, -35]
   });
 
-  /* Universities — circleMarker with black border (ring) */
   uniLocations.forEach(uni => {
     const circle = L.circleMarker(uni.coords, {
       radius: 10,
@@ -163,15 +161,13 @@ function renderMap() {
       fillOpacity: 0.9
     }).addTo(map);
 
-    // caption list: decide side based on house areas:
-    // e.g. for simplicity: if longitude > -9.165 → belongs to Roma, else Alcântara
-    const listEl = (uni.coords[1] > -9.165) ? document.getElementById("list-roma") : document.getElementById("list-alcantara");
+    const side = (uni.coords[1] > -9.165) ? "roma" : "alcantara";
+    const listEl = document.getElementById(side === "roma" ? "list-roma" : "list-alcantara");
     const li = document.createElement("li");
     li.innerHTML = `<span class="dot ${uni.color}"></span>${uni.name[lang]}`;
     listEl.appendChild(li);
   });
 
-  /* Rental markers with sticky popups */
   Object.entries(data).forEach(([key, loc]) => {
     const marker = L.marker(loc.coords, { icon: rentalIcon }).addTo(map);
 
@@ -200,7 +196,8 @@ function renderMap() {
     marker.on("popupopen", () => {
       const popupEl = document.getElementById(`popup-${key}`);
       if (!popupEl) return;
-      popupEl.addEventListener("mouseenter", () => overPopup = true);
+
+      popupEl.addEventListener("mouseenter", () => { overPopup = true; });
       popupEl.addEventListener("mouseleave", () => {
         overPopup = false;
         setTimeout(() => {
