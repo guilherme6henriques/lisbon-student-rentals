@@ -245,14 +245,8 @@ function renderMap() {
         <ul id="list-roma"></ul>
       </div>
     </div>
-    <div style="text-align:center; margin: 20px 0;">
-      <button id="btn-about">${i18n[lang].aboutUsTitle}</button>
-    </div>
   `;
 
-  document.getElementById("btn-about").addEventListener("click", () => {
-    location.hash = "#/about";
-  });
 
   const map = L.map("map").setView([38.7369, -9.1427], 12);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -443,3 +437,4 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
