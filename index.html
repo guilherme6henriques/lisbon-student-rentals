@@ -4,11 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lisbon Student Rentals</title>
+  
+  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- Google Font (playful / modern) -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
   <header class="site-header">
     <div class="header-inner">
       <h1 class="site-title">Lisbon Student Rentals</h1>
@@ -19,7 +23,9 @@
     </div>
   </header>
 
-  <main id="app"></main>
+  <main id="app">
+    <!-- Map + caption layout will be injected by JS -->
+  </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
@@ -28,6 +34,7 @@
     </div>
   </footer>
 
+  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
