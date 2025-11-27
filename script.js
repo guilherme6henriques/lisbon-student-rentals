@@ -224,6 +224,13 @@ function render() {
   }
   toggleBackBtn(false);
   renderMap();
+
+  // Clear accidental text selection
+if (window.getSelection) {
+  const sel = window.getSelection();
+  if (sel && sel.removeAllRanges) sel.removeAllRanges();
+}
+
 }
 
 function toggleBackBtn(show) {
@@ -437,4 +444,5 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
