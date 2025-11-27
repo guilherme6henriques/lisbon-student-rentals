@@ -43,10 +43,10 @@ header {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 20px;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  gap: 20px;
   position: relative;
 }
 .site-title {
@@ -366,4 +366,5 @@ header {
     height: calc(160px * 0.75);
   }
 }
+
 
