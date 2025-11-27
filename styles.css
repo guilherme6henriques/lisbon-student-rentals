@@ -30,35 +30,6 @@ button {
 }
 
 /* ===========================================================
-   TOP‑LEFT NAV BUTTONS (Back to Map / About Us)
-=========================================================== */
-.top-nav {
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  z-index: 10000;
-  display: flex;
-  gap: 8px;
-}
-.nav-btn {
-  font-weight: 600;
-  font-size: 14px;
-  background: white;
-  padding: 6px 10px;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  color: #1a73e8;
-  transition: background 0.2s ease;
-}
-.nav-btn:hover {
-  background: #f1f1f1;
-  color: #0d47a1;
-}
-.nav-btn.hidden {
-  display: none;
-}
-
-/* ===========================================================
    HEADER
 =========================================================== */
 header {
@@ -74,7 +45,7 @@ header {
   padding: 0 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   position: relative;
 }
@@ -84,11 +55,9 @@ header {
   letter-spacing: 1px;
   flex: 1 1 auto;
   text-align: center;
-  animation: slideDown 0.5s ease;
 }
 .lang-switcher {
   flex: 0 0 auto;
-  margin-left: 20px;
   margin-top: 10px;
 }
 .lang-btn {
@@ -108,6 +77,32 @@ header {
 }
 
 /* ===========================================================
+   NAV BUTTONS (Back to Map / About Us) — like lang buttons
+=========================================================== */
+.nav-btns {
+  flex: 0 0 auto;
+  margin-top: 10px;
+}
+.nav-btn {
+  font-weight: 600;
+  font-size: 14px;
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-left: 6px;
+  transition: background 0.25s, color 0.25s;
+}
+.nav-btn:hover {
+  background: white;
+  color: #1e2b3a;
+}
+.nav-btn.hidden {
+  display: none;
+}
+
+/* ===========================================================
    APP CONTAINER
 =========================================================== */
 #app {
@@ -118,10 +113,6 @@ header {
 }
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
@@ -236,7 +227,7 @@ header {
 }
 
 /* ===========================================================
-   ROOM DETAIL / COMMON AREA IMAGES (with 4:3 wrapper) — linear layout
+   ROOM DETAIL / COMMON AREA — linear layout (title → bills → desc → images)
 =========================================================== */
 .common-photos-container,
 .room-detail {
@@ -275,8 +266,7 @@ header {
 }
 
 /* ===========================================================
-   POPUP & NAV LINKS
-   (buttons inside map popups remain unchanged)
+   POPUP & NAV LINKS (map popups) — same as before
 =========================================================== */
 .popup-btn {
   margin-top: 8px;
@@ -338,6 +328,20 @@ header {
 }
 
 /* ===========================================================
+   FOOTER
+=========================================================== */
+.site-footer {
+  background: #ffffff;
+  padding: 35px 10px;
+  margin-top: 60px;
+}
+.footer-inner {
+  text-align: center;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* ===========================================================
    RESPONSIVE / MOBILE STYLES
 =========================================================== */
 @media (max-width: 900px) {
@@ -347,7 +351,7 @@ header {
 }
 @media (max-width: 600px) {
   header h1 { font-size: 1.7rem; }
-  .lang-btn { padding: 5px 10px; font-size: 0.85rem; }
+  .lang-btn, .nav-btn { padding: 5px 10px; font-size: 0.85rem; }
   #map { height: 380px; }
 
   .map-caption-container {
