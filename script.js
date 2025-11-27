@@ -1,4 +1,4 @@
-// script.js — full logic with map, translations, pricing, image loading
+// script.js — corrected full logic
 
 const app = document.getElementById("app");
 const langBtns = document.querySelectorAll(".lang-btn");
@@ -43,22 +43,23 @@ A nossa missão é tornar a experiência de arrendar para estudantes o mais simp
   }
 };
 
-function applyTranslations() {
-  document.querySelector(".i18n-contact").textContent = i18n[lang].contact;
+function applyTranslationsText() {
+  document.querySelectorAll(".i18n-contact").forEach(el => {
+    el.textContent = i18n[lang].contact;
+  });
 }
-applyTranslations();
+applyTranslationsText();
 
 langBtns.forEach(btn => {
   btn.addEventListener("click", () => {
     lang = btn.id === "lang-pt" ? "pt" : "en";
     langBtns.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
-    applyTranslations();
+    applyTranslationsText();
     render();
   });
 });
 
-// Helper to generate image paths
 function getImagePaths(prefix, count) {
   const arr = [];
   for (let i = 1; i <= count; i++) {
@@ -67,7 +68,6 @@ function getImagePaths(prefix, count) {
   return arr;
 }
 
-// Data structure
 const data = {
   "avenida_de_roma": {
     name: { en: "Avenida de Roma", pt: "Avenida de Roma" },
@@ -167,19 +167,18 @@ const data = {
   }
 };
 
-// Universities data
+// Universities:
 const uniLocations = [
-  { id: "ist",       name: { en: "IST",       pt: "IST" },        coords: [38.7353,   -9.1367],        color: "#f1c40f" },
-  { id: "nova_ims",  name: { en: "NOVA IMS",  pt: "NOVA IMS" },   coords: [38.732462, -9.159921],      color: "#e74c3c" },
-  { id: "iseg",      name: { en: "ISEG",      pt: "ISEG" },       coords: [38.7099,   -9.1556],        color: "#2ecc71" },
-  { id: "nova_sbe",  name: { en: "NOVA SBE",  pt: "NOVA SBE" },   coords: [38.678458, -9.325998],      color: "#8e44ad" },
-  { id: "iscte",     name: { en: "ISCTE-IUL", pt: "ISCTE-IUL" },  coords: [38.74889,  -9.15389],       color: "#1abc9c" },
-  { id: "fcul",      name: { en: "FCUL",      pt: "FCUL" },       coords: [38.7563,   -9.1564],        color: "#3498db" },
-  { id: "fmul",      name: { en: "FMUL",      pt: "FMUL" },       coords: [38.7463469531953, -9.161155141126354], color: "#e84393" },
-  { id: "ucp_cat",   name: { en: "UCP",       pt: "UCP" },        coords: [38.74893443978093, -9.164949511475601], color: "#a04000" }
+  { id: "ist", name: { en: "IST", pt: "IST" }, coords: [38.7353, -9.1367], color: "#f1c40f" },
+  { id: "nova_ims", name: { en: "NOVA IMS", pt: "NOVA IMS" }, coords: [38.732462, -9.159921], color: "#e74c3c" },
+  { id: "iseg", name: { en: "ISEG", pt: "ISEG" }, coords: [38.7099, -9.1556], color: "#2ecc71" },
+  { id: "nova_sbe", name: { en: "NOVA SBE", pt: "NOVA SBE" }, coords: [38.678458, -9.325998], color: "#8e44ad" },
+  { id: "iscte", name: { en: "ISCTE-IUL", pt: "ISCTE-IUL" }, coords: [38.74889, -9.15389], color: "#1abc9c" },
+  { id: "fcul", name: { en: "FCUL", pt: "FCUL" }, coords: [38.7563, -9.1564], color: "#3498db" },
+  { id: "fmul", name: { en: "FMUL", pt: "FMUL" }, coords: [38.7463469531953, -9.161155141126354], color: "#e84393" },
+  { id: "ucp_cat", name: { en: "UCP", pt: "UCP" }, coords: [38.74893443978093, -9.164949511475601], color: "#a04000" }
 ];
 
-// Utility: compute distance to decide which building is closer
 function distKm(a, b) {
   const R = 6371;
   const [lat1, lon1] = a.map(d => d * Math.PI / 180);
@@ -214,9 +213,7 @@ function renderMap() {
       </div>
       <div class="map-container"><div id="map"></div></div>
       <div class="caption-box" id="caption-right">
-        <h3>${i17ncalls
-Lang h n nearR oras
-})</h3>
+        <h3>${i18n[lang].nearRoma}</h3>
         <ul id="list-roma"></ul>
       </div>
     </div>
@@ -293,7 +290,7 @@ Lang h n nearR oras
 }
 
 function renderFloors(locKey) {
-  applyTranslations();
+  applyTranslationsText();
   const loc = data[locKey];
   if (!loc) return renderMap();
   if (loc.floors.length === 1) return renderFloor(locKey, loc.floors[0].number);
@@ -315,7 +312,7 @@ function renderFloors(locKey) {
 }
 
 function renderFloor(locKey, floorNum) {
-  applyTranslations();
+  applyTranslationsText();
   const floor = data[locKey].floors.find(f => f.number === floorNum);
   if (!floor) return renderMap();
 
@@ -352,7 +349,7 @@ function renderFloor(locKey, floorNum) {
 }
 
 function renderRoom(locKey, floorNum, roomId) {
-  applyTranslations();
+  applyTranslationsText();
   const floor = data[locKey].floors.find(f => f.number === floorNum);
   if (!floor) return renderMap();
   const room = floor.rooms.find(r => r.id === roomId);
@@ -360,7 +357,8 @@ function renderRoom(locKey, floorNum, roomId) {
 
   let html = `<div class="room-detail">`;
   html += `<h2>${room.label[lang]} — €${room.price}</h2>`;
-  html += `<p><strong>${ room.bills[lang] ? i18n[lang].billsIncludedLabel : '' }</strong> ${room.bills[lang] || ''}</p>`;
+  const billsText = room.bills[lang] || "";
+  html += `<p><strong>${ room.bills[lang] ? i18n[lang].billsIncludedLabel : '' }</strong> ${billsText}</p>`;
 
   room.photos.forEach(src => {
     html += `<img src="${src}" alt="">`;
@@ -379,7 +377,7 @@ function renderRoom(locKey, floorNum, roomId) {
 }
 
 function renderAbout() {
-  applyTranslations();
+  applyTranslationsText();
   const html = `
     <div class="about-page" style="background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
       <h2>${i18n[lang].aboutUsTitle}</h2>
