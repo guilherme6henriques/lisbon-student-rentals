@@ -1,4 +1,4 @@
-// script.js — full logic + extra universities + room availability dates (formatted) + working map + image modal
+// script.js — full logic + top‑nav + translated nav + improved room layout + image modal
 
 const app = document.getElementById("app");
 const langBtns = document.querySelectorAll(".lang-btn");
@@ -17,10 +17,11 @@ const i18n = {
     billsIncludedLabel: "Bills included:",
     billsGasExcludedLabel: "Bills included (excluding gas):",
     aboutUsTitle: "About us",
-    aboutUsText: `Welcome to Lisbon Student Rentals! ...`,  // (same as before)
+    aboutUsText: `Welcome to Lisbon Student Rentals! We are dedicated to providing safe, comfortable, and well‑located rooms for students coming to Lisbon. With properties in central neighborhoods like Avenida de Roma and Alcântara, we ensure easy access to public transport and local universities.
+
+Our mission is to make the student renting experience as simple and stress‑free as possible. If you have any questions, feel free to contact us via email or WhatsApp. We look forward to helping you find your home in Lisbon!`,
     nearAlcantara: "Near Alcântara",
-    nearRoma: "Near Avenida de Roma",
-    availableFromLabel: "Available from:"
+    nearRoma: "Near Avenida de Roma"
   },
   pt: {
     contact: "Contacto",
@@ -34,17 +35,20 @@ const i18n = {
     billsIncludedLabel: "Contas incluídas:",
     billsGasExcludedLabel: "Contas incluídas (gás excluído):",
     aboutUsTitle: "Sobre nós",
-    aboutUsText: `Bem‑vindo aos Quartos de Estudantes Lisboa! ...`,  // (same as before)
+    aboutUsText: `Bem‑vindo aos Quartos de Estudantes Lisboa! Dedicamo‑nos a oferecer quartos seguros, confortáveis e bem localizados para estudantes que vêm para Lisboa. Com propriedades em bairros centrais como Avenida de Roma e Alcântara, garantimos fácil acesso a transportes públicos e às principais universidades.
+
+A nossa missão é tornar a experiência de arrendar para estudantes o mais simples e tranquila possível. Se tiver alguma dúvida, contacte‑nos por email ou WhatsApp. Estamos ansiosos por ajudar‑lo a encontrar o seu lar em Lisboa!`,
     nearAlcantara: "Perto de Alcântara",
-    nearRoma: "Perto da Avenida de Roma",
-    availableFromLabel: "Disponível a partir de:"
+    nearRoma: "Perto da Avenida de Roma"
   }
 };
 
 function applyTranslationsText() {
+  // Footer contact
   document.querySelectorAll(".i18n-contact").forEach(el => {
     el.textContent = i18n[lang].contact;
   });
+  // Top‑nav buttons
   const btnBack = document.getElementById("btn-back-to-map");
   const btnAbout = document.getElementById("btn-about-global");
   if (btnBack) btnBack.textContent = i18n[lang].backToMap;
@@ -70,14 +74,6 @@ function getImagePaths(prefix, count) {
   return arr;
 }
 
-// Utility to format date as "1 Dec" (day + short month name)
-function formatDateShort(dstr) {
-  // dstr expected "YYYY-MM-DD"
-  const d = new Date(dstr);
-  if (isNaN(d)) return dstr;
-  return d.getDate() + " " + d.toLocaleString(lang, { month: "short" });
-}
-
 const data = {
   "avenida_de_roma": {
     name: { en: "Avenida de Roma", pt: "Avenida de Roma" },
@@ -94,15 +90,15 @@ const data = {
           { id: "2Q", code: "AR1A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 700,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR1A2Q1F.jpg`, photos: getImagePaths("AR1A2Q", 8),
-            description: { en: "", pt: "" }, availableFrom: "2026-01-01" },
+            description: { en: "", pt: "" }, availableFrom: "" },
           { id: "4Q", code: "AR1A4Q", label: { en: "Room 4", pt: "Quarto 4" }, price: 600,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR1A4Q1F.jpg`, photos: getImagePaths("AR1A4Q", 3),
-            description: { en: "", pt: "" }, availableFrom: "2026-02-16" },
+            description: { en: "", pt: "" }, availableFrom: "" },
           { id: "5Q", code: "AR1A5Q", label: { en: "Room 5", pt: "Quarto 5" }, price: 570,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR1A5Q1F.jpg`, photos: getImagePaths("AR1A5Q", 2),
-            description: { en: "", pt: "" }, availableFrom: "2026-02-01" }
+            description: { en: "", pt: "" }, availableFrom: "" }
         ]
       },
       {
@@ -116,11 +112,11 @@ const data = {
           { id: "3Q", code: "AR2A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 650,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR2A3Q1F.jpg`, photos: getImagePaths("AR2A3Q", 6),
-            description: { en: "", pt: "" }, availableFrom: "2026-03-01" },
+            description: { en: "", pt: "" }, availableFrom: "" },
           { id: "5Q", code: "AR2A5Q", label: { en: "Room 5", pt: "Quarto 5" }, price: 600,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR2A5Q1F.jpg`, photos: getImagePaths("AR2A5Q", 4),
-            description: { en: "", pt: "" }, availableFrom: "2026-02-01" }
+            description: { en: "", pt: "" }, availableFrom: "" }
         ]
       },
       {
@@ -134,11 +130,11 @@ const data = {
           { id: "2Q", code: "AR3A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 700,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR3A2Q1F.jpg`, photos: getImagePaths("AR3A2Q", 4),
-            description: { en: "", pt: "" }, availableFrom: "2025-12-01" },
+            description: { en: "", pt: "" }, availableFrom: "" },
           { id: "3Q", code: "AR3A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 650,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR3A3Q1F.jpg`, photos: getImagePaths("AR3A3Q", 6),
-            description: { en: "", pt: "" }, availableFrom: "2026-02-01" }
+            description: { en: "", pt: "" }, availableFrom: "" }
         ]
       }
     ]
@@ -158,19 +154,19 @@ const data = {
           { id: "1Q", code: "AL1A1Q", label: { en: "Room 1", pt: "Quarto 1" }, price: 750,
             bills: { en: "All bills included (excluding gas)", pt: "Contas incluídas (gás excluído)" },
             thumb: `Images/AL1A1Q1F.jpg`, photos: getImagePaths("AL1A1Q", 6),
-            description: { en: "", pt: "" }, availableFrom: "2026-02-01" },
+            description: { en: "", pt: "" }, availableFrom: "" },
           { id: "2Q", code: "AL1A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 700,
             bills: { en: "All bills included (excluding gas)", pt: "Contas incluídas (gás excluído)" },
             thumb: `Images/AL1A2Q1F.jpg`, photos: getImagePaths("AL1A2Q", 4),
-            description: { en: "", pt: "" }, availableFrom: "2026-01-01" },
+            description: { en: "", pt: "" }, availableFrom: "" },
           { id: "3Q", code: "AL1A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 600,
             bills: { en: "All bills included (excluding gas)", pt: "Contas incluídas (gás excluído)" },
             thumb: `Images/AL1A3Q1F.jpg`, photos: getImagePaths("AL1A3Q", 4),
-            description: { en: "", pt: "" }, availableFrom: "2026-03-01" },
+            description: { en: "", pt: "" }, availableFrom: "" },
           { id: "4Q", code: "AL1A4Q", label: { en: "Room 4", pt: "Quarto 4" }, price: 750,
             bills: { en: "All bills included (excluding gas)", pt: "Contas incluídas (gás excluído)" },
             thumb: `Images/AL1A4Q1F.jpg`, photos: getImagePaths("AL1A4Q", 5),
-            description: { en: "", pt: "" }, availableFrom: "2025-12-01" }
+            description: { en: "", pt: "" }, availableFrom: "" }
         ]
       }
     ]
@@ -185,14 +181,7 @@ const uniLocations = [
   { id: "iscte", name: { en: "ISCTE-IUL", pt: "ISCTE-IUL" }, coords: [38.74889, -9.15389], color: "#1abc9c" },
   { id: "fcul", name: { en: "FCUL", pt: "FCUL" }, coords: [38.7563, -9.1564], color: "#3498db" },
   { id: "fmul", name: { en: "FMUL", pt: "FMUL" }, coords: [38.7463469531953, -9.161155141126354], color: "#e84393" },
-  { id: "ucp_cat", name: { en: "UCP", pt: "UCP" }, coords: [38.74893443978093, -9.164949511475601], color: "#a04000" },
-
-  // NEW — added universities
-  { id: "isa", name: { en: "ISA", pt: "ISA" }, coords: [38.707804917614304, -9.18041829943341], color: "#d35400" },
-  { id: "univ_europeia", name: { en: "Universidade Europeia de Lisboa", pt: "Universidade Europeia de Lisboa" }, coords: [38.70830724760151, -9.15303831282159], color: "#27ae60" },
-  { id: "fmv", name: { en: "FMV (Vet.)", pt: "FMV (Vet.)" }, coords: [38.71446887487367, -9.19299249625838], color: "#c0392b" },
-  { id: "faul_arch", name: { en: "FAUL-Arq. ULisboa", pt: "FAUL‑Arq. ULisboa" }, coords: [38.71339732566229, -9.193335818974514], color: "#8e44ad" },
-  { id: "lusofona", name: { en: "Universidade Lusófona", pt: "Universidade Lusófona" }, coords: [38.758500744490426, -9.151230966127313], color: "#2980b9" }
+  { id: "ucp_cat", name: { en: "UCP", pt: "UCP" }, coords: [38.74893443978093, -9.164949511475601], color: "#a04000" }
 ];
 
 function distKm(a, b) {
@@ -217,35 +206,33 @@ function render() {
     toggleBackBtn(false);
     return renderMap();
   }
-  if (parts[0] === "location") { toggleBackBtn(true); return renderFloors(parts[1]); }
-  if (parts[0] === "floor")    { toggleBackBtn(true); return renderFloor(parts[1], +parts[2]); }
-  if (parts[0] === "room")     { toggleBackBtn(true); return renderRoom(parts[1], +parts[2], parts[3]); }
-  if (parts[0] === "about")    { toggleBackBtn(true); return renderAbout(); }
+  if (parts[0] === "location") {
+    toggleBackBtn(true);
+    return renderFloors(parts[1]);
+  }
+  if (parts[0] === "floor") {
+    toggleBackBtn(true);
+    return renderFloor(parts[1], +parts[2]);
+  }
+  if (parts[0] === "room") {
+    toggleBackBtn(true);
+    return renderRoom(parts[1], +parts[2], parts[3]);
+  }
+  if (parts[0] === "about") {
+    toggleBackBtn(true);
+    return renderAbout();
+  }
   toggleBackBtn(false);
   renderMap();
 }
 
 function toggleBackBtn(show) {
   const btn = document.getElementById("btn-back-to-map");
-  if (!btn) return;
   if (show) btn.classList.remove("hidden");
   else btn.classList.add("hidden");
 }
 
 function renderMap() {
-  app.innerHTML = `
-    <div class="map-caption-container">
-      <div class="caption-box" id="caption-left">
-        <h3>${i^18n??}</h3>  <!-- placeholder, will be replaced below -->
-      </div>
-      <div class="map-container"><div id="map"></div></div>
-      <div class="caption-box" id="caption-right">
-        <h3>${i18n[lang].nearRoma}</h3>
-      </div>
-    </div>
-  `.replace(/\^\d+?n\?\?/g, "");  // small safe replace to avoid injection issues
-
-  // Actually easier: rebuild properly:
   app.innerHTML = `
     <div class="map-caption-container">
       <div class="caption-box" id="caption-left">
@@ -258,77 +245,76 @@ function renderMap() {
         <ul id="list-roma"></ul>
       </div>
     </div>
+    <div style="text-align:center; margin: 20px 0;">
+      <button id="btn-about">${i18n[lang].aboutUsTitle}</button>
+    </div>
   `;
 
-  // Wait for DOM to update then initialize map
-  setTimeout(() => {
-    const mapEl = document.getElementById("map");
-    if (!mapEl) return;
-    const map = L.map("map").setView([38.7369, -9.1427], 12);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '© OpenStreetMap contributors'
+  document.getElementById("btn-about").addEventListener("click", () => {
+    location.hash = "#/about";
+  });
+
+  const map = L.map("map").setView([38.7369, -9.1427], 12);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  const rentalIcon = L.icon({
+    iconUrl: "https://unpkg.com/leaflet/dist/images/marker-icon.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [0, -35]
+  });
+
+  uniLocations.forEach(uni => {
+    L.circleMarker(uni.coords, {
+      radius: 9,
+      fillColor: uni.color,
+      color: "#000",
+      weight: 2,
+      opacity: 1,
+      fillOpacity: 0.9
     }).addTo(map);
 
-    const rentalIcon = L.icon({
-      iconUrl: "https://unpkg.com/leaflet/dist/images/marker-icon.png",
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [0, -35]
+    const dA = distKm(uni.coords, data.alcantara.coords);
+    const dR = distKm(uni.coords, data.avenida_de_roma.coords);
+    const side = dA < dR ? "alcantara" : "roma";
+    const listEl = document.getElementById(side === "roma" ? "list-roma" : "list-alcantara");
+    const li = document.createElement("li");
+    li.innerHTML = `<span class="dot" style="background: ${uni.color};"></span>${uni.name[lang]}`;
+    listEl.appendChild(li);
+  });
+
+  Object.entries(data).forEach(([key, loc]) => {
+    const marker = L.marker(loc.coords, { icon: rentalIcon }).addTo(map);
+    const popup = L.popup({ closeOnClick: false, autoClose: false, closeButton: false })
+      .setContent(`
+        <div class="popup-wrap" id="popup-${key}">
+          <strong>${loc.name[lang]}</strong><br>
+          <button class="popup-btn" onclick="location.hash='#/location/${key}'">
+            ${i18n[lang].seeRooms}
+          </button>
+        </div>
+      `);
+
+    let overMarker = false, overPopup = false;
+    marker.on("mouseover", () => { overMarker = true; marker.openPopup(); });
+    marker.on("mouseout", () => {
+      overMarker = false;
+      setTimeout(() => { if (!overMarker && !overPopup) marker.closePopup(); }, 200);
     });
-
-    uniLocations.forEach(uni => {
-      L.circleMarker(uni.coords, {
-        radius: 9,
-        fillColor: uni.color,
-        color: "#000",
-        weight: 2,
-        opacity: 1,
-        fillOpacity: 0.9
-      }).addTo(map);
-
-      const dA = distKm(uni.coords, data.alcantara.coords);
-      const dR = distKm(uni.coords, data.avenida_de_roma.coords);
-      const side = dA < dR ? "alcantara" : "roma";
-      const listEl = document.getElementById(side === "roma" ? "list‑roma" : "list‑alcantara");
-      // note: if your IDs differ, adjust accordingly
-      if (listEl) {
-        const li = document.createElement("li");
-        li.innerHTML = `<span class="dot" style="background: ${uni.color};"></span>${uni.name[lang]}`;
-        listEl.appendChild(li);
-      }
-    });
-
-    Object.entries(data).forEach(([key, loc]) => {
-      const marker = L.marker(loc.coords, { icon: rentalIcon }).addTo(map);
-      const popup = L.popup({ closeOnClick: false, autoClose: false, closeButton: false })
-        .setContent(`
-          <div class="popup-wrap" id="popup-${key}">
-            <strong>${loc.name[lang]}</strong><br>
-            <button class="popup-btn" onclick="location.hash='#/location/${key}'">
-              ${i18n[lang].seeRooms}
-            </button>
-          </div>
-        `);
-
-      let overMarker = false, overPopup = false;
-      marker.on("mouseover", () => { overMarker = true; marker.openPopup(); });
-      marker.on("mouseout", () => {
-        overMarker = false;
+    marker.on("popupopen", () => {
+      const el = document.getElementById(`popup-${key}`);
+      if (!el) return;
+      el.addEventListener("mouseenter", () => overPopup = true);
+      el.addEventListener("mouseleave", () => {
+        overPopup = false;
         setTimeout(() => { if (!overMarker && !overPopup) marker.closePopup(); }, 200);
       });
-      marker.on("popupopen", () => {
-        const el = document.getElementById(`popup-${key}`);
-        if (!el) return;
-        el.addEventListener("mouseenter", () => overPopup = true);
-        el.addEventListener("mouseleave", () => {
-          overPopup = false;
-          setTimeout(() => { if (!overMarker && !overPopup) marker.closePopup(); }, 200);
-        });
-      });
-
-      marker.bindPopup(popup);
     });
-  }, 0);
+
+    marker.bindPopup(popup);
+  });
 }
 
 function renderFloors(locKey) {
@@ -343,6 +329,7 @@ function renderFloors(locKey) {
     const prices = f.rooms.map(r => r.price);
     const minP = Math.min(...prices);
     const maxP = Math.max(...prices);
+
     html += `
       <div class="floor" onclick="location.hash='#/floor/${locKey}/${f.number}'">
         <strong>${i18n[lang].floorLabel} ${f.number}</strong>
@@ -405,13 +392,9 @@ function renderRoom(locKey, floorNum, roomId) {
     html += `<p><strong>${i18n[lang].billsIncludedLabel}</strong> ${billsText}</p>`;
   }
 
-  const descText = (room.description && room.description[lang]) ? room.description[lang] : "";
-  if (descText) {
-    html += `<p class="room-description">${descText}</p>`;
-  }
-
-  if (room.availableFrom) {
-    html += `<p><strong>${i18n[lang].availableFromLabel}</strong> ${formatDateShort(room.availableFrom)}</p>`;
+  const desc = (room.description && room.description[lang]) ? room.description[lang] : "";
+  if (desc) {
+    html += `<p class="room-description">${desc}</p>`;
   }
 
   html += `<div class="common-photos-container">`;
@@ -435,7 +418,7 @@ function renderAbout() {
   app.innerHTML = html;
 }
 
-// === IMAGE MODAL logic ===
+// === IMAGE MODAL LOGIC ===
 const imageModal = document.getElementById("image-modal");
 const modalImg = document.getElementById("modal-img");
 
@@ -460,4 +443,3 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
-
