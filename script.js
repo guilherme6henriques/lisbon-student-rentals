@@ -1,4 +1,5 @@
-// script.js — corrected full logic + image popup & global back-to-map
+
+// script.js — full logic + translation + image‑popup + improved layout
 
 const app = document.getElementById("app");
 const langBtns = document.querySelectorAll(".lang-btn");
@@ -44,10 +45,18 @@ A nossa missão é tornar a experiência de arrendar para estudantes o mais simp
 };
 
 function applyTranslationsText() {
+  // Footer contact
   document.querySelectorAll(".i18n-contact").forEach(el => {
     el.textContent = i18n[lang].contact;
   });
+
+  // Nav buttons
+  const btnBack = document.getElementById("btn-back-to-map");
+  const btnAbout = document.getElementById("btn-about-global");
+  if (btnBack) btnBack.textContent = i18n[lang].backToMap;
+  if (btnAbout) btnAbout.textContent = i18n[lang].aboutUsTitle;
 }
+
 applyTranslationsText();
 
 langBtns.forEach(btn => {
@@ -167,7 +176,7 @@ const data = {
   }
 };
 
-// Universities:
+// Universities (same as before)
 const uniLocations = [
   { id: "ist", name: { en: "IST", pt: "IST" }, coords: [38.7353, -9.1367], color: "#f1c40f" },
   { id: "nova_ims", name: { en: "NOVA IMS", pt: "NOVA IMS" }, coords: [38.732462, -9.159921], color: "#e74c3c" },
@@ -196,12 +205,34 @@ window.addEventListener("load", render);
 function render() {
   const h = location.hash.slice(1);
   const parts = h.split("/").filter(Boolean);
-  if (parts.length === 0) return renderMap();
-  if (parts[0] === "location") return renderFloors(parts[1]);
-  if (parts[0] === "floor")    return renderFloor(parts[1], +parts[2]);
-  if (parts[0] === "room")     return renderRoom(parts[1], +parts[2], parts[3]);
-  if (parts[0] === "about")    return renderAbout();
+  if (parts.length === 0) {
+    toggleBackBtn(false);
+    return renderMap();
+  }
+  if (parts[0] === "location") {
+    toggleBackBtn(true);
+    return renderFloors(parts[1]);
+  }
+  if (parts[0] === "floor") {
+    toggleBackBtn(true);
+    return renderFloor(parts[1], +parts[2]);
+  }
+  if (parts[0] === "room") {
+    toggleBackBtn(true);
+    return renderRoom(parts[1], +parts[2], parts[3]);
+  }
+  if (parts[0] === "about") {
+    toggleBackBtn(true);
+    return renderAbout();
+  }
+  toggleBackBtn(false);
   renderMap();
+}
+
+function toggleBackBtn(show) {
+  const btn = document.getElementById("btn-back-to-map");
+  if (show) btn.classList.remove("hidden");
+  else btn.classList.add("hidden");
 }
 
 function renderMap() {
@@ -293,6 +324,7 @@ function renderFloors(locKey) {
   applyTranslationsText();
   const loc = data[locKey];
   if (!loc) return renderMap();
+
   if (loc.floors.length === 1) return renderFloor(locKey, loc.floors[0].number);
 
   let html = `<h2>${loc.name[lang]}</h2><div class="building">`;
@@ -357,19 +389,21 @@ function renderRoom(locKey, floorNum, roomId) {
 
   let html = `<div class="room-detail">`;
   html += `<h2>${room.label[lang]} — €${room.price}</h2>`;
-  const billsText = room.bills[lang] || "";
-  html += `<p><strong>${ room.bills[lang] ? i18n[lang].billsIncludedLabel : '' }</strong> ${billsText}</p>`;
 
+  const billsText = room.bills[lang] || "";
+  if (billsText) {
+    html += `<p><strong>${i18n[lang].billsIncludedLabel}</strong> ${billsText}</p>`;
+  }
+
+  const desc = (room.description && room.description[lang]) ? room.description[lang] : "";
+  if (desc) {
+    html += `<p class="room-description">${desc}</p>`;
+  }
+
+  // Photos
   room.photos.forEach(src => {
     html += `<div class="photo-wrapper"><img src="${src}" alt=""></div>`;
   });
-
-  if (room.description && (room.description.en || room.description.pt)) {
-    html += `<p>${room.description[lang] || ''}</p>`;
-  }
-  if (room.availableFrom) {
-    html += `<p><strong>${lang === "en" ? "Available from:" : "Disponível a partir de:"}</strong> ${room.availableFrom}</p>`;
-  }
 
   html += `</div>`;
   html += `<a href="#/floor/${locKey}/${floorNum}" class="back-link">${i18n[lang].backToFloor}</a>`;
@@ -382,7 +416,6 @@ function renderAbout() {
     <div class="about-page" style="background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
       <h2>${i18n[lang].aboutUsTitle}</h2>
       <p style="white-space: pre-line; margin-top: 16px;">${i18n[lang].aboutUsText}</p>
-      <a href="#/" class="back-link">${i18n[lang].backToMap}</a>
     </div>
   `;
   app.innerHTML = html;
@@ -391,7 +424,6 @@ function renderAbout() {
 // === IMAGE MODAL & GLOBAL BACK BUTTON LOGIC ===
 const imageModal = document.getElementById("image-modal");
 const modalImg = document.getElementById("modal-img");
-const backToMapBtn = document.getElementById("top-back-to-map");
 
 // Show modal on image click
 document.body.addEventListener("click", function (e) {
@@ -399,12 +431,17 @@ document.body.addEventListener("click", function (e) {
     modalImg.src = e.target.src;
     imageModal.classList.remove("hidden");
   }
+});
+
+// Close modal on Close button click
+document.body.addEventListener("click", function (e) {
   if (e.target.matches(".close-btn")) {
     imageModal.classList.add("hidden");
   }
 });
 
-// Close modal by clicking outside modal content (on backdrop)
+// Close modal by clicking on backdrop (outside content)
+image-modal: 
 imageModal.addEventListener("click", function (e) {
   if (e.target === imageModal) {
     imageModal.classList.add("hidden");
@@ -417,13 +454,3 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
-
-// Show or hide top "Back to Map" button depending on view
-function toggleBackBtnVisibility() {
-  const current = location.hash;
-  const show = current.startsWith("#/floor") || current.startsWith("#/room") || current.startsWith("#/about");
-  backToMapBtn.classList.toggle("hidden", !show);
-}
-window.addEventListener("hashchange", toggleBackBtnVisibility);
-window.addEventListener("load", toggleBackBtnVisibility);
-
