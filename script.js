@@ -2,203 +2,161 @@ const app = document.getElementById("app");
 const langBtns = document.querySelectorAll(".lang-btn");
 let lang = "en";
 
-// Language switching
-langBtns.forEach((btn) =>
+// Language switcher that persists wherever you are (doesn't reset page)
+langBtns.forEach(btn => {
   btn.addEventListener("click", () => {
+    const oldHash = location.hash;
     lang = btn.id === "lang-pt" ? "pt" : "en";
-    langBtns.forEach((b) => b.classList.remove("active"));
+    langBtns.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
-    location.hash = "#";
-  })
-);
+    // re-render current route without resetting to map
+    render();
+  });
+});
 
-// Sample data
+// Data (demo / placeholder) — rooms & universities
 const data = {
   "avenida_de_roma": {
     name: { en: "Avenida de Roma", pt: "Avenida de Roma" },
+    coords: [38.7436, -9.1354],
     floors: [
-      {
-        number: 2,
-        priceRange: [650, 800],
-        commonPhotos: ["images/placeholder1.jpg"],
-        rooms: [
-          {
-            id: "adr2_premium",
-            name: { en: "Premium Balcony", pt: "Varanda Premium" },
-            price: 800,
-            thumb: "images/placeholder2.jpg",
-            photos: ["images/placeholder2.jpg", "images/placeholder3.jpg"],
-            description: {
-              en: "Spacious room with balcony and natural light.",
-              pt: "Quarto espaçoso com varanda e luz natural."
-            },
-            availableFrom: "2026-01-01"
-          }
-        ]
-      },
-      {
-        number: 1,
-        priceRange: [700, 850],
-        commonPhotos: ["images/placeholder4.jpg"],
-        rooms: [
-          {
-            id: "adr1_interior",
-            name: { en: "Interior Room", pt: "Quarto Interior" },
-            price: 700,
-            thumb: "images/placeholder1.jpg",
-            photos: ["images/placeholder1.jpg"],
-            description: {
-              en: "Quiet interior room with all amenities.",
-              pt: "Quarto interior silencioso com todas as comodidades."
-            },
-            availableFrom: "2026-02-01"
-          }
-        ]
-      }
+      { number: 1, priceRange: [700, 850], commonPhotos: ["images/placeholder1.jpg"], rooms: [ { id: "adr1_interior", name: { en: "Interior Room", pt: "Quarto Interior" }, price: 700, thumb: "images/placeholder2.jpg", photos: ["images/placeholder2.jpg"], description: { en: "Quiet interior room with shared amenities.", pt: "Quarto interior silencioso com comodidades partilhadas." }, availableFrom: "2026-02-01" } ] },
+      { number: 2, priceRange: [650, 800], commonPhotos: ["images/placeholder3.jpg"], rooms: [ { id: "adr2_balcony", name: { en: "Balcony Room", pt: "Quarto com Varanda" }, price: 800, thumb: "images/placeholder4.jpg", photos: ["images/placeholder4.jpg"], description: { en: "Room with balcony, great view.", pt: "Quarto com varanda e vista agradável." }, availableFrom: "2026-03-01" } ] }
     ]
   },
   "alcantara": {
     name: { en: "Alcântara", pt: "Alcântara" },
+    coords: [38.7038, -9.1783],
     floors: [
-      {
-        number: 1,
-        priceRange: [600, 750],
-        commonPhotos: ["images/placeholder3.jpg"],
-        rooms: [
-          {
-            id: "alc1_premium",
-            name: { en: "Studio Room", pt: "Quarto Estúdio" },
-            price: 750,
-            thumb: "images/placeholder4.jpg",
-            photos: ["images/placeholder4.jpg"],
-            description: {
-              en: "Bright studio room in Alcântara.",
-              pt: "Quarto estúdio luminoso em Alcântara."
-            },
-            availableFrom: "2026-03-01"
-          }
-        ]
-      }
+      { number: 1, priceRange: [600, 750], commonPhotos: ["images/placeholder4.jpg"], rooms: [ { id: "alc1_studio", name: { en: "Studio Room", pt: "Quarto Estúdio" }, price: 750, thumb: "images/placeholder2.jpg", photos: ["images/placeholder2.jpg"], description: { en: "Compact studio near public transport.", pt: "Estúdio compacto perto de transportes públicos." }, availableFrom: "2026-04-01" } ] }
     ]
   }
 };
 
-// --- Routing ---
-window.addEventListener("hashchange", router);
-router();
+// Universities / landmarks
+const uniLocations = [
+  { id: "ist", name: { en: "Instituto Superior Técnico", pt: "Instituto Superior Técnico" }, coords: [38.7357, -9.1351] },
+  { id: "fdul", name: { en: "Faculdade de Direito ULisboa", pt: "Faculdade de Direito ULisboa" }, coords: [38.7523, -9.1840] },
+  // add more as needed
+];
 
-function router() {
-  const path = location.hash.slice(1).split("/").filter(Boolean);
+// Router & render
+window.addEventListener("hashchange", render);
+window.addEventListener("load", render);
 
-  if (path.length === 0) return renderMap();
+function render() {
+  const hash = location.hash.slice(1);
+  const parts = hash.split("/").filter(Boolean);
 
-  const [section, locationKey, param] = path;
-
-  if (section === "floor") return renderFloor(locationKey, +param);
-  if (section === "location") return renderFloors(locationKey);
-  if (section === "room") return renderRoom(locationKey, +param, path[3]);
-
-  renderMap();
+  if (parts.length === 0) {
+    renderMap();
+  } else if (parts[0] === "location" && parts[1]) {
+    renderFloors(parts[1]);
+  } else if (parts[0] === "floor" && parts[1] && parts[2]) {
+    renderFloor(parts[1], parseInt(parts[2], 10));
+  } else if (parts[0] === "room" && parts[1] && parts[2] && parts[3]) {
+    renderRoom(parts[1], parseInt(parts[2], 10), parts[3]);
+  } else {
+    renderMap();
+  }
 }
 
-// --- Render map view ---
 function renderMap() {
   app.innerHTML = `<div id="map"></div>`;
-  app.classList.add("fade-in");
-
   const map = L.map("map").setView([38.7369, -9.1427], 12);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
 
-  const locations = {
-    "avenida_de_roma": [38.7436, -9.1354],
-    "alcantara": [38.7038, -9.1783]
-  };
+  // Add property locations (your rentals)
+  Object.entries(data).forEach(([key, loc]) => {
+    const m = L.marker(loc.coords).addTo(map);
+    m.bindPopup(`<strong>${loc.name[lang]}</strong><br><button onclick="location.hash='#/location/${key}'">${lang === "en" ? "See rooms" : "Ver quartos"}</button>`);
+    m.on("mouseover", () => m.openPopup());
+    m.on("mouseout", () => m.closePopup());
+  });
 
-  Object.entries(locations).forEach(([key, coords]) => {
-    const marker = L.marker(coords).addTo(map);
-    marker.bindPopup(
-      `<button onclick="location.hash='#/location/${key}'">${data[key].name[lang]}</button>`
-    );
+  // Add university / landmark pins with always-visible labels
+  uniLocations.forEach(uni => {
+    // Create a transparent or custom red icon — simpler: use default marker but bind permanent tooltip
+    const marker = L.marker(uni.coords, {
+      icon: L.icon({
+        iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [0, -41]
+      })
+    }).addTo(map);
+    marker.bindTooltip(uni.name[lang], {
+      permanent: true,
+      direction: 'top',
+      className: 'uni-label'
+    });
   });
 }
 
-// --- Render building/floors view ---
-function renderFloors(locationKey) {
-  const loc = data[locationKey];
-  const title = loc.name[lang];
-
+function renderFloors(locKey) {
+  const loc = data[locKey];
+  let html = `<h2>${loc.name[lang]}</h2>`;
   if (loc.floors.length === 1) {
-    renderFloor(locationKey, loc.floors[0].number);
+    renderFloor(locKey, loc.floors[0].number);
     return;
   }
-
-  const html = `
-    <h2>${title}</h2>
-    <div class="building">
-      ${loc.floors
-        .slice()
-        .reverse()
-        .map(
-          (floor) => `
-        <div class="floor" onclick="location.hash='#/floor/${locationKey}/${floor.number}'">
-          <strong>Floor ${floor.number}</strong>
-          <p>€${floor.priceRange[0]} - €${floor.priceRange[1]}</p>
-        </div>
-      `
-        )
-        .join("")}
-    </div>
-    <a href="#/" class="back-link">← Back to map</a>
-  `;
-  app.innerHTML = `<div class="fade-in">${html}</div>`;
-}
-
-// --- Render floor view (common + rooms) ---
-function renderFloor(locationKey, floorNumber) {
-  const floor = data[locationKey].floors.find((f) => f.number === floorNumber);
-  const rooms = floor.rooms.slice().sort((a, b) => b.price - a.price);
-
-  let html = `<h2>${data[locationKey].name[lang]} - Floor ${floor.number}</h2>`;
-
-  html += floor.commonPhotos
-    .map((src) => `<img src="${src}" class="common-photo">`)
-    .join("");
-
-  html += `<div class="rooms-list">`;
-  html += rooms
-    .map(
-      (room, i) => `
-    <div class="room-card" onclick="location.hash='#/room/${locationKey}/${floor.number}/${room.id}'">
-      <img src="${room.thumb}" alt="${room.name[lang]}">
-      <div class="room-info">
-        <h3>${room.name[lang]}</h3>
-        <p>€${room.price}</p>
+  html += `<div class="building">`;
+  loc.floors.slice().reverse().forEach(f => {
+    html += `
+      <div class="floor" onclick="location.hash='#/floor/${locKey}/${f.number}'">
+        <strong>${lang === "en" ? "Floor" : "Andar"} ${f.number}</strong>
+        <p>€${f.priceRange[0]} - €${f.priceRange[1]}</p>
       </div>
-    </div>
-  `
-    )
-    .join("");
+    `;
+  });
   html += `</div>`;
-
-  html += `<a href="#/location/${locationKey}" class="back-link">← Back to building</a>`;
-  app.innerHTML = `<div class="fade-in">${html}</div>`;
+  html += `<a href="#/" class="back-link">← ${lang === "en" ? "Back to map" : "Voltar ao mapa"}</a>`;
+  app.innerHTML = html;
 }
 
-// --- Render room view (detail) ---
-function renderRoom(locationKey, floorNumber, roomId) {
-  const floor = data[locationKey].floors.find((f) => f.number === floorNumber);
-  const room = floor.rooms.find((r) => r.id === roomId);
+function renderFloor(locKey, floorNum) {
+  const floor = data[locKey].floors.find(f => f.number === floorNum);
+  let html = `<h2>${data[locKey].name[lang]} — ${lang === "en" ? "Floor" : "Andar"} ${floorNum}</h2>`;
 
-  let html = `
-    <div class="room-detail">
-      <h2>${room.name[lang]} — €${room.price}</h2>
-      ${room.photos.map((src) => `<img src="${src}">`).join("")}
-      <p>${room.description[lang]}</p>
-      <p><strong>${lang === "pt" ? "Disponível a partir de" : "Available from"}:</strong> ${room.availableFrom}</p>
-    </div>
-    <a href="#/floor/${locationKey}/${floorNumber}" class="back-link">← Back to floor</a>
-  `;
+  if (floor.commonPhotos && floor.commonPhotos.length) {
+    html += `<div class="section-title">${lang === "en" ? "Common areas" : "Áreas comuns"}</div>`;
+    floor.commonPhotos.forEach(src => {
+      html += `<img src="${src}" class="common-photo">`;
+    });
+  }
 
-  app.innerHTML = `<div class="fade-in">${html}</div>`;
+  html += `<div class="section-title">${lang === "en" ? "Rooms" : "Quartos"}</div>`;
+  html += `<div class="rooms-list">`;
+  floor.rooms.slice().sort((a,b)=> b.price - a.price).forEach(room => {
+    html += `
+      <div class="room-card" onclick="location.hash='#/room/${locKey}/${floorNum}/${room.id}'">
+        <img src="${room.thumb}" alt="${room.name[lang]}">
+        <div class="room-info">
+          <h3>${room.name[lang]}</h3>
+          <p>€${room.price}</p>
+        </div>
+      </div>
+    `;
+  });
+  html += `</div>`;
+  html += `<a href="#/location/${locKey}" class="back-link">← ${lang === "en" ? "Back to building" : "Voltar ao imóvel"}</a>`;
+  app.innerHTML = html;
+}
+
+function renderRoom(locKey, floorNum, roomId) {
+  const floor = data[locKey].floors.find(f => f.number === floorNum);
+  const room = floor.rooms.find(r => r.id === roomId);
+  let html = `<div class="room-detail">`;
+  html += `<h2>${room.name[lang]} — €${room.price}</h2>`;
+  room.photos.forEach(src => {
+    html += `<img src="${src}" alt="${room.name[lang]}">`;
+  });
+  html += `<p>${room.description[lang]}</p>`;
+  html += `<p><strong>${lang === "en" ? "Available from:" : "Disponível a partir de:"}</strong> ${room.availableFrom}</p>`;
+  html += `</div>`;
+  html += `<a href="#/floor/${locKey}/${floorNum}" class="back-link">← ${lang === "en" ? "Back to floor" : "Voltar ao andar"}</a>`;
+  app.innerHTML = html;
 }
 
