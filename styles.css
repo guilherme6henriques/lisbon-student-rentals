@@ -30,6 +30,35 @@ button {
 }
 
 /* ===========================================================
+   TOP‑LEFT NAV BUTTONS (Back to Map / About Us)
+=========================================================== */
+.top-nav {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 10000;
+  display: flex;
+  gap: 8px;
+}
+.nav-btn {
+  font-weight: 600;
+  font-size: 14px;
+  background: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  color: #1a73e8;
+  transition: background 0.2s ease;
+}
+.nav-btn:hover {
+  background: #f1f1f1;
+  color: #0d47a1;
+}
+.nav-btn.hidden {
+  display: none;
+}
+
+/* ===========================================================
    HEADER
 =========================================================== */
 header {
@@ -208,6 +237,7 @@ header {
 
 /* ===========================================================
    ROOM DETAIL / COMMON AREA IMAGES (with 4:3 wrapper)
+   Adjust room-detail so layout is linear: text then images
 =========================================================== */
 .common-photos-container,
 .room-detail {
@@ -216,11 +246,9 @@ header {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.12);
   animation: fadeIn 0.4s ease;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
+  /* Remove flex layout for clean vertical stacking */
+  display: block;
 }
-
 .photo-wrapper {
   position: relative;
   width: 220px;
@@ -228,6 +256,8 @@ header {
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  display: inline-block;
+  margin: 8px 8px 8px 0;
 }
 .photo-wrapper img {
   width: 100%;
@@ -283,7 +313,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 10000;
 }
 .image-modal.hidden {
   display: none;
@@ -313,31 +343,6 @@ header {
   border: none;
   color: #333;
   cursor: pointer;
-}
-
-/* ===========================================================
-   GLOBAL BACK TO MAP BUTTON
-=========================================================== */
-.global-back-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 9999;
-  font-weight: 600;
-  font-size: 15px;
-  background: white;
-  padding: 8px 12px;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  color: #1a73e8;
-  transition: background 0.2s ease;
-}
-.global-back-btn:hover {
-  background: #f1f1f1;
-  color: #0d47a1;
-}
-.global-back-btn.hidden {
-  display: none;
 }
 
 /* ===========================================================
