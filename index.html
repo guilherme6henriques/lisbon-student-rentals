@@ -2,17 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Lisbon Student Rooms</title>
+  <title>Lisbon Student Rentals</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Leaflet CSS -->
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Leaflet CSS for map -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <header>
+  <header class="site-header">
     <div class="header-inner">
-      <h1 id="site-title">Lisbon Student Rooms</h1>
+      <h1 class="site-title">Lisbon Student Rentals</h1>
       <div class="lang-switcher">
         <button id="lang-en" class="lang-btn active">EN</button>
         <button id="lang-pt" class="lang-btn">PT</button>
@@ -22,9 +27,14 @@
 
   <main id="app"></main>
 
-  <footer id="contact">
-    <hr />
-    <p id="contact-text">Contact: <a id="email-link" href="mailto:youremail@example.com">youremail@example.com</a> | <a id="whatsapp-link" href="https://wa.me/YourWhatsAppNumber" target="_blank">WhatsApp</a></p>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p id="contact-text">
+        Contact:
+        <a id="email-link" href="mailto:youremail@example.com">youremail@example.com</a> |
+        <a id="whatsapp-link" href="https://wa.me/0000000000" target="_blank">WhatsApp</a>
+      </p>
+    </div>
   </footer>
 
   <!-- Leaflet JS -->
