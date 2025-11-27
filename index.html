@@ -13,8 +13,11 @@
 </head>
 <body>
 
-  <!-- Fixed Global "Back to Map" Button -->
-  <a href="#/" id="top-back-to-map" class="global-back-btn hidden">← Back to Map</a>
+  <!-- Fixed top‑left navigation buttons -->
+  <div class="top-nav">
+    <a href="#/" id="btn-back-to-map" class="nav-btn hidden" data-i18n="backToMap">← Back to Map</a>
+    <a href="#/about" id="btn-about-global" class="nav-btn" data-i18n="aboutUsTitle">About Us</a>
+  </div>
 
   <header class="site-header">
     <div class="header-inner">
@@ -27,7 +30,7 @@
   </header>
 
   <main id="app">
-    <!-- Dynamic content rendered by script.js -->
+    <!-- Content rendered by script.js -->
   </main>
 
   <footer class="site-footer">
@@ -42,12 +45,12 @@
   <!-- Fullscreen Image Modal -->
   <div id="image-modal" class="image-modal hidden">
     <div class="modal-content">
-      <button class="close-btn">&times;</button>
+      <button class="close-btn" aria-label="Close">&times;</button>
       <img id="modal-img" src="" alt="Full View" />
     </div>
   </div>
 
-  <!-- Scripts -->
+  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
