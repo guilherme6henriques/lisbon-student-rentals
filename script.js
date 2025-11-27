@@ -7,7 +7,7 @@ langBtns.forEach(btn => {
     lang = btn.id === "lang-pt" ? "pt" : "en";
     langBtns.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
-    render(); // re-render without resetting view
+    render();
   });
 });
 
@@ -83,20 +83,32 @@ const data = {
   }
 };
 
+/* Universities with correct coordinates + colors */
 const uniLocations = [
   {
     id: "ist",
-    name: { en: "Instituto Superior Técnico", pt: "Instituto Superior Técnico" },
-    coords: [38.736197, -9.138794],
+    name: { en: "IST", pt: "IST" },
+    coords: [38.73676, -9.13871],  // from reliable source :contentReference[oaicite:1]{index=1}
     color: "yellow"
   },
   {
+    id: "novalisboa",
+    name: { en: "NOVA", pt: "NOVA" },
+    coords: [38.7335, -9.1562],  // from source :contentReference[oaicite:2]{index=2}
+    color: "red"
+  },
+  {
     id: "fdul",
-    name: { en: "Faculdade de Direito ULisboa", pt: "Faculdade de Direito ULisboa" },
-    coords: [38.72725679, -9.150371],
+    name: { en: "Direito ULisboa", pt: "Direito ULisboa" },
+    coords: [38.7273, -9.1504],  // approximate main campus area :contentReference[oaicite:3]{index=3}
     color: "green"
+  },
+  {
+    id: "novaims",
+    name: { en: "NOVA IMS", pt: "NOVA IMS" },
+    coords: [38.7325, -9.1600],  // Campus Campolide / IMS location :contentReference[oaicite:4]{index=4}
+    color: "purple"
   }
-  // Add more universities here as needed
 ];
 
 window.addEventListener("hashchange", render);
@@ -114,7 +126,6 @@ function render() {
 }
 
 function renderMap() {
-  // Build the caption structure around map
   app.innerHTML = `
     <div class="map-caption-container">
       <div class="caption-box caption-left" id="caption-left">
@@ -141,26 +152,26 @@ function renderMap() {
     popupAnchor: [0, -35]
   });
 
-  /* University pins: colored circle markers */
+  /* Universities — circleMarker with black border (ring) */
   uniLocations.forEach(uni => {
     const circle = L.circleMarker(uni.coords, {
-      radius: 8,
+      radius: 10,
       fillColor: uni.color,
-      color: "#fff",
-      weight: 1,
+      color: "#000",
+      weight: 2,
       opacity: 1,
       fillOpacity: 0.9
     }).addTo(map);
 
-    // add to caption list depending on proximity (naively by house area)
-    // For demo: if lon > -9.16 → right side (Roma), else left (Alcântara) — you can refine logic
-    const listEl = (uni.coords[1] > -9.16 ? document.getElementById("list-roma") : document.getElementById("list-alcantara"));
+    // caption list: decide side based on house areas:
+    // e.g. for simplicity: if longitude > -9.165 → belongs to Roma, else Alcântara
+    const listEl = (uni.coords[1] > -9.165) ? document.getElementById("list-roma") : document.getElementById("list-alcantara");
     const li = document.createElement("li");
     li.innerHTML = `<span class="dot ${uni.color}"></span>${uni.name[lang]}`;
     listEl.appendChild(li);
   });
 
-  /* Rental markers with sticky popup logic */
+  /* Rental markers with sticky popups */
   Object.entries(data).forEach(([key, loc]) => {
     const marker = L.marker(loc.coords, { icon: rentalIcon }).addTo(map);
 
@@ -174,8 +185,7 @@ function renderMap() {
         </div>
       `);
 
-    let overMarker = false;
-    let overPopup = false;
+    let overMarker = false, overPopup = false;
 
     marker.on("mouseover", () => {
       overMarker = true;
@@ -214,8 +224,7 @@ function renderFloors(locKey) {
       <div class="floor" onclick="location.hash='#/floor/${locKey}/${f.number}'">
         <strong>${lang === "en" ? "Floor" : "Andar"} ${f.number}</strong>
         <p>€${f.priceRange[0]} - €${f.priceRange[1]}</p>
-      </div>
-    `;
+      </div>`;
   });
   html += `</div><a href="#/" class="back-link">← ${lang === "en" ? "Back to map" : "Voltar ao mapa"}</a>`;
   app.innerHTML = html;
@@ -228,13 +237,13 @@ function renderFloor(locKey, floorNum) {
   let html = `<h2>${data[locKey].name[lang]} — ${lang === "en" ? "Floor" : "Andar"} ${floorNum}</h2>`;
 
   if (floor.commonPhotos && floor.commonPhotos.length) {
-    html += `<div class="section-title">${ lang === "en" ? "Common areas" : "Áreas comuns" }</div>`;
+    html += `<div class="section-title">${lang === "en" ? "Common areas" : "Áreas comuns"}</div>`;
     floor.commonPhotos.forEach(src => {
       html += `<img src="${src}" class="common-photo">`;
     });
   }
 
-  html += `<div class="section-title">${ lang === "en" ? "Rooms" : "Quartos" }</div>`;
+  html += `<div class="section-title">${lang === "en" ? "Rooms" : "Quartos"}</div>`;
   html += `<div class="rooms-list">`;
   floor.rooms.sort((a,b)=>b.price - a.price).forEach(room => {
     html += `
