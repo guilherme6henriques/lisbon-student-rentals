@@ -135,16 +135,8 @@ header {
   border-radius: 50%;
   margin-right: 8px;
   border: 2px solid #000;
+  display: inline-block;
 }
-.dot.yellow { background-color: #f1c40f; }
-.dot.red    { background-color: #e74c3c; }
-.dot.green  { background-color: #2ecc71; }
-.dot.purple { background-color: #8e44ad; }
-.dot.blue   { background-color: #3498db; }
-.dot.orange { background-color: #f39c12; }
-.dot.teal   { background-color: #1abc9c; }
-.dot.magenta{ background-color: #e84393; }
-.dot.brown  { background-color: #a04000; }
 
 .map-container {
   width: 100%;
@@ -260,6 +252,9 @@ header {
   color: #0d47a1;
 }
 
+/* ============================================================
+   FOOTER
+============================================================ */
 .site-footer {
   background: #ffffff;
   padding: 35px 10px;
