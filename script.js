@@ -2,17 +2,15 @@ const app = document.getElementById("app");
 const langBtns = document.querySelectorAll(".lang-btn");
 let lang = "en";
 
-/* ========== LANGUAGE SWITCHER (does not reset page) ========== */
 langBtns.forEach(btn => {
   btn.addEventListener("click", () => {
     lang = btn.id === "lang-pt" ? "pt" : "en";
     langBtns.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
-    render();
+    render(); // re-render without resetting view
   });
 });
 
-/* ========== DATA ========== */
 const data = {
   "avenida_de_roma": {
     name: { en: "Avenida de Roma", pt: "Avenida de Roma" },
@@ -58,7 +56,6 @@ const data = {
       }
     ]
   },
-
   "alcantara": {
     name: { en: "Alcântara", pt: "Alcântara" },
     coords: [38.70496170446613, -9.16909158174067],
@@ -86,44 +83,56 @@ const data = {
   }
 };
 
-/* ========== UNIVERSITIES ========== */
 const uniLocations = [
   {
     id: "ist",
     name: { en: "Instituto Superior Técnico", pt: "Instituto Superior Técnico" },
-    coords: [38.736197, -9.138794]
+    coords: [38.736197, -9.138794],
+    color: "yellow"
   },
   {
     id: "fdul",
     name: { en: "Faculdade de Direito ULisboa", pt: "Faculdade de Direito ULisboa" },
-    coords: [38.72725679, -9.150371]
+    coords: [38.72725679, -9.150371],
+    color: "green"
   }
+  // Add more universities here as needed
 ];
 
-/* ========== ROUTER ========== */
 window.addEventListener("hashchange", render);
 window.addEventListener("load", render);
 
 function render() {
   const hash = location.hash.slice(1);
-  const p = hash.split("/").filter(Boolean);
+  const parts = hash.split("/").filter(Boolean);
 
-  if (p.length === 0) return renderMap();
-  if (p[0] === "location") return renderFloors(p[1]);
-  if (p[0] === "floor") return renderFloor(p[1], +p[2]);
-  if (p[0] === "room") return renderRoom(p[1], +p[2], p[3]);
-
+  if (parts.length === 0) return renderMap();
+  if (parts[0] === "location") return renderFloors(parts[1]);
+  if (parts[0] === "floor") return renderFloor(parts[1], +parts[2]);
+  if (parts[0] === "room") return renderRoom(parts[1], +parts[2], parts[3]);
   renderMap();
 }
 
-/* ============================================================
-   ===============  RENDER MAP WITH POPUPS  ====================
-   ============================================================ */
 function renderMap() {
-  app.innerHTML = `<div id="map"></div>`;
+  // Build the caption structure around map
+  app.innerHTML = `
+    <div class="map-caption-container">
+      <div class="caption-box caption-left" id="caption-left">
+        <h3>${lang === "en" ? "Near Alcântara" : "Perto de Alcântara"}</h3>
+        <ul id="list-alcantara"></ul>
+      </div>
+      <div class="map-container"><div id="map"></div></div>
+      <div class="caption-box caption-right" id="caption-right">
+        <h3>${lang === "en" ? "Near Avenida de Roma" : "Perto da Avenida de Roma"}</h3>
+        <ul id="list-roma"></ul>
+      </div>
+    </div>
+  `;
 
   const map = L.map("map").setView([38.7369, -9.1427], 12);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
 
   const rentalIcon = L.icon({
     iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
@@ -132,28 +141,38 @@ function renderMap() {
     popupAnchor: [0, -35]
   });
 
-  const redIcon = L.icon({
-    iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-red.png",
-    iconSize: [25,41],
-    iconAnchor: [12,41]
+  /* University pins: colored circle markers */
+  uniLocations.forEach(uni => {
+    const circle = L.circleMarker(uni.coords, {
+      radius: 8,
+      fillColor: uni.color,
+      color: "#fff",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.9
+    }).addTo(map);
+
+    // add to caption list depending on proximity (naively by house area)
+    // For demo: if lon > -9.16 → right side (Roma), else left (Alcântara) — you can refine logic
+    const listEl = (uni.coords[1] > -9.16 ? document.getElementById("list-roma") : document.getElementById("list-alcantara"));
+    const li = document.createElement("li");
+    li.innerHTML = `<span class="dot ${uni.color}"></span>${uni.name[lang]}`;
+    listEl.appendChild(li);
   });
 
-  /* --- RENTAL MARKERS WITH STICKY POPUPS --- */
+  /* Rental markers with sticky popup logic */
   Object.entries(data).forEach(([key, loc]) => {
     const marker = L.marker(loc.coords, { icon: rentalIcon }).addTo(map);
 
-    const popup = L.popup({
-      closeOnClick: false,
-      autoClose: false,
-      closeButton: false
-    }).setContent(`
-      <div class="popup-wrap" id="popup-${key}">
-        <strong>${loc.name[lang]}</strong><br>
-        <button class="popup-btn" onclick="location.hash='#/location/${key}'">
-          ${lang === "en" ? "See rooms" : "Ver quartos"}
-        </button>
-      </div>
-    `);
+    const popup = L.popup({ closeOnClick: false, autoClose: false, closeButton: false })
+      .setContent(`
+        <div class="popup-wrap" id="popup-${key}">
+          <strong>${loc.name[lang]}</strong><br>
+          <button class="popup-btn" onclick="location.hash='#/location/${key}'">
+            ${lang === "en" ? "See rooms" : "Ver quartos"}
+          </button>
+        </div>
+      `);
 
     let overMarker = false;
     let overPopup = false;
@@ -162,22 +181,16 @@ function renderMap() {
       overMarker = true;
       marker.openPopup();
     });
-
     marker.on("mouseout", () => {
       overMarker = false;
       setTimeout(() => {
         if (!overMarker && !overPopup) marker.closePopup();
       }, 200);
     });
-
     marker.on("popupopen", () => {
-      const popupEl = document.querySelector(`#popup-${key}`);
+      const popupEl = document.getElementById(`popup-${key}`);
       if (!popupEl) return;
-
-      popupEl.addEventListener("mouseenter", () => {
-        overPopup = true;
-      });
-
+      popupEl.addEventListener("mouseenter", () => overPopup = true);
       popupEl.addEventListener("mouseleave", () => {
         overPopup = false;
         setTimeout(() => {
@@ -188,86 +201,71 @@ function renderMap() {
 
     marker.bindPopup(popup);
   });
-
-  /* --- UNIVERSITY MARKERS WITH LABELS --- */
-  uniLocations.forEach(uni => {
-    const m = L.marker(uni.coords, { icon: redIcon }).addTo(map);
-    m.bindTooltip(uni.name[lang], {
-      permanent: true,
-      direction: "top",
-      className: "uni-label"
-    });
-  });
 }
 
-/* ========== FLOORS PAGE ========== */
 function renderFloors(locKey) {
   const loc = data[locKey];
-
+  if (!loc) return renderMap();
   if (loc.floors.length === 1) return renderFloor(locKey, loc.floors[0].number);
 
-  let html = `<h2>${loc.name[lang]}</h2>`;
-
-  html += `<div class="building">`;
+  let html = `<h2>${loc.name[lang]}</h2><div class="building">`;
   loc.floors.slice().reverse().forEach(f => {
     html += `
       <div class="floor" onclick="location.hash='#/floor/${locKey}/${f.number}'">
         <strong>${lang === "en" ? "Floor" : "Andar"} ${f.number}</strong>
         <p>€${f.priceRange[0]} - €${f.priceRange[1]}</p>
-      </div>`;
+      </div>
+    `;
   });
-  html += `</div>`;
-
-  html += `<a href="#/" class="back-link">← ${lang === "en" ? "Back to map" : "Voltar ao mapa"}</a>`;
-
+  html += `</div><a href="#/" class="back-link">← ${lang === "en" ? "Back to map" : "Voltar ao mapa"}</a>`;
   app.innerHTML = html;
 }
 
-/* ========== FLOOR PAGE ========== */
 function renderFloor(locKey, floorNum) {
   const floor = data[locKey].floors.find(f => f.number === floorNum);
+  if (!floor) return renderMap();
 
   let html = `<h2>${data[locKey].name[lang]} — ${lang === "en" ? "Floor" : "Andar"} ${floorNum}</h2>`;
 
-  html += `<div class="section-title">${lang === "en" ? "Common areas" : "Áreas comuns"}</div>`;
-  floor.commonPhotos.forEach(src => {
-    html += `<img src="${src}" class="common-photo">`;
-  });
+  if (floor.commonPhotos && floor.commonPhotos.length) {
+    html += `<div class="section-title">${ lang === "en" ? "Common areas" : "Áreas comuns" }</div>`;
+    floor.commonPhotos.forEach(src => {
+      html += `<img src="${src}" class="common-photo">`;
+    });
+  }
 
-  html += `<div class="section-title">${lang === "en" ? "Rooms" : "Quartos"}</div>`;
+  html += `<div class="section-title">${ lang === "en" ? "Rooms" : "Quartos" }</div>`;
   html += `<div class="rooms-list">`;
-
   floor.rooms.sort((a,b)=>b.price - a.price).forEach(room => {
     html += `
       <div class="room-card" onclick="location.hash='#/room/${locKey}/${floorNum}/${room.id}'">
-        <img src="${room.thumb}">
+        <img src="${room.thumb}" alt="${room.name[lang]}">
         <div class="room-info">
           <h3>${room.name[lang]}</h3>
           <p>€${room.price}</p>
         </div>
       </div>`;
   });
-
   html += `</div>`;
   html += `<a href="#/location/${locKey}" class="back-link">← ${lang === "en" ? "Back to building" : "Voltar ao imóvel"}</a>`;
-
   app.innerHTML = html;
 }
 
-/* ========== ROOM PAGE ========== */
 function renderRoom(locKey, floorNum, roomId) {
   const floor = data[locKey].floors.find(f => f.number === floorNum);
+  if (!floor) return renderMap();
   const room = floor.rooms.find(r => r.id === roomId);
+  if (!room) return renderMap();
 
   let html = `<div class="room-detail">`;
   html += `<h2>${room.name[lang]} — €${room.price}</h2>`;
-  room.photos.forEach(src => html += `<img src="${src}">`);
+  room.photos.forEach(src => {
+    html += `<img src="${src}" alt="${room.name[lang]}">`;
+  });
   html += `<p>${room.description[lang]}</p>`;
   html += `<p><strong>${lang === "en" ? "Available from:" : "Disponível a partir de:"}</strong> ${room.availableFrom}</p>`;
   html += `</div>`;
-
   html += `<a href="#/floor/${locKey}/${floorNum}" class="back-link">← ${lang === "en" ? "Back to floor" : "Voltar ao andar"}</a>`;
-
   app.innerHTML = html;
 }
 
