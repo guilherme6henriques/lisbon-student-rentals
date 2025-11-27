@@ -225,11 +225,18 @@ function render() {
   toggleBackBtn(false);
   renderMap();
 
-  // Clear accidental text selection
-if (window.getSelection) {
-  const sel = window.getSelection();
-  if (sel && sel.removeAllRanges) sel.removeAllRanges();
-}
+// === CLEAN UP TEXT SELECTION AND FOCUS ===
+setTimeout(() => {
+  // Clear any accidental text selection
+  const selection = window.getSelection();
+  if (selection) selection.removeAllRanges();
+
+  // Remove unwanted focus from any active element
+  if (document.activeElement && document.activeElement !== document.body) {
+    document.activeElement.blur();
+  }
+}, 0);
+
 
 }
 
@@ -444,5 +451,6 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
