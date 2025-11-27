@@ -6,18 +6,16 @@
   <title>Lisbon Student Rentals</title>
 
   <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet/dist/leaflet.css"
-  />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <!-- Google Font -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
+  <!-- Fixed Global "Back to Map" Button -->
+  <a href="#/" id="top-back-to-map" class="global-back-btn hidden">← Back to Map</a>
+
   <header class="site-header">
     <div class="header-inner">
       <h1 class="site-title">Lisbon Student Rentals</h1>
@@ -29,7 +27,7 @@
   </header>
 
   <main id="app">
-    <!-- Map / content rendered by script.js -->
+    <!-- Dynamic content rendered by script.js -->
   </main>
 
   <footer class="site-footer">
@@ -41,17 +39,17 @@
     </div>
   </footer>
 
-  <!-- Leaflet JS -->
+  <!-- Fullscreen Image Modal -->
+  <div id="image-modal" class="image-modal hidden">
+    <div class="modal-content">
+      <button class="close-btn">&times;</button>
+      <img id="modal-img" src="" alt="Full View" />
+    </div>
+  </div>
+
+  <!-- Scripts -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="script.js"></script>
-
-
-
 </body>
-
-  <a href="#/" id="top-back-to-map" class="global-back-btn hidden">← Back to Map</a>
-
 </html>
-
-
 
