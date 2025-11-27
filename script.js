@@ -388,3 +388,18 @@ function renderAbout() {
   app.innerHTML = html;
 }
 
+// === IMAGE POPUP HANDLER ===
+document.body.addEventListener("click", function (e) {
+  if (e.target.matches(".photo-wrapper img")) {
+    const modal = document.getElementById("image-modal");
+    const modalImg = document.getElementById("modal-img");
+    modalImg.src = e.target.src;
+    modal.classList.remove("hidden");
+  }
+
+  if (e.target.matches(".close-btn")) {
+    document.getElementById("image-modal").classList.add("hidden");
+  }
+});
+
+
