@@ -326,7 +326,7 @@ function renderFloor(locKey, floorNum) {
     html += `<div class="section-title">${i18n[lang].commonAreas}</div>`;
     html += `<div class="common-photos-container">`;
     floor.commonPhotos.forEach(src => {
-      html += `<img src="${src}" alt="">`;
+      html += `<div class="photo-wrapper"><img src="${src}" alt=""></div>`;
     });
     html += `</div>`;
   }
@@ -361,7 +361,7 @@ function renderRoom(locKey, floorNum, roomId) {
   html += `<p><strong>${ room.bills[lang] ? i18n[lang].billsIncludedLabel : '' }</strong> ${billsText}</p>`;
 
   room.photos.forEach(src => {
-    html += `<img src="${src}" alt="">`;
+    html += `<div class="photo-wrapper"><img src="${src}" alt=""></div>`;
   });
 
   if (room.description && (room.description.en || room.description.pt)) {
