@@ -207,9 +207,10 @@ header {
 }
 
 /* ===========================================================
-   ROOM DETAIL / COMMON AREA IMAGES  (UPDATED)
+   ROOM DETAIL / COMMON AREA IMAGES (with 4:3 wrapper)
 =========================================================== */
-.room-detail, .common-photos-container {
+.common-photos-container,
+.room-detail {
   background: #ffffff;
   padding: 25px;
   border-radius: 10px;
@@ -220,26 +221,21 @@ header {
   gap: 16px;
 }
 
-/* 4:3 aspect-ratio wrapper for all photos */
-.aspect-4-3 {
-  width: 22%;              /* ← controls photo size (adjust to 20–26% as desired) */
-  aspect-ratio: 4 / 3;
+.photo-wrapper {
+  position: relative;
+  width: 220px;         /* Adjust this to change image size */
+  height: calc(220px * 0.75); /* Enforce 4:3 ratio */
   overflow: hidden;
   border-radius: 8px;
-  display: inline-block;
-  background: #eee;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
 }
 
-/* image inside wrapper */
-.room-detail img,
-.common-photos-container img {
+.photo-wrapper img {
   width: 100%;
   height: 100%;
-  object-fit: cover;        /* fills 4:3 frame without distortion */
+  object-fit: cover;
   display: block;
-  border-radius: 8px;
 }
-
 
 /* ===========================================================
    POPUP & NAV LINKS
@@ -283,18 +279,23 @@ header {
 @media (max-width: 900px) {
   header h1 { font-size: 2rem; }
   #map { height: 500px; }
+  #app { padding: 0 12px; }
 }
 @media (max-width: 600px) {
   header h1 { font-size: 1.7rem; }
   .lang-btn { padding: 5px 10px; font-size: 0.85rem; }
   #map { height: 380px; }
+
   .map-caption-container {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   .caption-box { width: 90%; margin: 10px 0; }
+
+  .photo-wrapper {
+    width: 160px;
+    height: calc(160px * 0.75);
+  }
 }
-
-
 
