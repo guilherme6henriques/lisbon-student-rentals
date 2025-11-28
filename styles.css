@@ -53,7 +53,6 @@ header {
   font-size: 2.4rem;
   font-weight: 700;
   letter-spacing: 1px;
-  flex: 1 1 auto;
   text-align: center;
 }
 .lang-switcher {
@@ -77,11 +76,12 @@ header {
 }
 
 /* ===========================================================
-   NAV BUTTONS (Back to Map / About Us) — like lang buttons
+   NAV BUTTONS (Back to Map / About Us)
 =========================================================== */
 .nav-btns {
-  flex: 0 0 auto;
-  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .nav-btn {
   font-weight: 600;
@@ -91,8 +91,8 @@ header {
   color: #fff;
   padding: 6px 12px;
   border-radius: 6px;
-  margin-left: 6px;
   transition: background 0.25s, color 0.25s;
+  white-space: nowrap;
 }
 .nav-btn:hover {
   background: white;
@@ -366,5 +366,4 @@ header {
     height: calc(160px * 0.75);
   }
 }
-
 
