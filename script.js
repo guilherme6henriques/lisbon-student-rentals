@@ -9,6 +9,7 @@ const i18n = {
   en: {
     contact: "Contact",
     seeRooms: "See rooms",
+    mapIntro: `This website is for viewing purposes only. All contacts must be made via email or WhatsApp. A contract is always made to ensure honesty and transparency. There are 2 homes to choose from — just hover your mouse (or tap on mobile) over the blue pins on the map to explore them.`,
     backToMap: "← Back to map",
     backToBuilding: "← Back to building",
     backToFloor: "← Back to floor",
@@ -18,9 +19,18 @@ const i18n = {
     billsIncludedLabel: "Bills included:",
     billsGasExcludedLabel: "Bills included (excluding gas):",
     aboutUsTitle: "About us",
-    aboutUsText: `Welcome to Lisbon Student Rentals! We are dedicated to providing safe, comfortable, and well‑located rooms for students coming to Lisbon. With properties in central neighborhoods like Avenida de Roma and Alcântara, we ensure easy access to public transport and local universities.
+    aboutUsText: `Hi! I’m Matilde, 21 years old, born and raised in sunny Portugal and currently studying Aerospace Engineering in Delft.
+Before moving abroad, I spent three unforgettable years living in one of these very rooms in Lisbon while studying at Técnico. Those years shaped me — late-night study sessions, shared dinners, new friendships, and countless memories that turned a simple room into a home.
 
-Our mission is to make the student renting experience as simple and stress‑free as possible. If you have any questions, feel free to contact us via email or WhatsApp. We look forward to helping you find your home in Lisbon!`,
+That’s why this project means so much to me.
+
+These houses belong to my father, but I’m the one taking care of the rentals, helping students and young professionals find a cozy place to live in Lisbon. I built this website myself (still pretty proud of that!) so everything could be transparent, easy, and welcoming.
+
+My goal is simple:
+To help you feel at home from the moment you walk in — the same way I did.
+
+If you’re looking for comfort, good vibes, and a place where your best stories might begin…
+welcome. 😊`,
     nearAlcantara: "Near Alcântara",
     nearRoma: "Near Avenida de Roma"
   },
@@ -29,6 +39,7 @@ Our mission is to make the student renting experience as simple and stress‑fre
     seeRooms: "Ver quartos",
     backToMap: "← Voltar ao mapa",
     backToBuilding: "← Voltar ao imóvel",
+    mapIntro: `Este site serve apenas para visualização. Todos os contactos devem ser feitos por email ou WhatsApp. Um contrato será sempre feito para garantir honestidade e transparência. Existem 2 casas à escolha — basta passar o rato (ou tocar no telemóvel) nos pinos azuis do mapa para explorar.`,
     backToFloor: "← Voltar ao andar",
     floorLabel: "Andar",
     commonAreas: "Áreas comuns",
@@ -36,9 +47,18 @@ Our mission is to make the student renting experience as simple and stress‑fre
     billsIncludedLabel: "Contas incluídas:",
     billsGasExcludedLabel: "Contas incluídas (gás excluído):",
     aboutUsTitle: "Sobre nós",
-    aboutUsText: `Bem‑vindo aos Quartos de Estudantes Lisboa! Dedicamo‑nos a oferecer quartos seguros, confortáveis e bem localizados para estudantes que vêm para Lisboa. Com propriedades em bairros centrais como Avenida de Roma e Alcântara, garantimos fácil acesso a transportes públicos e às principais universidades.
+    aboutUsText: `Olá! Eu sou a Matilde, tenho 21 anos, sou de Portugal e estou atualmente a estudar Engenharia Aeroespacial em Delft.
+Antes de vir para o estrangeiro, vivi três anos inesquecíveis num destes quartos em Lisboa enquanto estudava no Técnico. Foram anos que me marcaram — noites de estudo, jantares partilhados, novas amizades e memórias que transformaram um simples quarto numa verdadeira casa.
 
-A nossa missão é tornar a experiência de arrendar para estudantes o mais simples e tranquila possível. Se tiver alguma dúvida, contacte‑nos por email ou WhatsApp. Estamos ansiosos por ajudar‑lo a encontrar o seu lar em Lisboa!`,
+Por isso é que este projeto me diz tanto.
+
+As casas são do meu pai, mas sou eu quem trata de tudo o que é arrendamentos, ajudando estudantes e jovens profissionais a encontrarem um cantinho confortável em Lisboa. Fui eu que criei este website (ainda bem orgulhosa disso!), para que tudo fosse fácil, transparente e acolhedor.
+
+O meu objetivo é simples:
+Ajudar-te a sentir em casa desde o primeiro dia — tal como eu me senti.
+
+Se procuras conforto, boas vibes e um lugar onde possam começar algumas das tuas melhores histórias…
+bem-vindo(a). 😊`,
     nearAlcantara: "Perto de Alcântara",
     nearRoma: "Perto da Avenida de Roma"
   }
@@ -174,7 +194,7 @@ const data = {
   }
 };
 
-// ===== Universities list (including new ones) =====
+// ===== New universities added =====
 const uniLocations = [
   { id: "ist", name: { en: "IST", pt: "IST" }, coords: [38.7353, -9.1367], color: "#f1c40f" },
   { id: "nova_ims", name: { en: "NOVA IMS", pt: "NOVA IMS" }, coords: [38.732462, -9.159921], color: "#e74c3c" },
@@ -185,7 +205,7 @@ const uniLocations = [
   { id: "fmul", name: { en: "FMUL", pt: "FMUL" }, coords: [38.7463469531953, -9.161155141126354], color: "#e84393" },
   { id: "ucp_cat", name: { en: "UCP", pt: "UCP" }, coords: [38.74893443978093, -9.164949511475601], color: "#a04000" },
 
-  // New universities:
+  // ** New ones **
   { id: "isa", name: { en: "ISA", pt: "ISA" }, coords: [38.707804917614304, -9.18041829943341], color: "#ff6600" },
   { id: "universidade_europeia", name: { en: "Universidade Europeia de Lisboa", pt: "Universidade Europeia de Lisboa" },
     coords: [38.70830724760151, -9.15303831282159], color: "#0077ff" },
@@ -248,19 +268,27 @@ function toggleBackBtn(show) {
 }
 
 function renderMap() {
-  app.innerHTML = `
-    <div class="map-caption-container">
-      <div class="caption-box" id="caption-left">
-        <h3>${i18n[lang].nearAlcantara}</h3>
-        <ul id="list-alcantara"></ul>
-      </div>
-      <div class="map-container"><div id="map"></div></div>
-      <div class="caption-box" id="caption-right">
-        <h3>${i18n[lang].nearRoma}</h3>
-        <ul id="list-roma"></ul>
-      </div>
+app.innerHTML = `
+ <div class="map-intro-text" style="text-align: center; max-width: 800px; margin: 0 auto 20px; font-size: 16px; padding: 10px;">
+  ${i18n[lang].mapIntro}
+</div>
+
+
+  <div class="map-caption-container">
+    <div class="caption-box" id="caption-left">
+      <h3>${i18n[lang].nearAlcantara}</h3>
+      <ul id="list-alcantara"></ul>
     </div>
-  `;
+    <div class="map-container"><div id="map"></div></div>
+    <div class="caption-box" id="caption-right">
+      <h3>${i18n[lang].nearRoma}</h3>
+      <ul id="list-roma"></ul>
+    </div>
+  </div>
+
+
+`;
+
 
   const map = L.map("map").setView([38.7369, -9.1427], 12);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -400,6 +428,7 @@ function renderRoom(locKey, floorNum, roomId) {
     html += `<p><strong>${i18n[lang].billsIncludedLabel}</strong> ${billsText}</p>`;
   }
 
+  // Available from date
   if (room.availableFrom) {
     html += `<p><strong>${lang === "en" ? "Available from:" : "Disponível a partir de:"}</strong> ${room.availableFrom}</p>`;
   }
@@ -455,3 +484,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
+
+
+
