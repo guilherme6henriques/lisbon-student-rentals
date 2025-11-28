@@ -284,9 +284,7 @@ app.innerHTML = `
     </div>
   </div>
 
-  <div style="text-align:center; margin: 20px 0;">
-    <button id="btn-about">${i18n[lang].aboutUsTitle}</button>
-  </div>
+
 `;
 
 
@@ -484,6 +482,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
