@@ -266,19 +266,29 @@ function toggleBackBtn(show) {
 }
 
 function renderMap() {
-  app.innerHTML = `
-    <div class="map-caption-container">
-      <div class="caption-box" id="caption-left">
-        <h3>${i18n[lang].nearAlcantara}</h3>
-        <ul id="list-alcantara"></ul>
-      </div>
-      <div class="map-container"><div id="map"></div></div>
-      <div class="caption-box" id="caption-right">
-        <h3>${i18n[lang].nearRoma}</h3>
-        <ul id="list-roma"></ul>
-      </div>
+app.innerHTML = `
+  <div class="map-intro-text" style="text-align: center; max-width: 800px; margin: 0 auto 20px; font-size: 16px; padding: 10px;">
+    This website is for viewing purposes only. All contacts must be made via email or WhatsApp. A contract is always made to ensure honesty and transparency. 
+    There are 2 homes to choose from — just hover your mouse (or tap on mobile) over the blue pins on the map to explore them.
+  </div>
+
+  <div class="map-caption-container">
+    <div class="caption-box" id="caption-left">
+      <h3>${i18n[lang].nearAlcantara}</h3>
+      <ul id="list-alcantara"></ul>
     </div>
-  `;
+    <div class="map-container"><div id="map"></div></div>
+    <div class="caption-box" id="caption-right">
+      <h3>${i18n[lang].nearRoma}</h3>
+      <ul id="list-roma"></ul>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin: 20px 0;">
+    <button id="btn-about">${i18n[lang].aboutUsTitle}</button>
+  </div>
+`;
+
 
   const map = L.map("map").setView([38.7369, -9.1427], 12);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -474,5 +484,6 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
