@@ -12,23 +12,19 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
- <header class="site-header">
-  <div class="header-inner">
-    <div class="left-controls">
-      <a href="#/" id="btn-back-to-map" class="nav-btn hidden">← Back to Map</a>
-      <a href="#/about" id="btn-about-global" class="nav-btn">About Us</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="nav-btns">
+        <button id="btn-back-to-map" class="nav-btn hidden">← Back to map</button>
+        <button id="btn-about-global" class="nav-btn">About us</button>
+      </div>
+      <h1 class="site-title">Lisbon Student Rentals</h1>
+      <div class="lang-switcher">
+        <button id="lang-en" class="lang-btn active">EN</button>
+        <button id="lang-pt" class="lang-btn">PT</button>
+      </div>
     </div>
-
-    <h1 class="site-title">Lisbon Student Rentals</h1>
-
-    <div class="lang-switcher">
-      <button id="lang-en" class="lang-btn active">EN</button>
-      <button id="lang-pt" class="lang-btn">PT</button>
-    </div>
-  </div>
-</header>
-
+  </header>
 
   <main id="app">
     <!-- Content rendered by script.js -->
@@ -55,5 +51,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
-
