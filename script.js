@@ -1,4 +1,4 @@
-// script.js — full logic + top‑nav + translated nav + improved room layout + image modal
+// script.js — full logic + top‑nav + translated nav + improved room layout + image modal// script.js — full logic + top‑nav + translated nav + improved room layout + image modal
 // — UPDATED with new universities + room availability dates
 
 const app = document.getElementById("app");
@@ -484,6 +484,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
