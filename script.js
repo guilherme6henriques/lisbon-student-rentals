@@ -9,6 +9,7 @@ const i18n = {
   en: {
     contact: "Contact",
     seeRooms: "See rooms",
+    mapIntro: `This website is for viewing purposes only. All contacts must be made via email or WhatsApp. A contract is always made to ensure honesty and transparency. There are 2 homes to choose from — just hover your mouse (or tap on mobile) over the blue pins on the map to explore them.`,
     backToMap: "← Back to map",
     backToBuilding: "← Back to building",
     backToFloor: "← Back to floor",
@@ -38,6 +39,7 @@ welcome. 😊`,
     seeRooms: "Ver quartos",
     backToMap: "← Voltar ao mapa",
     backToBuilding: "← Voltar ao imóvel",
+    mapIntro: `Este site serve apenas para visualização. Todos os contactos devem ser feitos por email ou WhatsApp. Um contrato será sempre feito para garantir honestidade e transparência. Existem 2 casas à escolha — basta passar o rato (ou tocar no telemóvel) nos pinos azuis do mapa para explorar.`,
     backToFloor: "← Voltar ao andar",
     floorLabel: "Andar",
     commonAreas: "Áreas comuns",
@@ -267,10 +269,10 @@ function toggleBackBtn(show) {
 
 function renderMap() {
 app.innerHTML = `
-  <div class="map-intro-text" style="text-align: center; max-width: 800px; margin: 0 auto 20px; font-size: 16px; padding: 10px;">
-    This website is for viewing purposes only. All contacts must be made via email or WhatsApp. A contract is always made to ensure honesty and transparency. 
-    There are 2 homes to choose from — just hover your mouse (or tap on mobile) over the blue pins on the map to explore them.
-  </div>
+ <div class="map-intro-text" style="text-align: center; max-width: 800px; margin: 0 auto 20px; font-size: 16px; padding: 10px;">
+  ${i18n[lang].mapIntro}
+</div>
+
 
   <div class="map-caption-container">
     <div class="caption-box" id="caption-left">
@@ -482,6 +484,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
