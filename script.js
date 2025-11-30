@@ -1,5 +1,5 @@
-// script.js — full logic + top‑nav + translated nav + improved room layout + image modal// script.js — full logic + top‑nav + translated nav + improved room layout + image modal
-// — UPDATED with new universities + room availability dates
+// script.js — full logic + top‑nav + translated nav + improved room layout + image modal
+// UPDATED: always‑visible map popups + map bounds restriction
 
 const app = document.getElementById("app");
 const langBtns = document.querySelectorAll(".lang-btn");
@@ -9,7 +9,7 @@ const i18n = {
   en: {
     contact: "Contact",
     seeRooms: "See rooms",
-    mapIntro: `This website is for viewing purposes only. All contacts must be made via email or WhatsApp. A contract is always made to ensure honesty and transparency. There are 2 homes to choose from — just hover your mouse (or tap on mobile) over the blue pins on the map to explore them.`,
+    mapIntro: `This website is for viewing purposes only. All contacts must be made via email or WhatsApp. A contract is always made to ensure honesty and transparency. There are 2 homes to choose from — just click or tap the blue pins on the map to explore them.`,
     backToMap: "← Back to map",
     backToBuilding: "← Back to building",
     backToFloor: "← Back to floor",
@@ -37,9 +37,9 @@ welcome. 😊`,
   pt: {
     contact: "Contacto",
     seeRooms: "Ver quartos",
+    mapIntro: `Este site serve apenas para visualização. Todos os contactos devem ser feitos por email ou WhatsApp. Um contrato será sempre feito para garantir honestidade e transparência. Existem 2 casas à escolha — basta tocar nos pinos azuis do mapa para explorar.`,
     backToMap: "← Voltar ao mapa",
     backToBuilding: "← Voltar ao imóvel",
-    mapIntro: `Este site serve apenas para visualização. Todos os contactos devem ser feitos por email ou WhatsApp. Um contrato será sempre feito para garantir honestidade e transparência. Existem 2 casas à escolha — basta passar o rato (ou tocar no telemóvel) nos pinos azuis do mapa para explorar.`,
     backToFloor: "← Voltar ao andar",
     floorLabel: "Andar",
     commonAreas: "Áreas comuns",
@@ -58,18 +58,16 @@ O meu objetivo é simples:
 Ajudar-te a sentir em casa desde o primeiro dia — tal como eu me senti.
 
 Se procuras conforto, boas vibes e um lugar onde possam começar algumas das tuas melhores histórias…
-bem-vindo(a). 😊`,
+bem‑vindo(a). 😊`,
     nearAlcantara: "Perto de Alcântara",
     nearRoma: "Perto da Avenida de Roma"
   }
 };
 
 function applyTranslationsText() {
-  // Footer contact
   document.querySelectorAll(".i18n-contact").forEach(el => {
     el.textContent = i18n[lang].contact;
   });
-  // Top‑nav buttons
   const btnBack = document.getElementById("btn-back-to-map");
   const btnAbout = document.getElementById("btn-about-global");
   if (btnBack) btnBack.textContent = i18n[lang].backToMap;
@@ -86,6 +84,20 @@ langBtns.forEach(btn => {
     render();
   });
 });
+
+// Global nav-button click handling (header)
+const btnBackGlobal = document.getElementById("btn-back-to-map");
+if (btnBackGlobal) {
+  btnBackGlobal.addEventListener("click", () => {
+    location.hash = "#/";
+  });
+}
+const btnAboutGlobal = document.getElementById("btn-about-global");
+if (btnAboutGlobal) {
+  btnAboutGlobal.addEventListener("click", () => {
+    location.hash = "#/about";
+  });
+}
 
 function getImagePaths(prefix, count) {
   const arr = [];
@@ -194,7 +206,7 @@ const data = {
   }
 };
 
-// ===== New universities added =====
+// University + new ones
 const uniLocations = [
   { id: "ist", name: { en: "IST", pt: "IST" }, coords: [38.7353, -9.1367], color: "#f1c40f" },
   { id: "nova_ims", name: { en: "NOVA IMS", pt: "NOVA IMS" }, coords: [38.732462, -9.159921], color: "#e74c3c" },
@@ -205,7 +217,7 @@ const uniLocations = [
   { id: "fmul", name: { en: "FMUL", pt: "FMUL" }, coords: [38.7463469531953, -9.161155141126354], color: "#e84393" },
   { id: "ucp_cat", name: { en: "UCP", pt: "UCP" }, coords: [38.74893443978093, -9.164949511475601], color: "#a04000" },
 
-  // ** New ones **
+  // New ones
   { id: "isa", name: { en: "ISA", pt: "ISA" }, coords: [38.707804917614304, -9.18041829943341], color: "#ff6600" },
   { id: "universidade_europeia", name: { en: "Universidade Europeia de Lisboa", pt: "Universidade Europeia de Lisboa" },
     coords: [38.70830724760151, -9.15303831282159], color: "#0077ff" },
@@ -261,36 +273,45 @@ function render() {
 
 function toggleBackBtn(show) {
   const btn = document.getElementById("btn-back-to-map");
-  if (btn) {
-    if (show) btn.classList.remove("hidden");
-    else btn.classList.add("hidden");
-  }
+  if (!btn) return;
+  if (show) btn.classList.remove("hidden");
+  else btn.classList.add("hidden");
 }
 
 function renderMap() {
-app.innerHTML = `
- <div class="map-intro-text" style="text-align: center; max-width: 800px; margin: 0 auto 20px; font-size: 16px; padding: 10px;">
-  ${i18n[lang].mapIntro}
-</div>
-
-
-  <div class="map-caption-container">
-    <div class="caption-box" id="caption-left">
-      <h3>${i18n[lang].nearAlcantara}</h3>
-      <ul id="list-alcantara"></ul>
+  app.innerHTML = `
+    <div class="map-intro-text" style="text-align: center; max-width: 800px; margin: 0 auto 20px; font-size: 16px; padding: 10px;">
+      ${i18n[lang].mapIntro}
     </div>
-    <div class="map-container"><div id="map"></div></div>
-    <div class="caption-box" id="caption-right">
-      <h3>${i18n[lang].nearRoma}</h3>
-      <ul id="list-roma"></ul>
+    <div class="map-caption-container">
+      <div class="caption-box" id="caption-left">
+        <h3>${i18n[lang].nearAlcantara}</h3>
+        <ul id="list-alcantara"></ul>
+      </div>
+      <div class="map-container"><div id="map"></div></div>
+      <div class="caption-box" id="caption-right">
+        <h3>${i18n[lang].nearRoma}</h3>
+        <ul id="list-roma"></ul>
+      </div>
     </div>
-  </div>
+  `;
 
+  // define geographic bounds to restrict map to area of interest
+  const southWest = L.latLng(38.60, -9.30);
+  const northEast = L.latLng(38.82, -9.00);
+  const bounds = L.latLngBounds(southWest, northEast);
 
-`;
+  const map = L.map("map", {
+    center: [38.7369, -9.1427],
+    zoom: 12,
+    scrollWheelZoom: false,
+    maxBounds: bounds,
+    maxBoundsViscosity: 0.9,
+    doubleClickZoom: false,
+    touchZoom: false,
+    dragging: true,
+  });
 
-
-  const map = L.map("map").setView([38.7369, -9.1427], 12);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '© OpenStreetMap contributors'
   }).addTo(map);
@@ -332,24 +353,7 @@ app.innerHTML = `
           </button>
         </div>
       `);
-
-    let overMarker = false, overPopup = false;
-    marker.on("mouseover", () => { overMarker = true; marker.openPopup(); });
-    marker.on("mouseout", () => {
-      overMarker = false;
-      setTimeout(() => { if (!overMarker && !overPopup) marker.closePopup(); }, 200);
-    });
-    marker.on("popupopen", () => {
-      const el = document.getElementById(`popup-${key}`);
-      if (!el) return;
-      el.addEventListener("mouseenter", () => overPopup = true);
-      el.addEventListener("mouseleave", () => {
-        overPopup = false;
-        setTimeout(() => { if (!overMarker && !overPopup) marker.closePopup(); }, 200);
-      });
-    });
-
-    marker.bindPopup(popup);
+    marker.bindPopup(popup).openPopup();
   });
 }
 
@@ -386,7 +390,6 @@ function renderFloor(locKey, floorNum) {
   if (floor.commonDesc) {
     html += `<p class="common-desc">${floor.commonDesc[lang]}</p>`;
   }
-
   if (floor.commonPhotos && floor.commonPhotos.length) {
     html += `<div class="section-title">${i18n[lang].commonAreas}</div>`;
     html += `<div class="common-photos-container">`;
@@ -428,7 +431,6 @@ function renderRoom(locKey, floorNum, roomId) {
     html += `<p><strong>${i18n[lang].billsIncludedLabel}</strong> ${billsText}</p>`;
   }
 
-  // Available from date
   if (room.availableFrom) {
     html += `<p><strong>${lang === "en" ? "Available from:" : "Disponível a partir de:"}</strong> ${room.availableFrom}</p>`;
   }
@@ -484,8 +486,3 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
-
-
-
-
-
