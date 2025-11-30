@@ -227,7 +227,7 @@ header {
 }
 
 /* ===========================================================
-   ROOM DETAIL / COMMON AREA — linear layout
+   ROOM DETAIL / COMMON AREA — linear layout (title → bills → desc → images)
 =========================================================== */
 .common-photos-container,
 .room-detail {
@@ -266,7 +266,7 @@ header {
 }
 
 /* ===========================================================
-   POPUP & NAV LINKS (map popups)
+   POPUP & NAV LINKS (map popups) — same as before
 =========================================================== */
 .popup-btn {
   margin-top: 8px;
@@ -349,9 +349,40 @@ header {
   #map { height: 500px; }
   #app { padding: 0 12px; }
 }
+
 @media (max-width: 600px) {
-  header h1 { font-size: 1.7rem; }
-  .lang-btn, .nav-btn { padding: 5px 10px; font-size: 0.85rem; }
+  header {
+    padding: 15px 0;
+  }
+  .header-inner {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 12px;
+    text-align: center;
+  }
+  .site-title {
+    font-size: 1.9rem;
+  }
+  .lang-switcher {
+    margin: 0 auto;
+  }
+
+  .nav-btns {
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+  }
+  .nav-btn {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .lang-btn, .nav-btn {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+  }
+
   #map { height: 380px; }
 
   .map-caption-container {
@@ -364,11 +395,6 @@ header {
   .photo-wrapper {
     width: 160px;
     height: calc(160px * 0.75);
-  }
-
-  .nav-btns {
-    flex-direction: column;
-    gap: 8px;
   }
 }
 
