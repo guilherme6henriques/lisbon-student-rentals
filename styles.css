@@ -227,7 +227,7 @@ header {
 }
 
 /* ===========================================================
-   ROOM DETAIL / COMMON AREA — linear layout (title → bills → desc → images)
+   ROOM DETAIL / COMMON AREA — linear layout
 =========================================================== */
 .common-photos-container,
 .room-detail {
@@ -266,7 +266,7 @@ header {
 }
 
 /* ===========================================================
-   POPUP & NAV LINKS (map popups) — same as before
+   POPUP & NAV LINKS (map popups)
 =========================================================== */
 .popup-btn {
   margin-top: 8px;
@@ -365,4 +365,10 @@ header {
     width: 160px;
     height: calc(160px * 0.75);
   }
+
+  .nav-btns {
+    flex-direction: column;
+    gap: 8px;
+  }
 }
+
