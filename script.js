@@ -107,6 +107,14 @@ function getImagePaths(prefix, count) {
   return arr;
 }
 
+function getImagePaths2(prefix, count) {
+  const arr = [];
+  for (let i = 1; i <= count; i++) {
+    arr.push(`Images/${prefix}${i}F.jpeg`);
+  }
+  return arr;
+}
+
 const data = {
   "avenida_de_roma": {
     name: { en: "Avenida de Roma", pt: "Avenida de Roma" },
@@ -144,7 +152,7 @@ const data = {
         rooms: [
           { id: "2Q", code: "AR2A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 700,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
-            thumb: `Images/AR2A2Q1F.jpeg`, photos: getImagePaths("AR2A2Q", 5),
+            thumb: `Images/AR2A2Q1F.jpeg`, photos: getImagePaths2("AR2A2Q", 5),
             description: { en: "", pt: "" }, availableFrom: "01/03/2026" },
            { id: "3Q", code: "AR2A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 650,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
@@ -490,6 +498,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
