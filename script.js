@@ -115,7 +115,7 @@ const data = {
       {
         number: 1,
         commonDesc: {
-          en: "5 bedrooms in total \n 1 Kitchen with full utilities, 2 Bathrooms, 1 Living room",
+          en: "5 bedrooms in total <br> 1 Kitchen with full utilities, 2 Bathrooms, 1 Living room",
           pt: "1 Cozinha com todas as utilidades, 2 Casas de banho, 1 Sala"
         },
         commonPhotos: getImagePaths("AR1AZC", 7),
@@ -490,5 +490,6 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
