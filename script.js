@@ -123,7 +123,7 @@ const data = {
       {
         number: 1,
         commonDesc: {
-          en: "5 bedrooms in total <br> 1 Kitchen with full utilities, 2 Bathrooms, 1 Living room",
+          en: "5 bedrooms in total <br> 5 bedrooms in total <br> 1 Kitchen with full utilities, 2 Bathrooms, 1 Living room",
           pt: "1 Cozinha com todas as utilidades, 2 Casas de banho, 1 Sala"
         },
         commonPhotos: getImagePaths("AR1AZC", 7),
@@ -145,7 +145,7 @@ const data = {
       {
         number: 2,
         commonDesc: {
-          en: "1 Kitchen with full utilities, 1 Bathroom",
+          en: "5 bedrooms in total <br> 1 Kitchen with full utilities, 1 Bathroom",
           pt: "1 Cozinha com todas as utilidades, 1 Casa de banho"
         },
         commonPhotos: getImagePaths("AR2AZC", 3),
@@ -167,7 +167,7 @@ const data = {
       {
         number: 3,
         commonDesc: {
-          en: "1 Kitchen with full utilities, 1 Bathroom",
+          en: "5 bedrooms in total <br> 1 Kitchen with full utilities, 1 Bathroom",
           pt: "1 Cozinha com todas as utilidades, 1 Casa de banho"
         },
         commonPhotos: getImagePaths("AR3AZC", 5),
@@ -191,7 +191,7 @@ const data = {
       {
         number: 1,
         commonDesc: {
-          en: "1 Kitchen with full utilities, 2 Bathrooms, 1 Living room and 1 Patio",
+          en: "4 bedrooms in total <br> 1 Kitchen with full utilities, 2 Bathrooms, 1 Living room and 1 Patio",
           pt: "1 Cozinha com todas as utilidades, 2 Casas de banho, 1 Sala e 1 Pátio"
         },
         commonPhotos: getImagePaths("AL1AZC", 7),
@@ -498,6 +498,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
