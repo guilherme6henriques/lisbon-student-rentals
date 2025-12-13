@@ -128,15 +128,15 @@ const data = {
         },
         commonPhotos: getImagePaths("AR1AZC", 7),
         rooms: [
-          { id: "2Q", code: "AR1A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 700,
+          { id: "2Q", code: "AR1A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 650,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR1A2Q1F.jpg`, photos: getImagePaths("AR1A2Q", 8),
             description: { en: "", pt: "" }, availableFrom: "01/01/2026" },
-          { id: "4Q", code: "AR1A4Q", label: { en: "Room 4", pt: "Quarto 4" }, price: 600,
+          { id: "4Q", code: "AR1A4Q", label: { en: "Room 4", pt: "Quarto 4" }, price: 540,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR1A4Q1F.jpg`, photos: getImagePaths("AR1A4Q", 3),
             description: { en: "", pt: "" }, availableFrom: "16/02/2026" },
-          { id: "5Q", code: "AR1A5Q", label: { en: "Room 5", pt: "Quarto 5" }, price: 570,
+          { id: "5Q", code: "AR1A5Q", label: { en: "Room 5", pt: "Quarto 5" }, price: 520,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR1A5Q1F.jpg`, photos: getImagePaths("AR1A5Q", 2),
             description: { en: "", pt: "" }, availableFrom: "01/02/2026" }
@@ -150,15 +150,15 @@ const data = {
         },
         commonPhotos: getImagePaths("AR2AZC", 3),
         rooms: [
-          { id: "2Q", code: "AR2A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 700,
+          { id: "2Q", code: "AR2A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 650,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR2A2Q1F.jpeg`, photos: getImagePaths2("AR2A2Q", 5),
             description: { en: "", pt: "" }, availableFrom: "01/02/2026" },
-           { id: "3Q", code: "AR2A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 650,
+           { id: "3Q", code: "AR2A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 580,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR2A3Q1F.jpg`, photos: getImagePaths("AR2A3Q", 6),
             description: { en: "", pt: "" }, availableFrom: "01/03/2026" },
-          { id: "5Q", code: "AR2A5Q", label: { en: "Room 5", pt: "Quarto 5" }, price: 600,
+          { id: "5Q", code: "AR2A5Q", label: { en: "Room 5", pt: "Quarto 5" }, price: 550,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR2A5Q1F.jpg`, photos: getImagePaths("AR2A5Q", 4),
             description: { en: "", pt: "" }, availableFrom: "01/02/2026" }
@@ -172,11 +172,11 @@ const data = {
         },
         commonPhotos: getImagePaths("AR3AZC", 5),
         rooms: [
-          { id: "2Q", code: "AR3A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 700,
+          { id: "2Q", code: "AR3A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 650,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR3A2Q1F.jpg`, photos: getImagePaths("AR3A2Q", 6),
             description: { en: "", pt: "" }, availableFrom: "01/12/2025" },
-          { id: "3Q", code: "AR3A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 650,
+          { id: "3Q", code: "AR3A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 580,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR3A3Q1F.jpg`, photos: getImagePaths("AR3A3Q", 6),
             description: { en: "", pt: "" }, availableFrom: "01/02/2026" }
@@ -196,19 +196,19 @@ const data = {
         },
         commonPhotos: getImagePaths("AL1AZC", 7),
         rooms: [
-          { id: "1Q", code: "AL1A1Q", label: { en: "Room 1", pt: "Quarto 1" }, price: 750,
+          { id: "1Q", code: "AL1A1Q", label: { en: "Room 1", pt: "Quarto 1" }, price: 650,
             bills: { en: "All bills included (excluding gas)", pt: "Contas incluídas (gás excluído)" },
             thumb: `Images/AL1A1Q1F.jpg`, photos: getImagePaths("AL1A1Q", 6),
             description: { en: "", pt: "" }, availableFrom: "01/02/2026" },
-          { id: "2Q", code: "AL1A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 700,
+          { id: "2Q", code: "AL1A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 600,
             bills: { en: "All bills included (excluding gas)", pt: "Contas incluídas (gás excluído)" },
             thumb: `Images/AL1A2Q1F.jpg`, photos: getImagePaths("AL1A2Q", 4),
             description: { en: "", pt: "" }, availableFrom: "01/01/2026" },
-          { id: "3Q", code: "AL1A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 600,
+          { id: "3Q", code: "AL1A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 550,
             bills: { en: "All bills included (excluding gas)", pt: "Contas incluídas (gás excluído)" },
             thumb: `Images/AL1A3Q1F.jpg`, photos: getImagePaths("AL1A3Q", 4),
             description: { en: "", pt: "" }, availableFrom: "01/03/2026" },
-          { id: "4Q", code: "AL1A4Q", label: { en: "Room 4", pt: "Quarto 4" }, price: 750,
+          { id: "4Q", code: "AL1A4Q", label: { en: "Room 4", pt: "Quarto 4" }, price: 650,
             bills: { en: "All bills included (excluding gas)", pt: "Contas incluídas (gás excluído)" },
             thumb: `Images/AL1A4Q1F.jpg`, photos: getImagePaths("AL1A4Q", 5),
             description: { en: "", pt: "" }, availableFrom: "01/12/2025" }
@@ -498,6 +498,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
