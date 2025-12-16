@@ -153,7 +153,7 @@ const data = {
           { id: "2Q", code: "AR2A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 650,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR2A2Q1F.jpeg`, photos: getImagePaths2("AR2A2Q", 5),
-            description: { en: "", pt: "" }, availableFrom: "01/02/2026" },
+            description: { en: "", pt: "" }, availableFrom: "NOT AVAILABLE" },
            { id: "3Q", code: "AR2A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 580,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR2A3Q1F.jpg`, photos: getImagePaths("AR2A3Q", 6),
@@ -498,6 +498,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
