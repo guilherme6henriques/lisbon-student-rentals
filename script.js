@@ -128,6 +128,10 @@ const data = {
         },
         commonPhotos: getImagePaths("AR1AZC", 7),
         rooms: [
+           { id: "1Q", code: "AR1A1Q", label: { en: "Room 1 - NOT AVAILABLE", pt: "Quarto 1 - INDISPONÍVEL"}, price: 550,
+            bills: { en: "All bills included", pt: "Todas as contas incluídas" },
+            thumb: `Images/AR1A1Q1F.jpg`, photos: getImagePaths("AR1A2Q", 4),
+            description: { en: "", pt: "" }, availableFrom: "01/01/2027" },
           { id: "2Q", code: "AR1A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 650,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR1A2Q1F.jpg`, photos: getImagePaths("AR1A2Q", 8),
@@ -150,7 +154,7 @@ const data = {
         },
         commonPhotos: getImagePaths("AR2AZC", 3),
         rooms: [
-          { id: "2Q", code: "AR2A2Q", label: { en: "Room 2-NOT AVAILABLE", pt: "Quarto 2" }, price: 650,
+          { id: "2Q", code: "AR2A2Q", label: { en: "Room 2 - NOT AVAILABLE", pt: "Quarto 2 - INDISPONÍVEL" }, price: 650,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR2A2Q1F.jpeg`, photos: getImagePaths2("AR2A2Q", 5),
             description: { en: "", pt: "" }, availableFrom: "15/07/2026" },
@@ -172,6 +176,10 @@ const data = {
         },
         commonPhotos: getImagePaths("AR3AZC", 5),
         rooms: [
+          { id: "1Q", code: "AR3A1Q", label: { en: "Room 1", pt: "Quarto 1"}, price: 550,
+            bills: { en: "All bills included", pt: "Todas as contas incluídas" },
+            thumb: `Images/AR3A1Q1F.jpg`, photos: getImagePaths("AR1A2Q", 5),
+            description: { en: "", pt: "" }, availableFrom: "01/03/2026" },
           { id: "2Q", code: "AR3A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 650,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR3A2Q1F.jpg`, photos: getImagePaths("AR3A2Q", 6),
@@ -498,6 +506,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
