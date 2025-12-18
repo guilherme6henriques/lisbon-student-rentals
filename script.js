@@ -123,8 +123,8 @@ const data = {
       {
         number: 1,
         commonDesc: {
-          en: "5 bedrooms in total <br> 1 Kitchen with full utilities, 2 Bathrooms, 1 Living room",
-          pt: "5 quartos no total <br> 1 Cozinha com todas as utilidades, 2 Casas de banho, 1 Sala"
+          en: "5 bedrooms in total <br> 1 Kitchen with full utilities, 2 Bathrooms and 1 Living room",
+          pt: "5 quartos no total <br> 1 Cozinha com todas as utilidades, 2 Casas de banho e 1 Sala"
         },
         commonPhotos: getImagePaths("AR1AZC", 7),
         rooms: [
@@ -145,15 +145,15 @@ const data = {
       {
         number: 2,
         commonDesc: {
-          en: "5 bedrooms in total <br> 1 Kitchen with full utilities, 1 Bathroom",
-          pt: "5 quartos no total <br> 1 Cozinha com todas as utilidades, 1 Casa de banho"
+          en: "5 bedrooms in total <br> 1 Kitchen with full utilities, 1 Bathroom and 1 Washroom",
+          pt: "5 quartos no total <br> 1 Cozinha com todas as utilidades, 1 Casa de banho e 1 Lavabo"
         },
         commonPhotos: getImagePaths("AR2AZC", 3),
         rooms: [
-          { id: "2Q", code: "AR2A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 650,
+          { id: "2Q", code: "AR2A2Q", label: { en: "Room 2-NOT AVAILABLE", pt: "Quarto 2" }, price: 650,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR2A2Q1F.jpeg`, photos: getImagePaths2("AR2A2Q", 5),
-            description: { en: "", pt: "" }, availableFrom: "NOT AVAILABLE" },
+            description: { en: "", pt: "" }, availableFrom: "15/07/2026" },
            { id: "3Q", code: "AR2A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 580,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR2A3Q1F.jpg`, photos: getImagePaths("AR2A3Q", 6),
@@ -167,8 +167,8 @@ const data = {
       {
         number: 3,
         commonDesc: {
-          en: "5 bedrooms in total <br> 1 Kitchen with full utilities, 1 Bathroom",
-          pt: "5 quartos no total <br> 1 Cozinha com todas as utilidades, 1 Casa de banho"
+          en: "5 bedrooms in total <br> 1 Kitchen with full utilities, 1 Bathroom and 1 Washroom <br> Please note that This is a 4-bedroom apartment for students/young workers. Additionally, my father has his private space in the attic. He stays there frequently, so the kitchen and bathroom are shared between the tenants and him.",
+          pt: "5 quartos no total <br> 1 Cozinha com todas as utilidades, 1 Casa de banho e 1 Lavabo <br> O apartamento dispõe de 4 quartos para estudantes ou jovens trabalhadores. Além disso, o meu pai tem o seu espaço privado no sótão. Ele fica lá frequentemente, pelo que a cozinha e a casa de banho são partilhadas entre os inquilinos e ele."
         },
         commonPhotos: getImagePaths("AR3AZC", 5),
         rooms: [
@@ -498,6 +498,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
