@@ -421,7 +421,9 @@ function renderFloor(locKey, floorNum) {
 
   html += `<div class="section-title">${i18n[lang].roomsLabel}</div>`;
   html += `<div class="rooms-list">`;
-  floor.rooms.slice().sort((a,b)=> b.price - a.price).forEach(room => {
+  
+  // UPDATED SORTING LOGIC HERE:
+  floor.rooms.slice().sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true })).forEach(room => {
     html += `
       <div class="room-card" onclick="location.hash='#/room/${locKey}/${floorNum}/${room.id}'">
         <img src="${room.thumb}" alt="">
@@ -431,6 +433,7 @@ function renderFloor(locKey, floorNum) {
         </div>
       </div>`;
   });
+  
   html += `</div>`;
   html += `<a href="#/location/${locKey}" class="back-link">${i18n[lang].backToBuilding}</a>`;
   app.innerHTML = html;
@@ -506,6 +509,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
