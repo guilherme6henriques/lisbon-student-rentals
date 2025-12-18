@@ -178,7 +178,7 @@ const data = {
         rooms: [
           { id: "1Q", code: "AR3A1Q", label: { en: "Room 1", pt: "Quarto 1"}, price: 550,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
-            thumb: `Images/AR3A1Q1F.jpg`, photos: getImagePaths("AR3A1Q", 5),
+            thumb: `Images/AR3A1Q1F.jpeg`, photos: getImagePaths2("AR3A1Q", 5),
             description: { en: "", pt: "" }, availableFrom: "01/03/2026" },
           { id: "2Q", code: "AR3A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 650,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
@@ -506,6 +506,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
