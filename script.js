@@ -132,10 +132,10 @@ const data = {
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR1A1Q1F.jpg`, photos: getImagePaths("AR1A1Q", 2),
             description: { en: "", pt: "" }, availableFrom: "01/01/2027" },
-          { id: "2Q", code: "AR1A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 650,
+          { id: "2Q", code: "AR1A2Q", label: { en: "Room 2 - NOT AVAILABLE", pt: "Quarto 2 - INDISPONÍVEL" }, price: 650,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR1A2Q1F.jpg`, photos: getImagePaths("AR1A2Q", 8),
-            description: { en: "", pt: "" }, availableFrom: "01/01/2026" },
+            description: { en: "", pt: "" }, availableFrom: "01/07/2026" },
           { id: "4Q", code: "AR1A4Q", label: { en: "Room 4", pt: "Quarto 4" }, price: 540,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
             thumb: `Images/AR1A4Q1F.jpg`, photos: getImagePaths("AR1A4Q", 3),
@@ -171,7 +171,7 @@ const data = {
       {
         number: 3,
         commonDesc: {
-          en: "5 bedrooms in total. Please note that This is a 4-bedroom apartment for students/young workers. Additionally, my father has his private space in the attic. He stays there frequently, so the kitchen and bathroom are shared between the tenants and him. <br> 1 Kitchen with full utilities, 1 Bathroom and 1 Washroom",
+          en: "5 bedrooms in total. This is a 4-bedroom apartment for students/young workers. Additionally, my father has his private space in the attic. He stays there frequently, so the kitchen and bathroom are shared between the tenants and him. <br> 1 Kitchen with full utilities, 1 Bathroom and 1 Washroom",
           pt: "5 quartos no total. O apartamento dispõe de 4 quartos para estudantes ou jovens trabalhadores. Além disso, o meu pai tem o seu espaço privado no sótão. Ele fica lá frequentemente, pelo que a cozinha e a casa de banho são partilhadas entre os inquilinos e ele. <br> 1 Cozinha com todas as utilidades, 1 Casa de banho e 1 Lavabo"
         },
         commonPhotos: getImagePaths("AR3AZC", 5),
@@ -509,6 +509,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
