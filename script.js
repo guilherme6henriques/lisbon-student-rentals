@@ -167,8 +167,8 @@ const data = {
       {
         number: 3,
         commonDesc: {
-          en: "5 bedrooms in total <br> 1 Kitchen with full utilities, 1 Bathroom and 1 Washroom <br> Please note that This is a 4-bedroom apartment for students/young workers. Additionally, my father has his private space in the attic. He stays there frequently, so the kitchen and bathroom are shared between the tenants and him.",
-          pt: "5 quartos no total <br> 1 Cozinha com todas as utilidades, 1 Casa de banho e 1 Lavabo <br> O apartamento dispõe de 4 quartos para estudantes ou jovens trabalhadores. Além disso, o meu pai tem o seu espaço privado no sótão. Ele fica lá frequentemente, pelo que a cozinha e a casa de banho são partilhadas entre os inquilinos e ele."
+          en: "5 bedrooms in total. Please note that This is a 4-bedroom apartment for students/young workers. Additionally, my father has his private space in the attic. He stays there frequently, so the kitchen and bathroom are shared between the tenants and him. <br> 1 Kitchen with full utilities, 1 Bathroom and 1 Washroom",
+          pt: "5 quartos no total. O apartamento dispõe de 4 quartos para estudantes ou jovens trabalhadores. Além disso, o meu pai tem o seu espaço privado no sótão. Ele fica lá frequentemente, pelo que a cozinha e a casa de banho são partilhadas entre os inquilinos e ele. <br> 1 Cozinha com todas as utilidades, 1 Casa de banho e 1 Lavabo"
         },
         commonPhotos: getImagePaths("AR3AZC", 5),
         rooms: [
@@ -498,6 +498,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
