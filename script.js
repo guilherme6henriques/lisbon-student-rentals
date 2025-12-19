@@ -204,7 +204,7 @@ const data = {
         },
         commonPhotos: getImagePaths("AL1AZC", 7),
         rooms: [
-          { id: "1Q", code: "AL1A1Q", label: { en: "Room 1", pt: "Quarto 1" }, price: 650,
+          { id: "1Q", code: "AL1A1Q", label: { en: "Room 1 - INDISPONÍVEL", pt: "Quarto 1 - NOT AVAILABLE" }, price: 650,
             bills: { en: "All bills included (excluding gas)", pt: "Contas incluídas (gás excluído)" },
             thumb: `Images/AL1A1Q1F.jpg`, photos: getImagePaths("AL1A1Q", 6),
             description: { en: "", pt: "" }, availableFrom: "NOT AVAILABLE" },
@@ -509,6 +509,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
