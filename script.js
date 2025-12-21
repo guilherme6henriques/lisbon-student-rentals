@@ -152,7 +152,7 @@ const data = {
           en: "5 bedrooms in total <br> 1 Kitchen with full utilities, 1 Bathroom and 1 Washroom",
           pt: "5 quartos no total <br> 1 Cozinha com todas as utilidades, 1 Casa de banho e 1 Lavabo"
         },
-        commonPhotos: getImagePaths("AR2AZC", 3),
+        commonPhotos: getImagePaths2("AR2AZC", 15),
         rooms: [
           { id: "2Q", code: "AR2A2Q", label: { en: "Room 2 - NOT AVAILABLE", pt: "Quarto 2 - INDISPONÍVEL" }, price: 650,
             bills: { en: "All bills included", pt: "Todas as contas incluídas" },
@@ -509,6 +509,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
