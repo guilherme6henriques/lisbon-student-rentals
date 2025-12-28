@@ -142,7 +142,7 @@ const data = {
             description: { en: "", pt: "" }, availableFrom: "16/02/2026" },
           { id: "5Q", code: "AR1A5Q", label: { en: "Room 5", pt: "Quarto 5" }, price: 520,
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
-            thumb: `Images/AR1A5Q1F.jpg`, photos: getImagePaths("AR1A5Q", 2),
+            thumb: `Images/AR1A5Q1F.jpg`, photos: getImagePaths2("AR1A5Q", 4),
             description: { en: "", pt: "" }, availableFrom: "01/02/2026" }
         ]
       },
@@ -509,6 +509,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
