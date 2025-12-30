@@ -136,14 +136,14 @@ const data = {
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR1A2Q1F.jpg`, photos: getImagePaths("AR1A2Q", 8),
             description: { en: "", pt: "" }, availableFrom: "01/07/2026" },
-          { id: "4Q", code: "AR1A4Q", label: { en: "Room 4", pt: "Quarto 4" }, price: 540,
+          { id: "4Q", code: "AR1A4Q", label: { en: "Room 4 - NOT AVAILABLE", pt: "Quarto 4 - INDISPONÍVEL" }, price: 540,
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR1A4Q1F.jpg`, photos: getImagePaths("AR1A4Q", 3),
-            description: { en: "", pt: "" }, availableFrom: "16/02/2026" },
-          { id: "5Q", code: "AR1A5Q", label: { en: "Room 5", pt: "Quarto 5" }, price: 520,
+            description: { en: "", pt: "" }, availableFrom: "01/08/2026" },
+          { id: "5Q", code: "AR1A5Q", label: { en: "Room 5 - NOT AVAILABLE", pt: "Quarto 5 - INDISPONÍVEL" }, price: 520,
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR1A5Q1F.jpg`, photos: getImagePaths("AR1A5Q", 4),
-            description: { en: "", pt: "" }, availableFrom: "01/02/2026" }
+            description: { en: "", pt: "" }, availableFrom: "01/08/2026" }
         ]
       },
       {
@@ -509,6 +509,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
