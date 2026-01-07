@@ -120,6 +120,20 @@ const data = {
     name: { en: "Avenida de Roma", pt: "Avenida de Roma" },
     coords: [38.74651115662008, -9.143217726509699],
     floors: [
+        {
+        number: 0,
+        commonDesc: {
+          en: "Ground floor <br> 5 bedrooms in total <br> 1 Kitchen with full utilities and 2 Bathrooms",
+          pt: "Rés do chão <br> 5 quartos no total <br> 1 Cozinha com todas as utilidades e 2 Casas de banho"
+        },
+        commonPhotos: getImagePaths2("AR0AZC", 10),
+        rooms: [
+          { id: "2Q", code: "AR1A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 590,
+            bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
+            thumb: `Images/AR0A2Q1F.jpg`, photos: getImagePaths("AR0A2Q", 5),
+            description: { en: "", pt: "" }, availableFrom: "15/02/2026" },
+        ]
+      },
       {
         number: 1,
         commonDesc: {
@@ -509,6 +523,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
