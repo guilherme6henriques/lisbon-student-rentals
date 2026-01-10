@@ -131,7 +131,7 @@ const data = {
           { id: "2Q", code: "AR1A2Q", label: { en: "Room 2 - NOT AVAILABLE", pt: "Quarto 2 - INDISPONÍVEL" }, price: 590,
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR0A2Q1F.jpg`, photos: getImagePaths("AR0A2Q", 5),
-            description: { en: "", pt: "" }, availableFrom: "15/02/2026" },
+            description: { en: "", pt: "" }, availableFrom: "01/07/2026" },
         ]
       },
       {
@@ -523,6 +523,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
