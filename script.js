@@ -190,7 +190,7 @@ const data = {
         },
         commonPhotos: getImagePaths("AR3AZC", 5),
         rooms: [
-          { id: "1Q", code: "AR3A1Q", label: { en: "Room 1", pt: "Quarto 1"}, price: 530,
+          { id: "1Q", code: "AR3A1Q", label: { en: "Room 1 - NOT AVAILABLE", pt: "Quarto 1 - INDISPONÍVEL"}, price: 530,
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR3A1Q1F.jpeg`, photos: getImagePaths2("AR3A1Q", 5),
             description: { en: "", pt: "" }, availableFrom: "01/03/2026" },
@@ -523,6 +523,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
