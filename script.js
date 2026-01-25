@@ -222,10 +222,10 @@ const data = {
             bills: { en: "All bills included (excluding gas) <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Contas incluídas (gás excluído). <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AL1A1Q1F.jpg`, photos: getImagePaths("AL1A1Q", 6),
             description: { en: "", pt: "" }, availableFrom: "NOT AVAILABLE" },
-          { id: "2Q", code: "AL1A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 550,
+          { id: "2Q", code: "AL1A2Q", label: { en: "Room 2 - NOT AVAILABLE", pt: "Quarto 2 - INDISPONÍVEL" }, price: 550,
             bills: { en: "All bills included (excluding gas) <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Contas incluídas (gás excluído). <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AL1A2Q1F.jpg`, photos: getImagePaths("AL1A2Q", 4),
-            description: { en: "", pt: "" }, availableFrom: "01/02/2026" },
+            description: { en: "", pt: "" }, availableFrom: "16/07/2026" },
           { id: "3Q", code: "AL1A3Q", label: { en: "Room 3 - NOT AVAILABLE", pt: "Quarto 3 - INDISPONÍVEL" }, price: 500,
             bills: { en: "All bills included (excluding gas) <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Contas incluídas (gás excluído). <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AL1A3Q1F.jpg`, photos: getImagePaths("AL1A3Q", 4),
@@ -523,6 +523,7 @@ document.addEventListener("keydown", (e) => {
     imageModal.classList.add("hidden");
   }
 });
+
 
 
 
