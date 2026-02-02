@@ -4,19 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lisbon Student Rentals</title>
+
+  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<header class="site-header">
+ <header class="site-header">
   <div class="header-inner">
     <div class="left-controls">
-      <a href="#/" id="btn-back-to-map" class="nav-btn hidden">← Back</a>
+      <a href="#/" id="btn-back-to-map" class="nav-btn hidden">← Back to Map</a>
       <a href="#/about" id="btn-about-global" class="nav-btn">About Us</a>
     </div>
-    <h1 class="site-title" onclick="location.hash='#/'">Lisbon Student Rentals</h1>
+
+    <h1 class="site-title">Lisbon Student Rentals</h1>
+
     <div class="lang-switcher">
       <button id="lang-en" class="lang-btn active">EN</button>
       <button id="lang-pt" class="lang-btn">PT</button>
@@ -24,25 +29,29 @@
   </div>
 </header>
 
-<main id="app">
+
+  <main id="app">
+    <!-- Content rendered by script.js -->
   </main>
 
-<footer class="site-footer">
-  <div class="footer-inner">
-    <span class="i18n-contact">Contact</span>:
-    <a href="mailto:matildersbarros@gmail.com">matildersbarros@gmail.com</a> |
-    <a href="https://wa.me/351924488081" target="_blank">WhatsApp</a>
-  </div>
-</footer>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="i18n-contact">Contact</span>:
+      <a href="mailto:matildersbarros@gmail.com">matildersbarros@gmail.com</a> |
+      <a href="https://wa.me/351924488081" target="_blank">WhatsApp</a>
+    </div>
+  </footer>
 
-<div id="image-modal" class="image-modal hidden">
-  <div class="modal-content">
-    <button class="close-btn">&times;</button>
-    <img id="modal-img" src="" alt="Full View" />
+  <!-- Fullscreen Image Modal -->
+  <div id="image-modal" class="image-modal hidden">
+    <div class="modal-content">
+      <button class="close-btn" aria-label="Close">&times;</button>
+      <img id="modal-img" src="" alt="Full View" />
+    </div>
   </div>
-</div>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="script.js"></script>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
