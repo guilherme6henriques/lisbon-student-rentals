@@ -1,82 +1,399 @@
-/* --- HERO & SEARCH BAR --- */
-.hero-search {
-  background: #2d3e50;
-  padding: 60px 20px;
-  text-align: center;
+/* ===========================================================
+   GLOBAL RESET & BASE STYLING
+=========================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f5f6fa;
+  color: #2c3e50;
+  overflow-x: hidden;
+}
+a {
+  color: #1a73e8;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+a:hover {
+  color: #0d47a1;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* ===========================================================
+   HEADER
+=========================================================== */
+header {
+  background: linear-gradient(145deg, #2d3e50, #1e2b3a);
   color: white;
-  border-radius: 0 0 30px 30px;
-  margin-bottom: 40px;
+  padding: 20px 0;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  margin-bottom: 30px;
 }
-
-.search-bar {
-  background: white;
-  padding: 15px 25px;
-  border-radius: 50px;
-  display: inline-flex;
-  gap: 20px;
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  margin-top: 20px;
+  gap: 20px;
+  position: relative;
+}
+.site-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.lang-switcher {
+  flex: 0 0 auto;
+  margin-top: 10px;
+}
+.lang-btn {
+  border: 2px solid #fff;
+  background: transparent;
+  color: #fff;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-left: 6px;
+  transition: background 0.25s, color 0.25s;
+}
+.lang-btn:hover,
+.lang-btn.active {
+  background: white;
+  color: #1e2b3a;
 }
 
-.search-group {
+/* ===========================================================
+   NAV BUTTONS (Back to Map / About Us)
+=========================================================== */
+.nav-btns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-btn {
+  font-weight: 600;
+  font-size: 14px;
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background 0.25s, color 0.25s;
+  white-space: nowrap;
+}
+.nav-btn:hover {
+  background: white;
+  color: #1e2b3a;
+}
+.nav-btn.hidden {
+  display: none;
+}
+
+/* ===========================================================
+   APP CONTAINER
+=========================================================== */
+#app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  animation: fadeIn 0.4s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===========================================================
+   MAP + CAPTION LAYOUT
+=========================================================== */
+.map-caption-container {
+  display: grid;
+  grid-template-columns: 250px 1fr 250px;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+.caption-box {
+  background: #ffffff;
+  border: 1px solid #e2e4e7;
+  border-radius: 8px;
+  padding: 18px;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  animation: fadeIn 0.6s ease;
+}
+.caption-box h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.caption-box ul {
+  list-style: none;
+  padding-left: 0;
+}
+.caption-box li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.caption-box .dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 8px;
+  border: 2px solid #000;
+  display: inline-block;
+}
+
+.map-container {
+  width: 100%;
+}
+#map {
+  width: 100%;
+  height: 620px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  animation: fadeIn 0.5s ease;
+}
+
+/* ===========================================================
+   FLOOR LIST & ROOM CARDS
+=========================================================== */
+.building {
   display: flex;
   flex-direction: column;
-  text-align: left;
-  border-right: 1px solid #eee;
-  padding-right: 20px;
+  gap: 18px;
 }
-
-.search-group:last-of-type { border-right: none; }
-
-.search-group label {
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: #888;
-  text-transform: uppercase;
-}
-
-.search-group select, .search-group input {
-  border: none;
-  outline: none;
-  font-family: inherit;
-  font-size: 1rem;
-  margin-top: 4px;
-}
-
-.search-btn-main {
-  background: #1a73e8;
-  color: white;
-  border: none;
-  padding: 12px 30px;
-  border-radius: 30px;
-  font-weight: 600;
+.floor {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 18px 22px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.08);
   cursor: pointer;
-  transition: background 0.2s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.floor:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
 
-.search-btn-main:hover { background: #0d47a1; }
-
-/* --- SEARCH RESULTS --- */
-.results-container {
-  max-width: 1100px;
-  margin: 0 auto 50px;
-  padding: 0 20px;
+.rooms-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-top: 20px;
 }
-
-.no-results {
-  text-align: center;
-  padding: 40px;
+.room-card {
   background: white;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  font-weight: 500;
+  width: 100%;
+  max-width: 300px;
+  overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+.room-card:hover {
+  transform: translateY(-4px);
+}
+.room-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+.room-info {
+  padding: 14px 16px;
+}
+.room-info h3 {
+  margin-bottom: 5px;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+.room-info p {
+  color: #555;
 }
 
-/* --- MAP --- */
-#map {
-  height: 500px;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  margin-bottom: 40px;
+/* ===========================================================
+   ROOM DETAIL / COMMON AREA — linear layout (title → bills → desc → images)
+=========================================================== */
+.common-photos-container,
+.room-detail {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  animation: fadeIn 0.4s ease;
+  display: block;
+}
+.photo-wrapper {
+  position: relative;
+  width: 220px;
+  height: calc(220px * 0.75);
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  display: inline-block;
+  margin: 8px 8px 8px 0;
+}
+.photo-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 25px;
+  font-size: 1rem;
+  color: #1a73e8;
+}
+.back-link:hover {
+  color: #0d47a1;
+}
+
+/* ===========================================================
+   POPUP & NAV LINKS (map popups) — same as before
+=========================================================== */
+.popup-btn {
+  margin-top: 8px;
+  padding: 7px 12px;
+  background-color: #1a73e8;
+  color: white;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+.popup-btn:hover {
+  background-color: #0d47a1;
+}
+
+/* ===========================================================
+   IMAGE MODAL STYLES
+=========================================================== */
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 20, 20, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+.image-modal.hidden {
+  display: none;
+}
+.modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+.modal-content img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+}
+
+/* ===========================================================
+   FOOTER
+=========================================================== */
+.site-footer {
+  background: #ffffff;
+  padding: 35px 10px;
+  margin-top: 60px;
+}
+.footer-inner {
+  text-align: center;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* ===========================================================
+   RESPONSIVE / MOBILE STYLES
+=========================================================== */
+@media (max-width: 900px) {
+  header h1 { font-size: 2rem; }
+  #map { height: 500px; }
+  #app { padding: 0 12px; }
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 15px 0;
+  }
+  .header-inner {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 12px;
+    text-align: center;
+  }
+  .site-title {
+    font-size: 1.9rem;
+  }
+  .lang-switcher {
+    margin: 0 auto;
+  }
+
+  .nav-btns {
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+  }
+  .nav-btn {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .lang-btn, .nav-btn {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+  }
+
+  #map { height: 380px; }
+
+  .map-caption-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .caption-box { width: 90%; margin: 10px 0; }
+
+  .photo-wrapper {
+    width: 160px;
+    height: calc(160px * 0.75);
+  }
 }
