@@ -179,7 +179,7 @@ const data = {
           { id: "2Q", code: "AR2A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 650,
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR2A2Q1F.jpeg`, photos: getImagePaths2("AR2A2Q", 5),
-            description: { en: "", pt: "" }, availableFrom: "16/07/2026" },
+            description: { en: "", pt: "" }, availableFrom: "01/08/2026" },
           { id: "3Q", code: "AR2A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 580,
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR2A3Q1F.jpg`, photos: getImagePaths("AR2A3Q", 6),
@@ -228,7 +228,7 @@ const data = {
           { id: "2Q", code: "AL1A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 550,
             bills: { en: "All bills included (excluding gas) <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Contas incluídas (gás excluído). <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AL1A2Q1F.jpg`, photos: getImagePaths("AL1A2Q", 4),
-            description: { en: "", pt: "" }, availableFrom: "16/07/2026" },
+            description: { en: "", pt: "" }, availableFrom: "01/08/2026" },
           { id: "3Q", code: "AL1A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 500,
             bills: { en: "All bills included (excluding gas) <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Contas incluídas (gás excluído). <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AL1A3Q1F.jpg`, photos: getImagePaths("AL1A3Q", 4),
@@ -352,6 +352,9 @@ function render() {
   } else if (parts[0] === 'locations') {
     hero.classList.add('hidden');
     renderLocations();
+  } else if (parts[0] === 'contact') {
+    hero.classList.add('hidden');
+    renderContact();
   } else {
     hero.classList.remove('hidden');
     renderHome();
@@ -810,6 +813,35 @@ function renderLocations() {
   requestAnimationFrame(() => requestAnimationFrame(initMap));
 }
 
+function renderContact() {
+  const t = lang === 'pt';
+  app.innerHTML = `
+    <div class="contact-page">
+      <h2>${t ? 'Contacto' : 'Contact'}</h2>
+      <p class="contact-intro">${t ? 'Tens alguma questão sobre os quartos ou queres fazer uma reserva? Fala connosco por e-mail ou WhatsApp.' : 'Have a question about the rooms or want to book? Reach out by email or WhatsApp.'}</p>
+      <div class="contact-options">
+        <a href="mailto:matildersbarros@gmail.com" class="contact-card">
+          <div class="contact-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div class="contact-card-body">
+            <div class="contact-card-label">Email</div>
+            <div class="contact-card-value">matildersbarros@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://wa.me/351924488081" target="_blank" class="contact-card contact-card-wa">
+          <div class="contact-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          </div>
+          <div class="contact-card-body">
+            <div class="contact-card-label">WhatsApp</div>
+            <div class="contact-card-value">+351 924 488 081</div>
+          </div>
+        </a>
+      </div>
+    </div>`;
+}
+
 function renderAbout() {
   app.innerHTML = `
     <div class="about-page">
@@ -990,6 +1022,20 @@ langBtns.forEach(btn => {
     btn.classList.add('active');
     leafletMap = null; // reset map so it re-renders with new lang
     render();
+  });
+});
+
+// ── Mobile Nav ────────────────────────────────────────────
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileNav = document.getElementById('mobile-nav');
+mobileMenuBtn.addEventListener('click', () => {
+  const open = mobileNav.classList.toggle('hidden') === false;
+  mobileMenuBtn.classList.toggle('open', open);
+});
+mobileNav.querySelectorAll('.mobile-nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileNav.classList.add('hidden');
+    mobileMenuBtn.classList.remove('open');
   });
 });
 
