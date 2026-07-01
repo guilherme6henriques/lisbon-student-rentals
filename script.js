@@ -56,7 +56,7 @@ const i18n = {
     clearSearch: 'Clear search',
     searchResults: n => `${n} room${n !== 1 ? 's' : ''} found`,
     nearAlcantara: 'Near Alcântara',
-    nearRoma: 'Near Avenida de Roma',
+    nearRoma: 'Near Avenida de Roma / Entrecampos',
     mapIntro: 'Click the blue markers to explore each property.',
     seeRooms: 'See rooms',
     dayLabels: ['Su','Mo','Tu','We','Th','Fr','Sa'],
@@ -112,7 +112,7 @@ const i18n = {
     clearSearch: 'Limpar pesquisa',
     searchResults: n => `${n} quarto${n !== 1 ? 's' : ''} encontrado${n !== 1 ? 's' : ''}`,
     nearAlcantara: 'Perto de Alcântara',
-    nearRoma: 'Perto da Avenida de Roma',
+    nearRoma: 'Perto da Avenida de Roma / Entrecampos',
     mapIntro: 'Clica nos marcadores azuis para explorar cada imóvel.',
     seeRooms: 'Ver quartos',
     dayLabels: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
@@ -134,7 +134,7 @@ function getImagePaths2(prefix, count) {
 
 const data = {
   "avenida_de_roma": {
-    name: { en: "Avenida de Roma", pt: "Avenida de Roma" },
+    name: { en: "Avenida de Roma / Entrecampos", pt: "Avenida de Roma / Entrecampos" },
     coords: [38.74651115662008, -9.143217726509699],
     floors: [
       {
@@ -488,8 +488,7 @@ function renderCard(room) {
     <div class="room-card" onclick="location.hash='${nav}'">
       <div class="room-card-img-wrap">
         <img src="${room.thumb}" alt="${cleanLabel(room)}" loading="lazy" onerror="this.style.opacity='0'" />
-        <div class="card-location-badge">${room.locName[lang]}</div>
-        ${unavail ? `<div class="card-unavail-overlay"><span class="card-unavail-label">${i18n[lang].notAvailable}</span></div>` : ''}
+${unavail ? `<div class="card-unavail-overlay"><span class="card-unavail-label">${i18n[lang].notAvailable}</span></div>` : ''}
       </div>
       <div class="room-card-body">
         <div class="room-card-floor">${floorTxt}</div>
@@ -922,7 +921,7 @@ function renderReviews() {
               <div class="review-form-field">
                 <label>${t ? 'Apartamento' : 'Property'}</label>
                 <select name="property">
-                  <option value="Avenida de Roma">Avenida de Roma</option>
+                  <option value="Avenida de Roma">Avenida de Roma / Entrecampos</option>
                   <option value="Alcântara">Alcântara</option>
                 </select>
               </div>
