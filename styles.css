@@ -1219,7 +1219,7 @@ img { display: block; max-width: 100%; }
   display: block;
   width: 22px;
   height: 2px;
-  background: var(--text-primary);
+  background: var(--text);
   border-radius: 2px;
   transition: all 0.2s;
 }
@@ -1246,14 +1246,21 @@ img { display: block; max-width: 100%; }
 .mobile-nav-link:hover { background: var(--bg); }
 
 @media (max-width: 700px) {
+  .site-header { height: auto; flex-direction: column; align-items: stretch; padding: 0; }
+  .header-inner { padding: 0 16px; height: 64px; }
+  .site-logo .logo-text { display: none; }
+  .lang-switcher { margin-left: auto; }
   .hero-title { font-size: 1.95rem; }
   .hero { padding: 48px 16px 64px; }
   .search-bar { flex-direction: column; border-radius: var(--radius); }
   .search-field { border-bottom: 1px solid var(--border); }
   .search-divider { display: none; }
   .search-btn { width: 100%; justify-content: center; border-radius: 0 0 var(--radius) var(--radius); padding: 14px; }
-  .header-nav { display: none; }
-  .mobile-menu-btn { display: flex; }
+  .mobile-menu-btn { display: none; }
+  .header-nav { display: flex; }
+  .nav-link { padding: 6px 8px; font-size: 0.78rem; white-space: nowrap; }
+  .header-inner { gap: 4px; }
+  .lang-switcher { flex-shrink: 0; }
   #app { padding: 24px 14px 60px; }
   .about-page { padding: 28px 20px; }
   .contact-page { padding: 28px 20px; }
