@@ -852,7 +852,24 @@ function renderAbout() {
 // ── Reviews ───────────────────────────────────────────────
 // To display real reviews once received, add objects to this array:
 // { name, age, country:{en,pt}, property:{en,pt}, stars:1-5, text:{en,pt} }
-const reviews = [];
+const reviews = [
+  {
+    name: 'Marin',
+    age: 22,
+    country: { en: 'France', pt: 'França' },
+    property: { en: 'Avenida de Roma / Entrecampos', pt: 'Avenida de Roma / Entrecampos' },
+    stars: 5,
+    text: { en: 'The room was amazing: very spacious and really clean! The location is great and very convenient, especially for public transportation. The landlord is very trustworthy and always willing to help. If you need anything, he\'s quick to respond and happy to assist. That was really appreciated!', pt: 'The room was amazing: very spacious and really clean! The location is great and very convenient, especially for public transportation. The landlord is very trustworthy and always willing to help. If you need anything, he\'s quick to respond and happy to assist. That was really appreciated!' }
+  },
+  {
+    name: 'Rein',
+    age: 24,
+    country: { en: 'Tanzania', pt: 'Tanzânia' },
+    property: { en: 'Avenida de Roma / Entrecampos', pt: 'Avenida de Roma / Entrecampos' },
+    stars: 5,
+    text: { en: 'I had a nice stay, the room was nice, large with a cute balcony 🌟 most of all the Landlord was very nice. Inteally enjoyed my stay 🔥 Highly recommended', pt: 'I had a nice stay, the room was nice, large with a cute balcony 🌟 most of all the Landlord was very nice. Inteally enjoyed my stay 🔥 Highly recommended' }
+  }
+];
 
 // Replace the placeholder below with your Formspree form ID.
 // Sign up free at https://formspree.io → New Form → copy the ID (e.g. "xpwzkyrd").
