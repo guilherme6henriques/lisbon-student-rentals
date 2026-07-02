@@ -46,6 +46,7 @@ const i18n = {
     houseRules: [
       { icon: '🚭', title: 'No open flames', text: 'Candles and smoking are not permitted inside the apartment.' },
       { icon: '💡', title: 'Utility fair-use limit', text: 'Bills are fully included in the rent, subject to a €40/person monthly cap. This limit exists to encourage mindful use of electricity and water.' },
+      { icon: '👤', title: 'Individual use only', text: 'The room is for the individual use of the tenant. We do not rent rooms to couples.' },
       { icon: '👥', title: 'Guests', text: 'Visitors are warmly welcome. Overnight guests may stay for up to 3 consecutive nights and notice the landlord of that.' },
       { icon: '🔓', title: 'No security deposit', text: 'No deposit is required to move in.' },
       { icon: '📅', title: 'Payment schedule', text: 'Rent is due on the first business day of the month preceding the rental period. In practice: on move-in you pay two months upfront; from then on you pay monthly and your final month is already covered.' },
@@ -102,6 +103,7 @@ const i18n = {
     houseRules: [
       { icon: '🚭', title: 'Sem chamas abertas', text: 'Não é permitido o uso de velas nem fumar dentro do apartamento.' },
       { icon: '💡', title: 'Limite de consumo de utilidades', text: 'As contas estão totalmente incluídas na renda, sujeitas a um limite mensal de €40 por pessoa. Este limite existe para encorajar um consumo responsável de eletricidade e água.' },
+      { icon: '👤', title: 'Uso individual', text: 'O quarto destina-se ao uso individual do inquilino. Não arrendamos quartos a casais.' },
       { icon: '👥', title: 'Visitas', text: 'As visitas são bem-vindas. As estadias de hóspedes estão limitadas a 3 noites consecutivas e o senhorio deve ser informado.' },
       { icon: '🔓', title: 'Sem caução', text: 'Não é exigida qualquer caução para a entrada.' },
       { icon: '📅', title: 'Pagamento', text: 'A renda é paga no primeiro dia útil do mês anterior ao mês a que respeita. Na prática: no primeiro mês paga-se o equivalente a dois meses; a partir daí paga-se mensalmente e o último mês já está coberto.' },
@@ -773,12 +775,12 @@ function renderLocations() {
       vibe: t ? 'Bairro trendy e ribeirinho' : 'Trendy riverside neighbourhood',
       categories: t ? [
         { label: 'Transportes', items: ['Estação de Alcântara-Terra (linha de Cascais), 8 min a pé', 'Estação de Alcântara-Mar, 10 min a pé', 'Várias paragens de autocarro na zona'] },
-        { label: 'Universidades', items: ['ISEG', 'NOVA SBE', 'ISA', 'FMV', 'FAUL', 'NOVA FCT', 'Universidade Europeia de Lisboa'] },
+        { label: 'Universidades', items: ['ISEG', 'NOVA SBE', 'ISA', 'FMV', 'FAUL', 'NOVA FCT', 'Universidade Europeia de Lisboa', 'ISCSP'] },
         { label: 'À volta', items: ['LX Factory, mercado, restaurantes e bares', 'Vistas para a Ponte 25 de Abril e o Rio Tejo', 'Escapadinhas fáceis a Cascais e Estoril ao fim de semana', 'Jardim das Necessidades e zonas verdes'] },
         { label: 'Ambiente', items: ['Bairro trendy e ribeirinho', 'Moderno, criativo e cheio de vida'] },
       ] : [
         { label: 'Transport', items: ['Alcântara-Terra train station (Cascais line), 8 min walk', 'Alcântara-Mar train station, 10 min walk', 'Multiple bus stops in the area'] },
-        { label: 'Universities', items: ['ISEG', 'NOVA SBE', 'ISA', 'FMV', 'FAUL', 'NOVA FCT', 'Universidade Europeia de Lisboa'] },
+        { label: 'Universities', items: ['ISEG', 'NOVA SBE', 'ISA', 'FMV', 'FAUL', 'NOVA FCT', 'Universidade Europeia de Lisboa', 'ISCSP'] },
         { label: 'Around you', items: ['LX Factory, market, restaurants and bars', 'Views of the 25 de Abril bridge and the Tagus river', 'Easy weekend trips to Cascais and Estoril beaches', 'Jardim das Necessidades and green spaces'] },
         { label: 'Vibe', items: ['Trendy riverside neighbourhood', 'Modern, creative and buzzing'] },
       ]
