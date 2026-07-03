@@ -209,7 +209,11 @@ const data = {
           { id: "3Q", code: "AR3A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 570,
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR3A3Q1F.jpg`, photos: getImagePaths("AR3A3Q", 6),
-            description: { en: "", pt: "" }, availableFrom: "01/07/2026" }
+            description: { en: "", pt: "" }, availableFrom: "01/07/2026" },
+          { id: "4Q", code: "AR3A4Q", label: { en: "Room 4", pt: "Quarto 4" }, price: 550,
+            bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
+            thumb: `Images/AR3A4Q1F.jpeg`, photos: getImagePaths2("AR3A4Q", 3),
+            description: { en: "", pt: "" }, availableFrom: "21/07/2026" }
         ]
       }
     ]
