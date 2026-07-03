@@ -712,7 +712,7 @@ function renderMonth(monthDate, availFrom, unavail, today, bookedFrom, bookedUnt
       cls += ' past';
     } else if (unavail) {
       cls += ' booked';
-    } else if (bookedFrom && bookedUntil && date >= bookedFrom && date <= bookedUntil) {
+    } else if (bookedFrom && bookedUntil && date >= bookedFrom && date < bookedUntil) {
       cls += ' booked';
     } else if (availFrom && date < availFrom) {
       cls += ' booked';
