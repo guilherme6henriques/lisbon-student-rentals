@@ -162,7 +162,7 @@ const data = {
           { id: "2Q", code: "AR1A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 650,
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR1A2Q1F.jpg`, photos: getImagePaths("AR1A2Q", 8),
-            description: { en: "", pt: "" }, availableFrom: "01/07/2026", bookedFrom: "15/08/2026", bookedUntil: "01/02/2027", note: { en: "Booked 15/08/2026 to 01/02/2027", pt: "Reservado 15/08/2026 a 01/02/2027" } },
+            description: { en: "", pt: "" }, availableFrom: "01/07/2026", bookedFrom: "01/08/2026", bookedUntil: "01/02/2027", note: { en: "Booked 01/08/2026 to 01/02/2027", pt: "Reservado 01/08/2026 a 01/02/2027" } },
           { id: "4Q", code: "AR1A4Q", label: { en: "Room 4", pt: "Quarto 4" }, price: 540,
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR1A4Q1F.jpg`, photos: getImagePaths("AR1A4Q", 3),
@@ -189,7 +189,7 @@ const data = {
           { id: "5Q", code: "AR2A5Q", label: { en: "Room 5", pt: "Quarto 5" }, price: 550,
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR2A5Q1F.jpg`, photos: getImagePaths("AR2A5Q", 4),
-            description: { en: "", pt: "" }, availableFrom: "01/07/2026", bookedFrom: "15/09/2026", bookedUntil: "01/02/2027" }
+            description: { en: "", pt: "" }, availableFrom: "01/07/2026", bookedFrom: "15/08/2026", bookedUntil: "01/02/2027" }
         ]
       },
       {
