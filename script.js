@@ -404,6 +404,9 @@ function renderHome() {
       if (searchDate) {
         const avail = parseDate(r.availableFrom);
         if (avail && avail > searchDate) return false;
+        const bookedFrom = parseDate(r.bookedFrom);
+        const bookedUntil = parseDate(r.bookedUntil);
+        if (bookedFrom && bookedUntil && searchDate >= bookedFrom && searchDate < bookedUntil) return false;
       }
       return true;
     });
