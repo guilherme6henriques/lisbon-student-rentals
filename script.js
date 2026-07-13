@@ -874,6 +874,14 @@ const reviews = [
     property: { en: 'Avenida de Roma / Entrecampos', pt: 'Avenida de Roma / Entrecampos' },
     stars: 5,
     text: { en: 'I had a nice stay, the room was nice, large with a cute balcony 🌟 most of all the Landlord was very nice. Inteally enjoyed my stay 🔥 Highly recommended', pt: 'I had a nice stay, the room was nice, large with a cute balcony 🌟 most of all the Landlord was very nice. Inteally enjoyed my stay 🔥 Highly recommended' }
+  },
+  {
+    name: 'Magdalena',
+    age: 23,
+    country: { en: 'Germany', pt: 'Alemanha' },
+    property: { en: 'Avenida de Roma / Entrecampos', pt: 'Avenida de Roma / Entrecampos' },
+    stars: 5,
+    text: { en: 'Everything went well! Landlord is very reliable and helpful. The room was exactly like in the pictures.', pt: 'Everything went well! Landlord is very reliable and helpful. The room was exactly like in the pictures.' }
   }
 ];
 
