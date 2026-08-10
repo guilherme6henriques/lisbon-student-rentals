@@ -921,6 +921,14 @@ const reviews = [
     property: { en: 'Avenida de Roma / Entrecampos', pt: 'Avenida de Roma / Entrecampos' },
     stars: 5,
     text: { en: 'Everything went well! Landlord is very reliable and helpful. The room was exactly like in the pictures.', pt: 'Everything went well! Landlord is very reliable and helpful. The room was exactly like in the pictures.' }
+  },
+  {
+    name: 'Miriam',
+    age: 24,
+    country: { en: 'Norway', pt: 'Noruega' },
+    property: { en: 'Avenida de Roma / Entrecampos', pt: 'Avenida de Roma / Entrecampos' },
+    stars: 5,
+    text: { en: 'Had a very plesant experience with this rental. Super nice room with balcony. Very good location, close to both green and yellow metro line. Would reccomend living here!:)', pt: 'Had a very plesant experience with this rental. Super nice room with balcony. Very good location, close to both green and yellow metro line. Would reccomend living here!:)' }
   }
 ];
 
