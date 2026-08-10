@@ -669,10 +669,10 @@ function renderRoom(locKey, floorNum, roomId) {
         <div class="detail-left">
           ${includesHtml}
           ${videoHtml}
-          ${houseTourHtml}
           ${calHtml}
           ${renderHouseRules()}
           ${commonHtml}
+          ${houseTourHtml}
         </div>
         ${infoPanelHtml}
       </div>
