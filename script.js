@@ -43,6 +43,7 @@ const i18n = {
     calUnavail: 'Unavailable',
     calPast: 'Past',
     videoTourTitle: 'Video Tour',
+    houseTourTitle: 'House Tour',
     houseRulesTitle: 'House Rules',
     houseRules: [
       { icon: '🚭', title: 'No open flames', text: 'Candles and smoking are not permitted inside the apartment.' },
@@ -101,6 +102,7 @@ const i18n = {
     calUnavail: 'Indisponível',
     calPast: 'Passado',
     videoTourTitle: 'Vídeo do Quarto',
+    houseTourTitle: 'Tour da Casa',
     houseRulesTitle: 'Regras da casa',
     houseRules: [
       { icon: '🚭', title: 'Sem chamas abertas', text: 'Não é permitido o uso de velas nem fumar dentro do apartamento.' },
@@ -179,6 +181,7 @@ const data = {
         number: 2,
         commonDesc: { en: "2nd floor · 5 bedrooms · 1 Kitchen · 1 Bathroom · 1 Washroom", pt: "2.º Andar · 5 quartos · 1 Cozinha · 1 Casa de banho · 1 Lavabo" },
         commonPhotos: getImagePaths2("AR2AZC", 15),
+        commonVideo: "X0SM8e-dmSA",
         rooms: [
           { id: "1Q", code: "AR2A1Q", label: { en: "Room 1", pt: "Quarto 1" }, price: 550,
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
@@ -570,6 +573,14 @@ function renderRoom(locKey, floorNum, roomId) {
     </div>
   </div>` : '';
 
+  // House tour video (floor-level, shown on every room of that floor)
+  const houseTourHtml = floor.commonVideo ? `<div class="detail-card">
+    <div class="detail-card-title">${i18n[lang].houseTourTitle}</div>
+    <div class="video-embed-wrap">
+      <iframe src="https://www.youtube-nocookie.com/embed/${floor.commonVideo}" title="${i18n[lang].houseTourTitle}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>` : '';
+
   // Common area photos
   let commonHtml = '';
   if (floor.commonPhotos && floor.commonPhotos.length) {
@@ -658,6 +669,7 @@ function renderRoom(locKey, floorNum, roomId) {
         <div class="detail-left">
           ${includesHtml}
           ${videoHtml}
+          ${houseTourHtml}
           ${calHtml}
           ${renderHouseRules()}
           ${commonHtml}
