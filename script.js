@@ -158,6 +158,7 @@ const data = {
         number: 1,
         commonDesc: { en: "1st floor · 5 bedrooms · 1 Kitchen · 2 Bathrooms · 1 Living room", pt: "1.º Andar · 5 quartos · 1 Cozinha · 2 Casas de banho · 1 Sala" },
         commonPhotos: getImagePaths2("AR1AZC", 14),
+        commonVideo: "s3rZ0C7f2UI",
         rooms: [
           { id: "1Q", code: "AR1A1Q", label: { en: "Room 1", pt: "Quarto 1" }, price: 550,
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
