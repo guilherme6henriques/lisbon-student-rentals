@@ -42,6 +42,7 @@ const i18n = {
     calNotYet: 'Not yet available',
     calUnavail: 'Unavailable',
     calPast: 'Past',
+    videoTourTitle: 'Video Tour',
     houseRulesTitle: 'House Rules',
     houseRules: [
       { icon: '🚭', title: 'No open flames', text: 'Candles and smoking are not permitted inside the apartment.' },
@@ -99,6 +100,7 @@ const i18n = {
     calNotYet: 'Ainda não disponível',
     calUnavail: 'Indisponível',
     calPast: 'Passado',
+    videoTourTitle: 'Vídeo do Quarto',
     houseRulesTitle: 'Regras da casa',
     houseRules: [
       { icon: '🚭', title: 'Sem chamas abertas', text: 'Não é permitido o uso de velas nem fumar dentro do apartamento.' },
@@ -178,6 +180,11 @@ const data = {
         commonDesc: { en: "2nd floor · 5 bedrooms · 1 Kitchen · 1 Bathroom · 1 Washroom", pt: "2.º Andar · 5 quartos · 1 Cozinha · 1 Casa de banho · 1 Lavabo" },
         commonPhotos: getImagePaths2("AR2AZC", 15),
         rooms: [
+          { id: "1Q", code: "AR2A1Q", label: { en: "Room 1", pt: "Quarto 1" }, price: 550,
+            bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
+            thumb: `Images/AR2A1Q1F.jpeg`, photos: ["Images/AR2A1Q1F.jpeg", "Images/AR2A1Q2F.jpeg", "Images/AR2A1Q4F.jpeg", "Images/AR2A1Q5F.jpeg", "Images/AR2A1Q6F.jpeg"],
+            video: "NqNRUMmuQFk",
+            description: { en: "", pt: "" }, availableFrom: "01/08/2026" },
           { id: "2Q", code: "AR2A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 650,
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR2A2Q1F.jpeg`, photos: getImagePaths2("AR2A2Q", 5),
@@ -555,6 +562,14 @@ function renderRoom(locKey, floorNum, roomId) {
   }
   galleryHtml += `</div>`;
 
+  // Video tour
+  const videoHtml = room.video ? `<div class="detail-card">
+    <div class="detail-card-title">${i18n[lang].videoTourTitle}</div>
+    <div class="video-embed-wrap">
+      <iframe src="https://www.youtube-nocookie.com/embed/${room.video}" title="${i18n[lang].videoTourTitle}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>` : '';
+
   // Common area photos
   let commonHtml = '';
   if (floor.commonPhotos && floor.commonPhotos.length) {
@@ -642,6 +657,7 @@ function renderRoom(locKey, floorNum, roomId) {
       <div class="detail-grid">
         <div class="detail-left">
           ${includesHtml}
+          ${videoHtml}
           ${calHtml}
           ${renderHouseRules()}
           ${commonHtml}
