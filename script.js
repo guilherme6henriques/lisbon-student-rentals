@@ -458,18 +458,30 @@ function renderHome() {
       <button class="btn-outline" id="btn-clear-nores">${i18n[lang].clearSearch}</button>
     </div>`;
   } else if (!searchActive) {
-    // Group by location
+    // Group by location, then by floor
     Object.entries(data).forEach(([locKey, loc]) => {
       const locRooms = rooms.filter(r => r.locKey === locKey);
       if (!locRooms.length) return;
+      const floorNums = [...new Set(locRooms.map(r => r.floorNum))].sort((a, b) => a - b);
+      const floorsHtml = floorNums.map(fn => {
+        const floorRooms = locRooms.filter(r => r.floorNum === fn);
+        const desc = floorRooms[0].floorCommonDesc ? floorRooms[0].floorCommonDesc[lang] : '';
+        return `<div class="floor-group">
+          <div class="floor-group-header">
+            <div class="floor-group-title">${i18n[lang].floorLabel} ${fn}</div>
+            ${desc ? `<div class="floor-group-desc">${desc}</div>` : ''}
+          </div>
+          <div class="rooms-grid">
+            ${floorRooms.map(r => renderCard(r)).join('')}
+          </div>
+        </div>`;
+      }).join('');
       html += `<div class="loc-group">
         <div class="loc-group-header">
           <div class="loc-group-title">${loc.name[lang]}</div>
           <div class="loc-group-meta">${locRooms.filter(r => !isUnavailable(r)).length} ${lang === 'pt' ? 'quartos disponíveis' : 'rooms available'}</div>
         </div>
-        <div class="rooms-grid">
-          ${locRooms.map(r => renderCard(r)).join('')}
-        </div>
+        ${floorsHtml}
       </div>`;
     });
   } else {
