@@ -465,11 +465,9 @@ function renderHome() {
       const floorNums = [...new Set(locRooms.map(r => r.floorNum))].sort((a, b) => a - b);
       const floorsHtml = floorNums.map(fn => {
         const floorRooms = locRooms.filter(r => r.floorNum === fn);
-        const desc = floorRooms[0].floorCommonDesc ? floorRooms[0].floorCommonDesc[lang] : '';
         return `<div class="floor-group">
           <div class="floor-group-header">
             <div class="floor-group-title">${i18n[lang].floorLabel} ${fn}</div>
-            ${desc ? `<div class="floor-group-desc">${desc}</div>` : ''}
           </div>
           <div class="rooms-grid">
             ${floorRooms.map(r => renderCard(r)).join('')}
