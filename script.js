@@ -202,7 +202,7 @@ const data = {
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR2A1Q1F.jpeg`, photos: ["Images/AR2A1Q1F.jpeg", "Images/AR2A1Q2F.jpeg", "Images/AR2A1Q4F.jpeg", "Images/AR2A1Q5F.jpeg", "Images/AR2A1Q6F.jpeg"],
             video: "NqNRUMmuQFk",
-            description: { en: "", pt: "" }, availableFrom: "01/08/2026" },
+            description: { en: "", pt: "" }, availableFrom: "01/02/2027", bookedFrom: "01/09/2026", bookedUntil: "31/01/2027" },
           { id: "2Q", code: "AR2A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 650,
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR2A2Q1F.jpeg`, photos: getImagePaths2("AR2A2Q", 7),
