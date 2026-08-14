@@ -159,7 +159,7 @@ const data = {
           { id: "5Q", code: "AR0A5Q", label: { en: "Room 5", pt: "Quarto 5" }, price: 520,
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR0A5Q1F.jpg`, photos: getImagePaths("AR0A5Q", 3),
-            description: { en: "", pt: "" } }
+            description: { en: "", pt: "" }, availableFrom: "01/07/2027", bookedFrom: "15/08/2026", bookedUntil: "30/06/2027" }
         ]
       },
       {
