@@ -207,7 +207,7 @@ const data = {
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR2A2Q1F.jpeg`, photos: getImagePaths2("AR2A2Q", 7),
             video: "K2n4sU_uJDA",
-            description: { en: "", pt: "" }, availableFrom: "01/01/2027", bookedFrom: "01/09/2026", bookedUntil: "31/12/2026" },
+            description: { en: "", pt: "" }, availableFrom: "01/02/2027", bookedFrom: "01/09/2026", bookedUntil: "01/02/2027" },
           { id: "3Q", code: "AR2A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 580,
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR2A3Q1F.jpg`, photos: getImagePaths("AR2A3Q", 6),
@@ -258,19 +258,19 @@ const data = {
           { id: "1Q", code: "AL1A1Q", label: { en: "Room 1", pt: "Quarto 1" }, price: 600,
             bills: { en: "All bills included (excluding gas) <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Contas incluídas (gás excluído). <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AL1A1Q1F.jpg`, photos: getImagePaths("AL1A1Q", 6),
-            description: { en: "", pt: "" }, availableFrom: "01/01/2027", bookedFrom: "01/08/2026", bookedUntil: "01/01/2027" },
+            description: { en: "", pt: "" }, availableFrom: "01/08/2027", bookedFrom: "01/08/2026", bookedUntil: "01/08/2027" },
           { id: "2Q", code: "AL1A2Q", label: { en: "Room 2", pt: "Quarto 2" }, price: 550,
             bills: { en: "All bills included (excluding gas) <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Contas incluídas (gás excluído). <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AL1A2Q1F.jpg`, photos: getImagePaths("AL1A2Q", 4),
-            description: { en: "", pt: "" }, availableFrom: "01/01/2027", bookedFrom: "01/08/2026", bookedUntil: "01/01/2027" },
+            description: { en: "", pt: "" }, availableFrom: "01/08/2027", bookedFrom: "01/08/2026", bookedUntil: "01/08/2027" },
           { id: "3Q", code: "AL1A3Q", label: { en: "Room 3", pt: "Quarto 3" }, price: 500,
             bills: { en: "All bills included (excluding gas) <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Contas incluídas (gás excluído). <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AL1A3Q1F.jpg`, photos: getImagePaths("AL1A3Q", 4),
-            description: { en: "", pt: "" }, availableFrom: "01/01/2027", bookedFrom: "01/08/2026", bookedUntil: "01/01/2027" },
+            description: { en: "", pt: "" }, availableFrom: "01/08/2027", bookedFrom: "01/08/2026", bookedUntil: "01/08/2027" },
           { id: "4Q", code: "AL1A4Q", label: { en: "Room 4", pt: "Quarto 4" }, price: 600,
             bills: { en: "All bills included (excluding gas) <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Contas incluídas (gás excluído). <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AL1A4Q1F.jpg`, photos: getImagePaths("AL1A4Q", 5),
-            description: { en: "", pt: "" }, availableFrom: "01/01/2027", bookedFrom: "01/08/2026", bookedUntil: "01/01/2027" }
+            description: { en: "", pt: "" }, availableFrom: "01/08/2027", bookedFrom: "01/08/2026", bookedUntil: "01/08/2027" }
         ]
       }
     ]
