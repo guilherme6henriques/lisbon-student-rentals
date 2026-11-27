@@ -156,6 +156,10 @@ const data = {
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR0A3Q1F.jpg`, photos: getImagePaths("AR0A3Q", 5),
             description: { en: "", pt: "" }, availableFrom: "01/02/2027", bookedFrom: "01/09/2026", bookedUntil: "31/01/2027" },
+          { id: "4Q", code: "AR0A4Q", label: { en: "Room 4", pt: "Quarto 4" }, price: 590,
+            bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
+            thumb: `Images/AR0A4Q1F.jpg`, photos: getImagePaths("AR0A4Q", 4),
+            description: { en: "", pt: "" }, availableFrom: "22/02/2027", bookedFrom: "16/08/2026", bookedUntil: "21/02/2027" },
           { id: "5Q", code: "AR0A5Q", label: { en: "Room 5", pt: "Quarto 5" }, price: 490,
             bills: { en: "All bills included <br> The room includes a pillow, a duvet, bed sheets, and a towel. <br> It is lockable for your privacy.", pt: "Todas as contas incluídas. <br> O quarto inclui uma almofada, um edredão, lençóis de cama e uma toalha. <br> Tem fechadura para sua privacidade." },
             thumb: `Images/AR0A5Q1F.jpg`, photos: getImagePaths("AR0A5Q", 3),
@@ -1062,10 +1066,9 @@ function initMap() {
     maxBoundsViscosity: 0.9
   });
 
-  // Base layer — CartoDB Voyager (cleaner, labels metro stations)
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/">CARTO</a>',
-    subdomains: 'abcd',
+  // Base layer — OpenStreetMap standard tiles (CARTO now requires an API key)
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     maxZoom: 19
   }).addTo(leafletMap);
 
